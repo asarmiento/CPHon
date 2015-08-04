@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: AccountHon
+        psr4_prefix: AccountHon
+        src_path: app

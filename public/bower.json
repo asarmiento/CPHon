@@ -1,0 +1,26 @@
+{
+  "name": "AccountHon",
+  "version": "1.0.0",
+  "homepage": "https://github.com/asarmiento/AccountHon",
+  "authors": [
+    "Francisco Gamonal <hfgamonalb@gmail.com>"
+  ],
+  "description": "' '",
+  "keywords": [
+    "Contabilidad",
+    "Honduras"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "bootstrap-switch": "~3.3.2",
+    "blockUI": "*",
+    "bootbox": "~4.4.0",
+    "datatables-bootstrap3-plugin": "~0.4.0",
+    "bootstrap-tagsinput": "~0.5.0",
+    "typeahead.js": "~0.11.1",
+    "matchHeight": "~0.6.0",
+    "jquery-file-download": "~1.4.3",
+    "bootstrap-datepicker": "~1.4.0"
+  }
+}

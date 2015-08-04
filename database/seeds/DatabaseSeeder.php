@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+
+class DatabaseSeeder extends Seeder {
+
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run() {
+        Model::unguard();
+
+        //$this->call('UsersTableSeeder');
+        $this->call('TypeUsersTableSeeder');
+        $this->call('SchoolsTableSeeder');
+        $this->call('UsersTableSeeder');
+        $this->call('CatalogsTableSeeder');
+        $this->call('TasksTableSeeder');
+        $this->call('MenuTableSeeder');
+        $this->call('MenuTaskTableSeeder');
+        $this->call('SchoolUserTableSeeder');
+        $this->call('AccountingPeriodsTableSeeder');
+        $this->call('TypeSeatsTableSeeder');
+        $this->call('DegreesTableSeeder');
+
+        Model::reguard();
+    }
+
+}
