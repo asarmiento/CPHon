@@ -45,85 +45,16 @@ Route::group(['prefix' => 'institucion'], function () {
 
         Route::get('/', ['as' => 'dashboard', function () {  return view('home'); }]);
 
-        /*
-        * Rutas de Bancos
-        */
-        require __DIR__.'/Routes/Bank.php';
 
-        /*
-         * Rutas de Grados
-         */
-        require __DIR__.'/Routes/Degrees.php';
 
-        /*
-         * Rutas de Notas
-         */
-        require __DIR__.'/Routes/Note.php';
 
-        /*
-         * Rutas de Periodos Contables
-        */
-        require __DIR__.'/Routes/AccountingPeriods.php';
-
-        /*
-         * Rutas de Tipos de Pago
-         */
-        require __DIR__.'/Routes/PaymentForm.php';
-        
-        /*
-         * Rutas de Tipos de Asientos
-         */
-        require __DIR__.'/Routes/TypeSeat.php';
-        
-        /*
-         * Rutas de Costos
-         */
-        require __DIR__.'/Routes/Costs.php';
-        
-        /*
-         * Rutas de Estudiantes
-         */
-        require __DIR__.'/Routes/Student.php';
-        
-        /*
-         * Rutas de Asientos Auxiliares
-         */
-        require __DIR__.'/Routes/AuxiliarySeat.php';
-
-        /*
-         * Rutas de Asientos Auxiliares
-         */
-        require __DIR__.'/Routes/AuxiliaryReceipt.php';
-
-        /*
-         * Rutas de Catalogos
-         */
-        require __DIR__.'/Routes/Catalogs.php';
-
-         /*
-         * Rutas de Asientos
-         */
-        require __DIR__.'/Routes/Seatings.php';
-
-        /*
-         * Rutas de Asientos Auxiliares
-         */
-        require __DIR__.'/Routes/Receipt.php';
 
         /*
          * Rutas de Asientos Auxiliares
          */
         require __DIR__.'/Routes/ReportExcel.php';
 
-        /*
-         * Rutas de Cortes de Caja
-         */
-        require __DIR__.'/Routes/CourtCases.php';
 
-        /*
-         * Rutas de Settings
-         */
-        require __DIR__.'/Routes/Settings.php';
     });
 
 });
@@ -157,10 +88,7 @@ require __DIR__.'/Routes/Users.php';
  */
 require __DIR__.'/Routes/Roles.php';
 
-/*
- * Rutas de Tipos
- */
-require __DIR__.'/Routes/TypeForm.php';
+
 
 
 
