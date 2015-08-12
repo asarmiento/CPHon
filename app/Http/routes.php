@@ -35,7 +35,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 /**
  * After Authentication
  */
-Route::get('porcentajes', ['as' => 'ver-porcentajes', 'uses' => 'PorcentController@index']);
+Route::resource('porcentajes', 'PorcentController');
 
 /*
  * Rutas de Tipos de Usuarios

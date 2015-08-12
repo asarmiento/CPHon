@@ -13,7 +13,7 @@ class PorcentController extends Controller
      * [__construct middleware for authentication]
      */
     public function __construct(){
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -23,7 +23,8 @@ class PorcentController extends Controller
      */
     public function index()
     {
-        return view('porcents.index');
+        $porcents = array();
+        return view('porcents.index', compact('porcents'));
     }
 
     /**
