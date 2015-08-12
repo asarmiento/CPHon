@@ -15,8 +15,8 @@ class CreateSchoolsTable extends Migration
        Schema::create('schools', function(Blueprint $table) {
         $table->increments('id');
         $table->string('name',150);
-           $table->string('route',60);
-           $table->string('charter',60);
+        $table->string('route',60);
+        $table->string('charter',60);
         $table->string('phoneOne',20);
         $table->string('phoneTwo',20);
         $table->string('fax',150);
