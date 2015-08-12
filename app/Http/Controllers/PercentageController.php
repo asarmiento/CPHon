@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use AccountHon\Http\Requests;
 use AccountHon\Http\Controllers\Controller;
 
-class PorcentController extends Controller
+class PercentageController extends Controller
 {
     /**
      * [__construct middleware for authentication]
@@ -23,8 +23,8 @@ class PorcentController extends Controller
      */
     public function index()
     {
-        $porcents = array();
-        return view('porcents.index', compact('porcents'));
+        $percentages = array();
+        return view('percentages.index', compact('percentages'));
     }
 
     /**

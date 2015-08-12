@@ -44,12 +44,12 @@
 	                            </tr>
 	                        </thead>
 	                        <tbody>
-	                        	@if(count($porcents) > 0)
-		                        	@foreach($porcents as $porcent)
+	                        	@if(count($percentages) > 0)
+		                        	@foreach($percentages as $percentage)
 			                            <tr>
-			                            	<td>{{ strtolower($porcent->year) }}</td>
-			                                <td>{{ strtolower($porcent->porcentJoined) }}</td>
-			                                <td>{{ strtolower($porcent->porcent) }}</td>
+			                            	<td>{{ strtolower($percentage->year) }}</td>
+			                                <td>{{ strtolower($percentage->porcentJoined) }}</td>
+			                                <td>{{ strtolower($percentage->porcent) }}</td>
 			                                <td class="text-center edit-row">
 												<a href="#" data-url="porcentajes"><i class="fa fa-pencil-square-o"></i></a>
 			                                </td>
