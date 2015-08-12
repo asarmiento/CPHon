@@ -18,7 +18,7 @@ class HtmlBuilder extends CollectiveHtmlBuilder  {
 
         $temp = null;
         $Menu = array();
-        foreach (\Auth::user()->menus as $menu) {
+        foreach (\Auth::user()->menus as $menu) { 
             if ($temp != $menu->id) {
                 $temp = $menu->id;
                 if(count($menu->tasksActive($menu->pivot->user_id)->select('name', 'id')->get()) > 0){

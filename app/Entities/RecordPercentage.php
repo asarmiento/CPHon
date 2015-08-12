@@ -6,7 +6,7 @@ class RecordPercentage extends Entity
 {
     public $timestamps = true;
     // Don't forget to fill this array
-    protected $fillable = ['year', 'month', 'percentage_affiliates', 'percentage'];
+    protected $fillable = ['year', 'month', 'percentage_affiliates', 'percentage','token'];
 
     public function Affiliates()
     {

@@ -2,6 +2,7 @@
 
 namespace AccountHon\Repositories;
 
+use AccountHon\Entities\RecordPercentage;
 
 class RecordPercentageRepository extends BaseRepository{
 

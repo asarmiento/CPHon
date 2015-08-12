@@ -1,6 +1,6 @@
 <div class="Menu-list">
 	<ul class="nav">
-        <?php $menus = \Html::menu(); ?>
+        <?php  $menus = \Html::menu(); ?>
         @foreach ($menus as $menu)
             <li class="submenu {{ ($menu['currentRoute'] != "inicio") ? ( $menu['currentRoute'] == strtolower(substr($menu['url'],1)) ? "active" : "" ): "" }}">
                 <a href="#">

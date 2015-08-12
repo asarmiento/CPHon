@@ -6,14 +6,21 @@ use Illuminate\Http\Request;
 
 use AccountHon\Http\Requests;
 use AccountHon\Http\Controllers\Controller;
+use AccountHon\Repositories\AffiliateRepository;
+use AccountHon\Repositories\RecordPercentageRepository;
 
 class RecordPercentageController extends Controller
 {
+    private $recordPercentageRepository;
     /**
      * [__construct middleware for authentication]
      */
-    public function __construct(){
+    public function __construct(
+        RecordPercentageRepository $recordPercentageRepository
+        ){
         $this->middleware('auth');
+
+        $this->recordPercentageRepository=$recordPercentageRepository;
     }
 
     /**
@@ -23,8 +30,8 @@ class RecordPercentageController extends Controller
      */
     public function index()
     {
-        $recordPercentages = array();
-        return view('recordPercentages.index', compact('recordPercentages'));
+        $recordPercentages = $this->recordPercentageRepository->all();
+        return View('recordPercentages.index', compact('recordPercentages'));
     }
 
     /**
@@ -34,7 +41,7 @@ class RecordPercentageController extends Controller
      */
     public function create()
     {
-        //
+        return View('recordPercentages.create');
     }
 
     /**
@@ -45,7 +52,13 @@ class RecordPercentageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $this->validate($request,['year'=>'required', 
+            'month'=>'required', 'percentage_affiliates'=>'required', 
+            'percentage'=>'required','token'=>'required']);
+        $recordPercentage = $this->CreacionArray($request->all(),'RecordPercentage');
+        $RecordPercentage = $this->recordPercentageRepository->getModel();
+        $RecordPercentage->fill($recordPercentage);
+        $RecordPercentage->save();
     }
 
     /**
