@@ -12,12 +12,12 @@ class CreateAffiliateRecordPorcentageTable extends Migration
      */
     public function up()
     {
-        Schema::create('affiliate_record_porcentage', function(Blueprint $table) {
+        Schema::create('affiliate_record_percentage', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('affiliate_id')->unsigned()->index();
             $table->foreign('affiliate_id')->references('id')->on('affiliates')->onDelete('no action');
-            $table->integer('record_porcentage_id')->unsigned()->index();
-            $table->foreign('record_porcentage_id')->references('id')->on('record_porcentages')->onDelete('no action');
+            $table->integer('record_percentage_id')->unsigned()->index();
+            $table->foreign('record_percentage_id')->references('id')->on('record_percentages')->onDelete('no action');
             $table->decimal('amount_affiliate',20,2);
             $table->decimal('amount',20,2);
             $table->string('consecutive',14);
@@ -34,6 +34,6 @@ class CreateAffiliateRecordPorcentageTable extends Migration
      */
     public function down()
     {
-       Schema::drop('affiliate_record_porcentage');
+        Schema::drop('affiliate_record_percentage');
     }
 }

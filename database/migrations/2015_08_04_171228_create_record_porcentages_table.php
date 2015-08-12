@@ -12,11 +12,11 @@ class CreateRecordPorcentagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('record_porcentages', function(Blueprint $table) {
+        Schema::create('record_percentages', function(Blueprint $table) {
             $table->increments('id');
             $table->string('year',4);
             $table->string('month',2);
-            $table->string('porcent_affiliates',150);
+            $table->string('percentage_affiliates',150);
             $table->string('porcent',150);
             $table->engine = 'InnoDB';
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateRecordPorcentagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('record_porcentages');
+        Schema::drop('record_percentages');
     }
 }
