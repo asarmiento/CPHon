@@ -31,41 +31,12 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-/**
- * Rutas al dashboard usuarios.
- */
-
-Route::group(['prefix' => 'institucion'], function () {
-
-    Route::get('/', 'SchoolsController@listSchools');
-    /* Test para hacer pruebas */
-
-    Route::group(['prefix' =>  'inst', 'middleware'=> 'userSchool'], function () {
-        Route::get('test', 'TestController@index');
-
-        Route::get('/', ['as' => 'dashboard', function () {  return view('home'); }]);
-
-
-
-
-
-        /*
-         * Rutas de Asientos Auxiliares
-         */
-        require __DIR__.'/Routes/ReportExcel.php';
-
-
-    });
-
-});
 
 /**
- *  Routes for Type User: Super Admin
+ * After Authentication
  */
-/**
- * Institución
- */
-require __DIR__.'/Routes/Schools.php';
+Route::get('porcentajes', ['as' => 'ver-porcentajes', 'uses' => 'PorcentController@index']);
+
 /*
  * Rutas de Tipos de Usuarios
  */
@@ -82,19 +53,7 @@ require __DIR__.'/Routes/Menu.php';
  *  Rutas de usuarios
  */
 require __DIR__.'/Routes/Users.php';
-
 /*
  *  Rutas de Roles
  */
 require __DIR__.'/Routes/Roles.php';
-
-
-
-
-
-
-Route::get('usuarios', function () {
-    echo "colegio/piura/usuarios";
-});
-
-Route::post('route-institucion', 'SchoolsController@routeUser');

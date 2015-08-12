@@ -5,13 +5,11 @@
 @endsection
 
 @section('page')
-	<aside class="page"> 
-		<h2>Periodos Contables</h2>
+	<aside class="page">
+		<h2>Menú</h2>
 		<div class="list-inline-block">
 			<ul>
-				<li><a href="{{url('/')}}">Home</a></li>
-				<li><a>Periodos Contables</a></li>
-				<li class="active-page"><a>Ver Periodos Contables</a></li>
+				<li class="active-page"><a>Porcentajes</a></li>
 			</ul>
 		</div>
 	</aside>
@@ -24,10 +22,10 @@
 				<div class="table-header">
 					<div class="row">
 						<div class="col-sm-6">
-							<h5><strong>Lista de Periodos Contables</strong></h5>
+							<h5><strong>Lista de Porcentajes</strong></h5>
 						</div>
 						<div class="col-sm-6">
-							<a href="{{route('crear-periodos-contables')}}" class="btn btn-info pull-right">
+							<a data-url="porcentajes" href="#" class="btn btn-info pull-right">
 								<span class="glyphicon glyphicon-plus"></span>
 								<span>Nuevo</span>
 							</a>
@@ -36,20 +34,24 @@
 				</div>
 				<div class="table-content">
 					<div class="table-responsive">
-						<table id="table_accounting_period" class="table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" width="100%">
+						<table id="table_porcent" class="table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" width="100%" style="table-layout:fixed;">
 	                        <thead>
 	                            <tr>
-	                                <th>Mes</th>
 	                                <th>Año</th>
-	                                <th>Periodo</th>
+	                                <th>Porcentaje del Afiliado</th>
+	                                <th>Porcentaje de la Empresa</th>
+	                                <th>Edición</th>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
-	                        	@foreach($accountingPeriods as $accountingPeriod)
+	                        	@foreach($porcents as $porcent)
 		                            <tr>
-		                                <td class="text-center" data-token="{{$accountingPeriod->token}}">{{ $accountingPeriod->month }}</td>
-		                                <td class="text-center">{{ $accountingPeriod->year }}</td>
-		                                <td class="text-center">{{ $accountingPeriod->period }}</td>
+		                            	<td class="menu_name">{{ strtolower($porcent->year) }}</td>
+		                                <td class="menu_name">{{ strtolower($porcent->porcentJoined) }}</td>
+		                                <td class="menu_url">{{ strtolower($porcent->porcent) }}</td>
+		                                <td class="text-center edit-row">
+											<a href="#" data-url="porcentajes"><i class="fa fa-pencil-square-o"></i></a>
+		                                </td>
 		                            </tr>
 	                            @endforeach
 	                        </tbody>
