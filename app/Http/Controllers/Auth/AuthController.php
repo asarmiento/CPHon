@@ -19,7 +19,7 @@ class AuthController extends Controller {
       |
      */
 
-    protected $redirectTo = '/institucion';
+    protected $redirectTo = '/porcentajes';
    
     use AuthenticatesAndRegistersUsers;
 
@@ -67,7 +67,6 @@ class AuthController extends Controller {
      * @return [type] [description]
      */
     public function getLogout(){
-        \Session::forget('school');
         \Auth::logout();
         return redirect('/');
     }
