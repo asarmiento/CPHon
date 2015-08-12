@@ -38,18 +38,20 @@
 	                        <thead>
 	                            <tr>
 	                                <th>Año</th>
+	                                <th>Mes</th>
 	                                <th>Porcentaje del Afiliado</th>
 	                                <th>Porcentaje de la Empresa</th>
 	                                <th>Edición</th>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
-	                        	@if(count($percentages) > 0)
-		                        	@foreach($percentages as $percentage)
+	                        	@if(count($recordPercentages) > 0)
+		                        	@foreach($recordPercentages as $recordPercentage)
 			                            <tr>
-			                            	<td>{{ strtolower($percentage->year) }}</td>
-			                                <td>{{ strtolower($percentage->porcentJoined) }}</td>
-			                                <td>{{ strtolower($percentage->porcent) }}</td>
+			                            	<td>{{ strtolower($recordPercentage->year) }}</td>
+			                            	<td>{{ strtolower($recordPercentage->month) }}</td>
+			                                <td>{{ strtolower($recordPercentage->percentage_affiliates) }}</td>
+			                                <td>{{ strtolower($recordPercentage->percentage) }}</td>
 			                                <td class="text-center edit-row">
 												<a href="#" data-url="porcentajes"><i class="fa fa-pencil-square-o"></i></a>
 			                                </td>

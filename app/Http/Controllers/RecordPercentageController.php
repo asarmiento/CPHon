@@ -10,13 +10,21 @@ use AccountHon\Http\Controllers\Controller;
 class RecordPercentageController extends Controller
 {
     /**
+     * [__construct middleware for authentication]
+     */
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return Response
      */
     public function index()
     {
-        //
+        $recordPercentages = array();
+        return view('recordPercentages.index', compact('recordPercentages'));
     }
 
     /**

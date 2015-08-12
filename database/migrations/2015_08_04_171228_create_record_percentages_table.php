@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRecordPorcentagesTable extends Migration
+class CreateRecordPercentagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,8 +16,8 @@ class CreateRecordPorcentagesTable extends Migration
             $table->increments('id');
             $table->string('year',4);
             $table->string('month',2);
-            $table->string('percentage_affiliates',150);
-            $table->string('porcent',150);
+            $table->decimal('percentage_affiliates',2,2);
+            $table->decimal('percentage',2,2);
             $table->engine = 'InnoDB';
             $table->timestamps();
             $table->softDeletes();
