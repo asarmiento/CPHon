@@ -33,6 +33,7 @@ class CreateAffiliatesTable extends Migration
             $table->enum('sex',['mujer','hombre']);
             $table->string('office',150);
             $table->enum('status',['activo','inactivo']);
+            $table->string('token',250);
             $table->engine = 'InnoDB';
             $table->timestamps();
             $table->softDeletes();

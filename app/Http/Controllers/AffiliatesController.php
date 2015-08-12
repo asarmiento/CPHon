@@ -6,9 +6,18 @@ use Illuminate\Http\Request;
 
 use AccountHon\Http\Requests;
 use AccountHon\Http\Controllers\Controller;
+use AccountHon\Repositories\AffiliateRepository;
 
 class AffiliatesController extends Controller
 {
+    private $affiliateRepository;
+
+    public function __construct(
+        AffiliateRepository $affiliateRepository
+        )
+    {
+        $this->affiliateRepository = $affiliateRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +25,8 @@ class AffiliatesController extends Controller
      */
     public function index()
     {
-        //
+        $affiliates = $this->affiliateRepository->all();
+        return View('affiliates.index',compact('affiliates'));
     }
 
     /**
@@ -26,7 +36,7 @@ class AffiliatesController extends Controller
      */
     public function create()
     {
-        //
+        return View('affiliates.create');
     }
 
     /**
