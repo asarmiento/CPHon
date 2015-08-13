@@ -25,7 +25,7 @@
 							<h5><strong>Lista de Porcentajes</strong></h5>
 						</div>
 						<div class="col-sm-6">
-							<a data-url="porcentajes" href="#" class="btn btn-info pull-right">
+							<a data-url="porcentajes" href="#" class="btn btn-info pull-right new">
 								<span class="glyphicon glyphicon-plus"></span>
 								<span>Nuevo</span>
 							</a>
@@ -34,7 +34,7 @@
 				</div>
 				<div class="table-content">
 					<div class="table-responsive">
-						<table id="table_porcent" class="table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" width="100%" style="table-layout:fixed;">
+						<table id="table_percentage" class="table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" width="100%" style="table-layout:fixed;">
 	                        <thead>
 	                            <tr>
 	                                <th>Año</th>
