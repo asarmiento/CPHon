@@ -47,16 +47,7 @@ class AffiliatesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[`code`=>'required', `charter`=>'required', 
-            `fname`=>'required', `sname`=>'required', `flast`=>'required', 
-            `slast`=>'required', 
-    `address`=>'required', 
-    `homePhone`=>'required', 
-    `workPhone`=>'required', 
-    `job`=>'required',
-    `affiliation`=>'required', `birthdate`=>'required', 
-    `retirementDate`=>'required', `salary`=>'required', `observation`=>'required',
-    `maritalStatus`=>'required', `sex`=>'required', `office`=>'required', `status`=>'required','token'=>'required']);
+            
         $affiliate = $this->CreacionArray($request->all(),'Affiliate');
         $affiliates = $this->affiliateRepository->getModel();
         $affiliates->fill($affiliate);

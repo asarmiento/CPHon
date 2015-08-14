@@ -2,6 +2,7 @@
 
 namespace AccountHon\Repositories;
 
+use AccountHon\Entities\Affiliate;
 
 class AffiliateRepository Extends BaseRepository {
 	
