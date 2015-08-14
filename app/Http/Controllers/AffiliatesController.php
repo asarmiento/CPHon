@@ -68,12 +68,13 @@ class AffiliatesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $token
      * @return Response
      */
-    public function edit($id)
+    public function edit($token)
     {
-        //
+        $affiliate = $this->affiliateRepository->token($token);
+        return $affiliate;
     }
 
     /**
