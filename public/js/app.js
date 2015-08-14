@@ -765,7 +765,7 @@ $(function(){
 	 */
 	
 	/**
-	 * Porcentajes
+	 * Porcentajes, Afiliados
 	 */
 	
 	$(document).off('click', '.new');
@@ -777,6 +777,7 @@ $(function(){
 				if(value.view == url){
 					bootbox.dialog({
 					  	message: value.modal,
+					  	size: "large",
 					  	title: "Nuevo " + value.title,
 					  	animate: true,
 					  	className: "my-modal-new",
@@ -847,7 +848,7 @@ $(function(){
 	});
 
 	dataTable('#table_percentage', 'porcentajes.');
-
+	dataTable('#table_affiliates', 'afiliados');
 	/**
 	 * End Porcentajes
 	 */
@@ -862,6 +863,7 @@ $(function(){
 				var modal = '<div class="row"><div class="col-sm-4"><span class="pull-right" style="line-height:2.25em;">Seleccionar Mes:</span></div><div class="col-sm-6"><div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span> <input id="dateOther" class="form-control" type="text"></div></div></div>';
 				bootbox.dialog({
 				  	message: modal,
+				  	size: "large",
 				  	title: "Cobros a Estudiantes",
 				  	animate: true,
 				  	className: "my-modal-other",

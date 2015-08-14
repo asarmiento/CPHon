@@ -29,7 +29,7 @@ class CreateAffiliatesTable extends Migration
             $table->date('retirementDate');
             $table->decimal('salary',30,2);
             $table->string('observation',250);
-            $table->enum('maritalStatus',['Casado','soltero']);
+            $table->enum('maritalStatus',['Casado','Soltero']);
             $table->enum('sex',['mujer','hombre']);
             $table->string('office',150);
             $table->enum('status',['activo','inactivo']);
