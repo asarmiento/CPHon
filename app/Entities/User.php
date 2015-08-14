@@ -51,7 +51,7 @@ use SoftDeletes;
     }
 
     public function menus() {
-        return $this->belongsToMany(Menu::getClass(), 'task_user')->withPivot('status', 'task_id')->orderBy('priority', 'asc')->orderBy('name', 'asc');
+        return $this->belongsToMany(Menu::getClass(), 'task_user')->withPivot('status', 'task_id')->orderBy('name', 'asc');
     }
 
     /* Relacion con la tabla schools */
