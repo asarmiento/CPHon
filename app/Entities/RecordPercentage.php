@@ -12,4 +12,20 @@ class RecordPercentage extends Entity
     {
         return $this->belongsToMany(Affiliate::getClass())->withPivot('amount_affiliate','amount','consecutive');
     }
+
+    public function isValid($data) {
+        $rules = ['year'=>'required', 
+            'month'=>'required', 'percentage_affiliates'=>'required', 
+            'percentage'=>'required','token'=>'required'];
+
+
+        $validator = \Validator::make($data, $rules);
+        if ($validator->passes()) {
+            return true;
+        }
+
+        $this->errors = $validator->errors();
+
+        return false;
+    }
 }

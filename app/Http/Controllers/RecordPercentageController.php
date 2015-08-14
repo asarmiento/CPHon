@@ -52,13 +52,15 @@ class RecordPercentageController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,['year'=>'required', 
-            'month'=>'required', 'percentage_affiliates'=>'required', 
-            'percentage'=>'required','token'=>'required']);
+      
         $recordPercentage = $this->CreacionArray($request->all(),'RecordPercentage');
-        $RecordPercentage = $this->recordPercentageRepository->getModel();
+       $RecordPercentage = $this->recordPercentageRepository->getModel();
+        if($RecordPercentage->isValid($recordPercentage)):
         $RecordPercentage->fill($recordPercentage);
         $RecordPercentage->save();
+        endif;
+
+         return $this->errores($RecordPercentage->errors);
     }
 
     /**
