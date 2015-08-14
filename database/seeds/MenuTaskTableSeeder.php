@@ -18,13 +18,12 @@ class MenuTaskTableSeeder extends Seeder {
     //put your code here
 
     public function run() {
-
+        //menu
         \DB::table('menu_task')->insert([
             'task_id' => 1,
             'menu_id' => 1,
             'status' => 1
         ]);
-
         \DB::table('menu_task')->insert([
             'task_id' => 2,
             'menu_id' => 1,
@@ -40,12 +39,7 @@ class MenuTaskTableSeeder extends Seeder {
             'menu_id' => 1,
             'status' => 1
         ]);
-        \DB::table('menu_task')->insert([
-            'task_id' => 5,
-            'menu_id' => 1,
-            'status' => 1
-        ]);
-
+        //user
         \DB::table('menu_task')->insert([
             'task_id' => 1,
             'menu_id' => 2,
@@ -66,23 +60,9 @@ class MenuTaskTableSeeder extends Seeder {
             'menu_id' => 2,
             'status' => 1
         ]);
-        \DB::table('menu_task')->insert([
-            'task_id' => 5,
-            'menu_id' => 2,
-            'status' => 1
-        ]);
+        //roles
         \DB::table('menu_task')->insert([
             'task_id' => 1,
-            'menu_id' => 3,
-            'status' => 1
-        ]);
-        \DB::table('menu_task')->insert([
-            'task_id' => 2,
-            'menu_id' => 3,
-            'status' => 1
-        ]);
-        \DB::table('menu_task')->insert([
-            'task_id' => 3,
             'menu_id' => 3,
             'status' => 1
         ]);
@@ -91,11 +71,7 @@ class MenuTaskTableSeeder extends Seeder {
             'menu_id' => 3,
             'status' => 1
         ]);
-        \DB::table('menu_task')->insert([
-            'task_id' => 5,
-            'menu_id' => 3,
-            'status' => 1
-        ]);
+        //tipos de usuarios
         \DB::table('menu_task')->insert([
             'task_id' => 1,
             'menu_id' => 4,
@@ -116,11 +92,49 @@ class MenuTaskTableSeeder extends Seeder {
             'menu_id' => 4,
             'status' => 1
         ]);
+        //afiliados
         \DB::table('menu_task')->insert([
-            'task_id' => 5,
-            'menu_id' => 4,
+            'task_id' => 1,
+            'menu_id' => 5,
             'status' => 1
         ]);
+        \DB::table('menu_task')->insert([
+            'task_id' => 2,
+            'menu_id' => 5,
+            'status' => 1
+        ]);
+        \DB::table('menu_task')->insert([
+            'task_id' => 3,
+            'menu_id' => 5,
+            'status' => 1
+        ]);
+        \DB::table('menu_task')->insert([
+            'task_id' => 4,
+            'menu_id' => 5,
+            'status' => 1
+        ]);
+        //porcentajes
+        \DB::table('menu_task')->insert([
+            'task_id' => 1,
+            'menu_id' => 6,
+            'status' => 1
+        ]);
+        \DB::table('menu_task')->insert([
+            'task_id' => 2,
+            'menu_id' => 6,
+            'status' => 1
+        ]);
+        \DB::table('menu_task')->insert([
+            'task_id' => 3,
+            'menu_id' => 6,
+            'status' => 1
+        ]);
+        \DB::table('menu_task')->insert([
+            'task_id' => 4,
+            'menu_id' => 6,
+            'status' => 1
+        ]);
+        
     }
 
 }

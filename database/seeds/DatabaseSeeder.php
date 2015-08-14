@@ -16,12 +16,12 @@ class DatabaseSeeder extends Seeder {
         //$this->call('UsersTableSeeder');
         $this->call('TypeUsersTableSeeder');
         $this->call('SchoolsTableSeeder');
-       $this->call('UsersTableSeeder');
-
+        $this->call('UsersTableSeeder');
         $this->call('TasksTableSeeder');
         $this->call('MenuTableSeeder');
         $this->call('MenuTaskTableSeeder');
         $this->call('SchoolUserTableSeeder');
+        $this->call('TaskUserTableSeeder');
 
         Model::reguard();
     }

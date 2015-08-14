@@ -170,6 +170,30 @@ var ajaxForm = function (url, type, data, msg, school){
 	});
 };
 
+//Function SubmitAjax
+var ajaxSubmit = function (url, type, data){
+	var message;
+	var path = url;
+	if(type == 'post'){
+		message = 'Registrando';
+	}else{
+		message = 'Actualizando';
+	}
+	return	$.ajax( {
+		      	url: path,
+		      	type: type,
+		      	data: data,
+				beforeSend: function(){
+		    		loadingUI(message);
+			    },
+		      	error: function(jqXHR, textStatus, errorThrown){
+					console.log('ERROR: ' + textStatus);
+					$.unblockUI();
+			    	bootbox.alert("<p class='red'>No se pueden grabar los datos.</p>")
+				}
+		    });
+}
+
 $(function(){
 	//setup Ajax
 	$.ajaxSetup({
@@ -721,18 +745,36 @@ $(function(){
 	$(document).off('click', '.new');
 	$(document).on('click', '.new', function(e){
 		e.preventDefault();
-		var self = $(this);
-		var path;
-		path = self.data('url');
-		path = path + '/modal';
-
-		$.ajax({
-			type: 'get',
-			url: path,
-		}).done(function(response){
-			console.log(response);
+		var url = $(this).data('url');
+		$.getJSON('../json/modal.json', function(response){
+			$.each(response, function(index,value){
+				if(value.view == url){
+					bootbox.dialog({
+					  	message: value.modal,
+					  	title: "Nuevo " + value.title,
+					  	animate: true,
+					  	className: "my-modal-new",
+					  	buttons: {
+						    success: {
+								label: "Grabar",
+								className: "btn-success",
+								callback: function() {
+									ajaxSubmit(url, 'post', $('.newModal').serialize())
+								    .done(function(response){
+								    	messageAjax(response);
+								    });
+								}
+						    },
+						    danger: {
+						    	label: "Cancelar",
+								className: "btn-default",
+						    }
+					  	}
+					});
+					return false;
+				}
+			});
 		});
-
 	});
 
 	dataTable('#table_percentage', 'porcentajes.');

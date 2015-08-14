@@ -39,6 +39,18 @@ class MenuTableSeeder extends Seeder {
             'url' => '/TIPOS-DE-USUARIOS',
             'icon_font' => 'glyphicon glyphicon-th-large'
          ]);
+        \DB::table('menus')->insert([
+            'id' => 5,
+            'name' => 'AFILIADOS',
+            'url' => '/AFILIADOS',
+            'icon_font' => null
+         ]);
+        \DB::table('menus')->insert([
+            'id' => 6,
+            'name' => 'PORCENTAJES',
+            'url' => '/PORCENTAJES',
+            'icon_font' => null
+         ]);
           
     }
 }
