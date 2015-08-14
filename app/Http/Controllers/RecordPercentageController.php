@@ -99,9 +99,17 @@ class RecordPercentageController extends Controller
      */
     public function update(Request $request, $token)
     {
-        echo json_encode($request->all());
-        echo "<br>";
-        echo $token;
+         $recordPercentage = $this->CreacionArray($request->all(),'RecordPercentage');
+       $RecordPercentage = $this->recordPercentageRepository->token($token);
+        if($RecordPercentage->isValid($recordPercentage)):
+        $RecordPercentage->fill($recordPercentage);
+        $RecordPercentage->save();
+
+        return $this->exito('Se ha Guardado con exito !!!');
+
+        endif;
+
+         return $this->errores($RecordPercentage->errors);
     }
 
     /**
