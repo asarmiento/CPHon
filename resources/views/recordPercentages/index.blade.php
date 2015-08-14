@@ -6,12 +6,7 @@
 
 @section('page')
 	<aside class="page">
-		<h2>Menú</h2>
-		<div class="list-inline-block">
-			<ul>
-				<li class="active-page"><a>Porcentajes</a></li>
-			</ul>
-		</div>
+		<h2>Porcentajes</h2>
 	</aside>
 @endsection
 
