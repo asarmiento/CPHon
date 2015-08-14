@@ -48,12 +48,12 @@
 	                        	@if(count($recordPercentages) > 0)
 		                        	@foreach($recordPercentages as $recordPercentage)
 			                            <tr>
-			                            	<td>{{ strtolower($recordPercentage->year) }}</td>
-			                            	<td>{{ strtolower($recordPercentage->month) }}</td>
-			                                <td>{{ strtolower($recordPercentage->percentage_affiliates) }}</td>
-			                                <td>{{ strtolower($recordPercentage->percentage) }}</td>
+			                            	<td class="text-center">{{ strtolower($recordPercentage->year) }}</td>
+			                            	<td class="text-center">{{ strtolower($recordPercentage->month) }}</td>
+			                                <td class="text-center">{{ strtolower($recordPercentage->percentage_affiliates) }}</td>
+			                                <td class="text-center">{{ strtolower($recordPercentage->percentage) }}</td>
 			                                <td class="text-center edit-row">
-												<a href="#" data-url="porcentajes"><i class="fa fa-pencil-square-o"></i></a>
+												<a class="edit" href="#" data-url="porcentajes" data-token="{{$recordPercentage->token}}"><i class="fa fa-pencil-square-o"></i></a>
 			                                </td>
 			                            </tr>
 		                            @endforeach
