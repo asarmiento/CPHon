@@ -29,18 +29,14 @@ class Affiliate extends Entity
 
      public function isValid($data) {
         $rules = [`code`=>'required', `charter`=>'required', 
-            `fname`=>'required', `sname`=>'required', `flast`=>'required', 
-            `slast`=>'required', 
+            `fname`=>'required', `flast`=>'required', 
     `address`=>'required', 
-    `homePhone`=>'required', 
-    `workPhone`=>'required', 
-    `job`=>'required',
+    `homePhone`=>'required',
     `affiliation`=>'required', `birthdate`=>'required', 
-    `retirementDate`=>'required', `salary`=>'required', `observation`=>'required',
-    `maritalStatus`=>'required', `sex`=>'required', `office`=>'required', `status`=>'required','token'=>'required'];
+  	`maritalStatus`=>'required', `status`=>'required','token'=>'required'];
 
-
-        $validator = \Validator::make($data, $rules);
+       $validator = \Validator::make($data, $rules);
+       
         if ($validator->passes()) {
             return true;
         }
