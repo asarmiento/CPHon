@@ -78,9 +78,10 @@ class RecordPercentageController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($token)
     {
-        //
+        $recordPercentage = $this->recordPercentageRepository->token($token);
+        return View('recordPercentages.edit',compact('recordPercentage'));
     }
 
     /**
