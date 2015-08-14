@@ -721,18 +721,38 @@ $(function(){
 	$(document).off('click', '.new');
 	$(document).on('click', '.new', function(e){
 		e.preventDefault();
-		var self = $(this);
-		var path;
-		path = self.data('url');
-		path = path + '/modal';
-
-		$.ajax({
-			type: 'get',
-			url: path,
-		}).done(function(response){
-			console.log(response);
+		var url = $(this).data('url');
+		$.getJSON('../json/modal.json', function(response){
+			$.each(response, function(index,value){
+				if(value.view == url){
+					bootbox.dialog({
+					  	message: value.modal,
+					  	title: "Nuevo Porcentaje",
+					  	animate: true,
+					  	className: "my-modal-new",
+					  	buttons: {
+						    success: {
+								label: "Grabar",
+								className: "btn-success",
+								callback: function() {
+									var dateOther = $('#dateOther').val();
+									data.dateOther = dateOther;
+									ajaxForm(url,'post',data, null, 'true')
+									.done( function (data) {
+										messageAjax(data);
+									});
+								}
+						    },
+						    danger: {
+						    	label: "Cancelar",
+								className: "btn-default",
+						    }
+					  	}
+					});
+					return false;
+				}
+			});
 		});
-
 	});
 
 	dataTable('#table_percentage', 'porcentajes.');

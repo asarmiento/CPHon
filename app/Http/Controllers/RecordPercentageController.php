@@ -107,7 +107,6 @@ class RecordPercentageController extends Controller
     }
 
     public function modal(){
-        return "OK";
-        return view('recordPercentages.create')->render();
+        return view('recordPercentages.create');
     }
 }
