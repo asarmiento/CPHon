@@ -1,38 +1,40 @@
-<section class='row'>
-	<div class='col-sm-6 col-md-6'>
-		<div class='form-mep'>
-			<label for='yearRecordPercentage'>Año</label>
-			<div class='input-group'>
-				<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
-		      	<input id='yearRecordPercentage' class='form-control' type='number' />
+<form class='newModal'>
+	<section class='row'>
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label for='yearRecordPercentage'>Año</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+			      	<input name='yearRecordPercentage' class='form-control' type='number' />
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class='col-sm-6 col-md-6'>
-		<div class='form-mep'>
-			<label for='monthRecordPercentage'>Mes</label>
-			<div class='input-group'>
-				<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
-		      	<input id='monthRecordPercentage' class='form-control' type='number' />
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label for='monthRecordPercentage'>Mes</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+			      	<input name='monthRecordPercentage' class='form-control' type='number' />
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class='col-sm-6 col-md-6'>
-		<div class='form-mep'>
-			<label for='percentage_affiliatesRecordPercentage'>Porcentaje del Afiliado</label>
-			<div class='input-group'>
-				<span class='input-group-addon'><i class='fa fa-bars'></i></span>
-		      	<input id='porcentJoinedPorcent' class='form-control' type='number' step='any' />
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label for='percentage_affiliatesRecordPercentage'>Porcentaje del Afiliado</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-bars'></i></span>
+			      	<input name='percentage_affiliatesRecordPercentage' class='form-control' type='number' step='any' />
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class='col-sm-6 col-md-6'>
-		<div class='form-mep'>
-			<label for='percentageRecordPercentage'>Porcentaje de la Empresa</label>
-			<div class='input-group'>
-				<span class='input-group-addon'><i class='fa fa-bars'></i></span>
-		      	<input id='percentageRecordPercentage' class='form-control' type='number' step='any' />
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label for='percentageRecordPercentage'>Porcentaje de la Empresa</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-bars'></i></span>
+			      	<input name='percentageRecordPercentage' class='form-control' type='number' step='any' />
+				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
+</form>

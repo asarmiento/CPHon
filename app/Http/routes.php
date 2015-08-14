@@ -35,7 +35,6 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 /**
  * After Authentication
  */
-Route::get('porcentajes/modal', 'RecordPercentageController@modal');
 Route::resource('porcentajes', 'RecordPercentageController');
 
 /*

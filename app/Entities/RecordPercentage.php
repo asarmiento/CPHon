@@ -14,9 +14,9 @@ class RecordPercentage extends Entity
     }
 
     public function isValid($data) {
-        $rules = ['year'=>'required', 
-            'month'=>'required', 'percentage_affiliates'=>'required', 
-            'percentage'=>'required','token'=>'required'];
+        $rules = ['year'=>'required|numeric', 
+            'month'=>'required|numeric', 'percentage_affiliates'=>'required|numeric', 
+            'percentage'=>'required|numeric','token'=>'required'];
 
 
         $validator = \Validator::make($data, $rules);

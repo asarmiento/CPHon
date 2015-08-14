@@ -58,6 +58,9 @@ class RecordPercentageController extends Controller
         if($RecordPercentage->isValid($recordPercentage)):
         $RecordPercentage->fill($recordPercentage);
         $RecordPercentage->save();
+
+        return $this->exito('Se ha Guardado con exito !!!');
+
         endif;
 
          return $this->errores($RecordPercentage->errors);
@@ -77,13 +80,16 @@ class RecordPercentageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $token
      * @return Response
      */
     public function edit($token)
     {
         $recordPercentage = $this->recordPercentageRepository->token($token);
-        return View('recordPercentages.edit',compact('recordPercentage'));
+      
+
+        return $recordPercentage;
+
     }
 
     /**

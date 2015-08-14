@@ -192,7 +192,11 @@ var ajaxSubmit = function (url, type, data){
 			    	bootbox.alert("<p class='red'>No se pueden grabar los datos.</p>")
 				}
 		    });
-}
+};
+
+var editModal = function(data, url){
+
+};
 
 $(function(){
 	//setup Ajax
@@ -746,6 +750,47 @@ $(function(){
 	$(document).on('click', '.new', function(e){
 		e.preventDefault();
 		var url = $(this).data('url');
+		$.getJSON('../json/modal.json', function(response){
+			$.each(response, function(index,value){
+				if(value.view == url){
+					bootbox.dialog({
+					  	message: value.modal,
+					  	title: "Nuevo " + value.title,
+					  	animate: true,
+					  	className: "my-modal-new",
+					  	buttons: {
+						    success: {
+								label: "Grabar",
+								className: "btn-success",
+								callback: function() {
+									ajaxSubmit(url, 'post', $('.newModal').serialize())
+								    .done(function(response){
+								    	messageAjax(response);
+								    });
+								}
+						    },
+						    danger: {
+						    	label: "Cancelar",
+								className: "btn-default",
+						    }
+					  	}
+					});
+					return false;
+				}
+			});
+		});
+	});
+
+	$(document).off('click', '.edit');
+	$(document).on('click', '.edit', function(e){
+		e.preventDefault();
+		var url = $(this).data('url');
+		var token = $(this).data('token');
+		var path = url+'/'+token+'/edit';
+		$.get(path)
+		.done(function(response){
+			var data = response;
+		});
 		$.getJSON('../json/modal.json', function(response){
 			$.each(response, function(index,value){
 				if(value.view == url){
