@@ -184,7 +184,7 @@ var ajaxSubmit = function (url, type, data){
 		      	type: type,
 		      	data: data,
 				beforeSend: function(){
-		    		loadingUI(message);
+		    		loadingUI(message, 'img');
 			    },
 		      	error: function(jqXHR, textStatus, errorThrown){
 					console.log('ERROR: ' + textStatus);
@@ -194,8 +194,30 @@ var ajaxSubmit = function (url, type, data){
 		    });
 };
 
-var editModal = function(data, url){
+/**
+ * [editModal description]
+ * @param  {[type]} url  [description]
+ * @param  {[type]} data [description]
+ * @return {[type]}      [description]
+ */
+var editModal = function(url, data){
+	switch(url){
+		case 'porcentajes': 
+			return modalPercentage(data);
+			break;
+		case 'afiliados': 
+			console.log('afiliados');
+	}
+};
 
+/**
+ * [modalPercentage description]
+ * @param  {[type]} data [description]
+ * @return {[type]}      [description]
+ */
+var modalPercentage = function(data){
+	var modal = "<form class='editModal'><section class='row'><div class='col-sm-6 col-md-6'><div class='form-mep'><label for='yearRecordPercentage'>Año</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-calendar'></i></span> <input name='yearRecordPercentage' class='form-control' type='number' value='"+data.year+"'/></div></div></div><div class='col-sm-6 col-md-6'><div class='form-mep'><label for='monthRecordPercentage'>Mes</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-calendar'></i></span> <input name='monthRecordPercentage' class='form-control' type='number' value='"+data.month+"'/></div></div></div><div class='col-sm-6 col-md-6'><div class='form-mep'><label for='percentage_affiliatesRecordPercentage'>Porcentaje del Afiliado</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-bars'></i></span> <input name='percentage_affiliatesRecordPercentage' class='form-control' type='number' step='any' value='"+data.percentage_affiliates+"'/></div></div></div><div class='col-sm-6 col-md-6'><div class='form-mep'><label for='percentageRecordPercentage'>Porcentaje de la Empresa</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-bars'></i></span> <input name='percentageRecordPercentage' class='form-control' type='number' step='any' value='"+data.percentage+"'/></div></div></div></section></form>"
+	return modal;
 };
 
 $(function(){
@@ -784,40 +806,42 @@ $(function(){
 	$(document).off('click', '.edit');
 	$(document).on('click', '.edit', function(e){
 		e.preventDefault();
-		var url = $(this).data('url');
-		var token = $(this).data('token');
-		var path = url+'/'+token+'/edit';
+		var url     = $(this).data('url');
+		var token   = $(this).data('token');
+		var path    = url+'/'+token+'/edit';
+		var pathPut = url+'/'+token;
 		$.get(path)
 		.done(function(response){
-			var data = response;
-		});
-		$.getJSON('../json/modal.json', function(response){
-			$.each(response, function(index,value){
-				if(value.view == url){
-					bootbox.dialog({
-					  	message: value.modal,
-					  	title: "Nuevo " + value.title,
-					  	animate: true,
-					  	className: "my-modal-new",
-					  	buttons: {
-						    success: {
-								label: "Grabar",
-								className: "btn-success",
-								callback: function() {
-									ajaxSubmit(url, 'post', $('.newModal').serialize())
-								    .done(function(response){
-								    	messageAjax(response);
-								    });
-								}
-						    },
-						    danger: {
-						    	label: "Cancelar",
-								className: "btn-default",
-						    }
-					  	}
-					});
-					return false;
-				}
+			//get modal
+			var modal = editModal(url, response);
+			$.getJSON('../json/modal.json', function(response){
+				$.each(response, function(index,value){
+					if(value.view == url){
+						bootbox.dialog({
+						  	message: modal,
+						  	title: "Editar " + value.title,
+						  	animate: true,
+						  	className: "my-modal-edit",
+						  	buttons: {
+							    success: {
+									label: "Actualizar",
+									className: "btn-success",
+									callback: function() {
+										ajaxSubmit(pathPut, 'put', $('.editModal').serialize())
+									    .done(function(response){
+									    	messageAjax(response);
+									    });
+									}
+							    },
+							    danger: {
+							    	label: "Cancelar",
+									className: "btn-default",
+							    }
+						  	}
+						});
+						return false;
+					}
+				});
 			});
 		});
 	});

@@ -86,8 +86,6 @@ class RecordPercentageController extends Controller
     public function edit($token)
     {
         $recordPercentage = $this->recordPercentageRepository->token($token);
-      
-
         return $recordPercentage;
 
     }
@@ -96,12 +94,14 @@ class RecordPercentageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  int  $id
+     * @param  int  $token
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $token)
     {
-        //
+        echo json_encode($request->all());
+        echo "<br>";
+        echo $token;
     }
 
     /**
