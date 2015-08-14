@@ -170,6 +170,30 @@ var ajaxForm = function (url, type, data, msg, school){
 	});
 };
 
+//Function SubmitAjax
+var ajaxSubmit = function (url, type, data){
+	var message;
+	var path = url;
+	if(type == 'post'){
+		message = 'Registrando';
+	}else{
+		message = 'Actualizando';
+	}
+	return	$.ajax( {
+		      	url: path,
+		      	type: type,
+		      	data: data,
+				beforeSend: function(){
+		    		loadingUI(message);
+			    },
+		      	error: function(jqXHR, textStatus, errorThrown){
+					console.log('ERROR: ' + textStatus);
+					$.unblockUI();
+			    	bootbox.alert("<p class='red'>No se pueden grabar los datos.</p>")
+				}
+		    });
+}
+
 $(function(){
 	//setup Ajax
 	$.ajaxSetup({
@@ -727,7 +751,7 @@ $(function(){
 				if(value.view == url){
 					bootbox.dialog({
 					  	message: value.modal,
-					  	title: "Nuevo Porcentaje",
+					  	title: "Nuevo " + value.title,
 					  	animate: true,
 					  	className: "my-modal-new",
 					  	buttons: {
@@ -735,12 +759,10 @@ $(function(){
 								label: "Grabar",
 								className: "btn-success",
 								callback: function() {
-									var dateOther = $('#dateOther').val();
-									data.dateOther = dateOther;
-									ajaxForm(url,'post',data, null, 'true')
-									.done( function (data) {
-										messageAjax(data);
-									});
+									ajaxSubmit(url, 'post', $('.newModal').serialize())
+								    .done(function(response){
+								    	messageAjax(response);
+								    });
 								}
 						    },
 						    danger: {

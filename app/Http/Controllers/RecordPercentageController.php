@@ -52,7 +52,7 @@ class RecordPercentageController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate($request,['year'=>'required', 
+        $this->validate($request,['year'=>'required', 
             'month'=>'required', 'percentage_affiliates'=>'required', 
             'percentage'=>'required','token'=>'required']);
         $recordPercentage = $this->CreacionArray($request->all(),'RecordPercentage');
