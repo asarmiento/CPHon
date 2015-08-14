@@ -16,8 +16,8 @@ class CreateRecordPercentagesTable extends Migration
             $table->increments('id');
             $table->string('year',4);
             $table->string('month',2);
-            $table->decimal('percentage_affiliates',2,2);
-            $table->decimal('percentage',2,2);
+            $table->decimal('percentage_affiliates',5,2);
+            $table->decimal('percentage',5,2);
             $table->string('token',250);
             $table->engine = 'InnoDB';
             $table->timestamps();
