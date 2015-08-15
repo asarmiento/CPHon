@@ -49,9 +49,16 @@ class AffiliatesController extends Controller
     {
             
         $affiliate = $this->CreacionArray($request->all(),'Affiliate');
+        $affiliate['affiliation']= date('Y-m-d');
+        $affiliate['status']= 'Activo';
         $affiliates = $this->affiliateRepository->getModel();
+        if($affiliates->isValid($affiliate)):
         $affiliates->fill($affiliate);
         $affiliates->save();
+        return $this->exito('Se ha Guardado con exito !!!');
+        endif;
+
+         return $this->errores($affiliates->errors);
     }
 
     /**
@@ -84,9 +91,19 @@ class AffiliatesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $token)
     {
-        //
+        $affiliate = $this->CreacionArray($request->all(),'Affiliate');
+        $affiliate['affiliation']= date('Y-m-d');
+        $affiliate['status']= 'Activo';
+        $affiliates = $this->affiliateRepository->token($token);
+        if($affiliates->isValid($affiliate)):
+        $affiliates->fill($affiliate);
+        $affiliates->save();
+        return $this->exito('Se ha Guardado con exito !!!');
+        endif;
+
+         return $this->errores($affiliates->errors);
     }
 
     /**
