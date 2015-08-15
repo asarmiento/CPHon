@@ -28,12 +28,12 @@ class Affiliate extends Entity
     }
 
      public function isValid($data) {
-        $rules = [`code`=>'required', `charter`=>'required', 
-            `fname`=>'required', `flast`=>'required', 
-    `address`=>'required', 
-    `homePhone`=>'required',
-    `affiliation`=>'required', `birthdate`=>'required', 
-  	`maritalStatus`=>'required', `status`=>'required','token'=>'required'];
+        $rules = ['code'=>'required', 'charter'=>'required', 
+            'fname'=>'required', 'flast'=>'required', 
+    'address'=>'required', 
+    'homePhone'=>'required',
+    'affiliation'=>'required', 'birthdate'=>'required', 
+  	'maritalStatus'=>'required', 'status'=>'required','token'=>'required'];
 
        $validator = \Validator::make($data, $rules);
        

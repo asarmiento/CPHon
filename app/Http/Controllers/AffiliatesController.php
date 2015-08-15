@@ -16,6 +16,7 @@ class AffiliatesController extends Controller
         AffiliateRepository $affiliateRepository
         )
     {
+        $this->middleware('auth');
         $this->affiliateRepository = $affiliateRepository;
     }
     /**

@@ -49,12 +49,12 @@
 			                            <tr>
 			                            	<td class="text-center">{{ strtolower($affiliate->code) }}</td>
 			                            	<td class="text-center">{{ strtolower($affiliate->charter) }}</td>
-			                            	<td class="text-center">{{ strtolower($affiliate->fname) }}</td>
-			                                <td class="text-center">{{ strtolower($affiliate->flast) }}</td>
-			                                <td class="text-center">{{ strtolower($affiliate->address) }}</td>
+			                            	<td class="text-center">{{ convertTitle($affiliate->fname.' '.$affiliate->sname) }}</td>
+			                                <td class="text-center">{{ convertTitle($affiliate->flast.' '.$affiliate->slast) }}</td>
+			                                <td class="text-center">{{ convertTitle($affiliate->address) }}</td>
 			                                <td class="text-center">{{ strtolower($affiliate->homePhone) }}</td>
 			                                <td class="text-center">{{ strtolower($affiliate->birthdate) }}</td>
-			                                <td class="text-center">{{ strtolower($affiliate->maritalStatus) }}</td>
+			                                <td class="text-center">{{ convertTitle($affiliate->maritalStatus) }}</td>
 			                                <td class="text-center edit-row">
 												<a class="edit" href="#" data-url="afiliados" data-token="{{$affiliate->token}}"><i class="fa fa-pencil-square-o"></i></a>
 			                                </td>
