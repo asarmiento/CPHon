@@ -18,6 +18,7 @@ class HtmlBuilder extends CollectiveHtmlBuilder  {
 
         $temp = null;
         $Menu = array();
+        $Menu[] = $this->currentRoute();
         foreach (\Auth::user()->menus as $menu) { 
             if ($temp != $menu->id) {
                 $temp = $menu->id;
@@ -26,8 +27,9 @@ class HtmlBuilder extends CollectiveHtmlBuilder  {
                         'url' => $menu->url,
                         'name' => $menu->name,
                         'icon_font' => $menu->icon_font,
+                        'resource' => $menu->resource,
+                        'priority' => $menu->priority,
                         'tasks' => $menu->tasksActive($menu->pivot->user_id)->select('name', 'id')->get(),
-                        'currentRoute' => $this->currentRoute()
                     ];
                 }
             }
@@ -48,6 +50,11 @@ class HtmlBuilder extends CollectiveHtmlBuilder  {
                 }
                 $route = substr($route, 0, -1);
             }
+            return $route;
+        }
+        $currentRoute = explode(".", \Route::currentRouteName());
+        if( count($currentRoute) > 1){
+            $route = $currentRoute[0];
             return $route;
         }
         return 'inicio';

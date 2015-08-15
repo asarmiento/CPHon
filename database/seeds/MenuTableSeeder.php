@@ -19,37 +19,49 @@ class MenuTableSeeder extends Seeder {
             'id' => 1,
             'name' => 'MENU',
             'url' => '/MENU',
-            'icon_font' => 'fa fa-bars'
+            'icon_font' => 'fa fa-bars',
+            'priority' => 5,
+            'resource' => false,
          ]);
          \DB::table('menus')->insert([
             'id' => 2,
             'name' => 'USUARIOS',
             'url' => '/USUARIOS',
-            'icon_font' => 'fa fa-users'
+            'icon_font' => 'fa fa-users',
+            'priority' => 5,
+            'resource' => false,
          ]);
            \DB::table('menus')->insert([
             'id' => 3,
             'name' => 'ROLES',
             'url' => '/ROLES',
-            'icon_font' => 'fa fa-list-alt'
+            'icon_font' => 'fa fa-list-alt',
+            'priority' => 5,
+            'resource' => false,
          ]);
            \DB::table('menus')->insert([
             'id' => 4,
             'name' => 'TIPOS DE USUARIOS',
             'url' => '/TIPOS-DE-USUARIOS',
-            'icon_font' => 'glyphicon glyphicon-th-large'
+            'icon_font' => 'glyphicon glyphicon-th-large',
+            'priority' => 5,
+            'resource' => false,
          ]);
         \DB::table('menus')->insert([
             'id' => 5,
             'name' => 'AFILIADOS',
             'url' => '/AFILIADOS',
-            'icon_font' => null
+            'icon_font' => null,
+            'priority' => 1,
+            'resource' => true,
          ]);
         \DB::table('menus')->insert([
             'id' => 6,
             'name' => 'PORCENTAJES',
             'url' => '/PORCENTAJES',
-            'icon_font' => null
+            'icon_font' => null,
+            'priority' => 1,
+            'resource' => true,
          ]);
           
     }
