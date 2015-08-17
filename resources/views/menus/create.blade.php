@@ -47,6 +47,23 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-sm-6 col-md-6">
+				<div class="form-mep">
+					<label for="priorityMenu">Prioridad del Menú</label>
+					<div class="input-group">
+						<span class="input-group-addon">#</span>
+				      	<input id="priorityMenu" class="form-control" type="number">
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-6">
+				<div class="form-mep">
+					<label for="resourceMenu">Menú Resource</label>
+					<div class="row">
+			      		<input id="resourceMenu" type="checkbox" name="status-checkbox" data-on-text="Activado" data-off-text="Desactivado" data-on-color="info" data-off-color="danger" data-label-text="Estado" checked>
+			      	</div>
+				</div>
+			</div>
 			<div class="col-sm-12 col-md-12 text-center">
 				<div class="form-mep">
 					<label>Escoger las opciones del Menú</label>

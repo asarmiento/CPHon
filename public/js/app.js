@@ -542,11 +542,13 @@ $(function(){
 			stateTasks[index] = $(this).bootstrapSwitch('state');
 			idTasks[index]    = $(this).data('id');
 		});
-		data.nameMenu   = $('#nameMenu').val();
-		data.urlMenu    = $('#urlMenu').val();
-		data.iconMenu   = $('#iconMenu').val();
-		data.idTasks    = idTasks;
-		data.stateTasks = stateTasks;
+		data.nameMenu     = $('#nameMenu').val();
+		data.urlMenu      = $('#urlMenu').val();
+		data.iconMenu     = $('#iconMenu').val();
+		data.priorityMenu = $('#priorityMenu').val();
+		data.resourceMenu = $('#resourceMenu').val();
+		data.idTasks      = idTasks;
+		data.stateTasks   = stateTasks;
 		ajaxForm(url,'post',data)
 		.done( function (data) {
 			messageAjax(data);
