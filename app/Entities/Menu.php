@@ -9,7 +9,7 @@ class Menu extends Entity
 {
     use SoftDeletes;
     // Don't forget to fill this array
-    protected $fillable = ['name', 'url', 'icon_font'];
+    protected $fillable = ['name', 'url', 'icon_font','resource', 'priority'];
 
     public function Tasks()
     {
@@ -25,7 +25,10 @@ class Menu extends Entity
     {
         $rules = ['name' => 'required|unique:menus',
             'url' => 'required|unique:menus',
-            'icon_font' => 'required' ];
+            'resource' => 'required',
+            'priority' => 'required',
+            'icon_font' => 'required'
+             ];
 
         if ($this->exists) {
             $rules['name'] .= ',name,'.$this->id;
