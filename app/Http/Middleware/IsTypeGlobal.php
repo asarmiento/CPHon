@@ -37,7 +37,7 @@ abstract class IsTypeGlobal
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->to('/institucion')->with('error', 'No tiene Permisos para esa opcion');
+                return redirect()->to('/porcentajes')->with('error', 'No tiene Permisos para esa opcion');
             }
         }
 

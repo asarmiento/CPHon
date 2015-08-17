@@ -37,7 +37,7 @@ class VerifictSchool
     {
         if( !userSchool() )
         {
-            return redirect('/institucion');
+            return redirect('/porcentajes');
         }
         return $next($request);
     }

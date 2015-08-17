@@ -75,9 +75,9 @@
 		<div class='col-sm-4 col-md-4'>
 			<div class='form-mep'>
 				<label for='birthdateAffiliates'>Fecha de Nacimiento</label>
-				<div class='input-group'>
+				<div class='input-group date'>
 					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
-			      	<input name='birthdateAffiliates' class='form-control' type='date' value='"+data.birthdate+"' />
+			      	<input name='birthdateAffiliates' class='form-control' type='text' value='"+data.birthdate+"' />
 				</div>
 			</div>
 		</div>
