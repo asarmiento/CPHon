@@ -544,9 +544,9 @@ $(function(){
 		});
 		data.nameMenu     = $('#nameMenu').val();
 		data.urlMenu      = $('#urlMenu').val();
-		data.iconMenu     = $('#iconMenu').val();
+		data.icon_fontMenu     = $('#icon_fontMenu').val();
 		data.priorityMenu = $('#priorityMenu').val();
-		data.resourceMenu = $('#resourceMenu').val();
+		data.resourceMenu = $('#resourceMenu').bootstrapSwitch('state');
 		data.idTasks      = idTasks;
 		data.stateTasks   = stateTasks;
 		ajaxForm(url,'post',data)
@@ -576,7 +576,9 @@ $(function(){
 		data.statusMenu = statusMenu;
 		data.nameMenu   = $('#nameMenu').val();
 		data.urlMenu    = $('#urlMenu').val();
-		data.iconMenu   = $('#iconMenu').val();
+		data.icon_fontMenu   = $('#icon_fontMenu').val();
+		data.priorityMenu = $('#priorityMenu').val();
+		data.resourceMenu = $('#resourceMenu').bootstrapSwitch('state');
 		data.idTasks    = idTasks;
 		data.stateTasks = stateTasks;
 		ajaxForm(url,'put',data)

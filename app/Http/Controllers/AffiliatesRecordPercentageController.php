@@ -6,9 +6,24 @@ use Illuminate\Http\Request;
 
 use AccountHon\Http\Requests;
 use AccountHon\Http\Controllers\Controller;
+use AccountHon\Repositories\AffiliateRepository;
+use AccountHon\Repositories\RecordPercentageRepository;
 
 class AffiliatesRecordPercentageController extends Controller
 {
+    
+    private $affiliateRepository;
+    private $recordPercentageRepository;
+
+    public function __construct(
+        AffiliateRepository $affiliateRepository,
+        RecordPercentageRepository $recordPercentageRepository
+        )
+    {
+        $this->middleware('auth');
+        $this->affiliateRepository = $affiliateRepository;
+        $this->recordPercentageRepository=$recordPercentageRepository;
+    }    
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +31,9 @@ class AffiliatesRecordPercentageController extends Controller
      */
     public function index()
     {
-        //
+        $affiliates = $this->affiliateRepository->all();
+        $recordPercentages = $this->recordPercentageRepository->last();
+        return View('affiliates.data',compact('affiliates','recordPercentages'));
     }
 
     /**
