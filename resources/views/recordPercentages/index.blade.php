@@ -64,4 +64,5 @@
 
 @section('scripts')
 	<script src="{{ asset('bower_components/datatables-bootstrap3-plugin/media/js/datatables-bootstrap3.min.js') }}"></script>
+	<script src="{{ asset('bower_components/handlebars/handlebars.min.js') }}"></script>
 @endsection

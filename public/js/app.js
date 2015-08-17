@@ -195,42 +195,197 @@ var ajaxSubmit = function (url, type, data){
 };
 
 /**
- * [editModal description]
- * @param  {[type]} url  [description]
+ * [bootboxEdit description]
+ * @param  {[type]} html    [description]
+ * @param  {[type]} title   [description]
+ * @param  {[type]} pathPut [description]
+ * @return {[type]}         [description]
+ */
+var bootboxEdit = function(html, title, pathPut){
+	bootbox.dialog({
+	  	message: html,
+	  	size: "large",
+	  	title: "Editar " + title,
+	  	animate: true,
+	  	className: "my-modal-edit",
+	  	buttons: {
+		    success: {
+				label: "Actualizar",
+				className: "btn-success",
+				callback: function() {
+					ajaxSubmit(pathPut, 'put', $('.editModal').serialize())
+				    .done(function(response){
+				    	messageAjax(response);
+				    });
+				}
+		    },
+		    danger: {
+		    	label: "Cancelar",
+				className: "btn-default",
+		    }
+	  	}
+	});
+};
+
+var bootboxNew = function(html, title, url){
+	bootbox.dialog({
+	  	message: html,
+	  	size: "large",
+	  	title: "Editar " + title,
+	  	animate: true,
+	  	className: "my-modal-edit",
+	  	buttons: {
+		    success: {
+				label: "Actualizar",
+				className: "btn-success",
+				callback: function() {
+					ajaxSubmit(url, 'put', $('.editModal').serialize())
+				    .done(function(response){
+				    	messageAjax(response);
+				    });
+				}
+		    },
+		    danger: {
+		    	label: "Cancelar",
+				className: "btn-default",
+		    }
+	  	}
+	});
+};
+
+/**
+ * [getTpl description]
+ * @param  {[type]} view [description]
+ * @param  {[type]} type [description]
+ * @return {[type]}      [description]
+ */
+var getTpl = function(view, type){
+	return "../templates/" + view + "/" + type +".html";
+};
+
+/**
+ * [helperHandlebars description]
+ * @return {[type]} [description]
+ */
+var helpersHandlebars = function(){
+	Handlebars.registerHelper('if_eq', function(a, b, opts) {
+    if(a == b) // Or === depending on your needs
+	        return opts.fn(this);
+	    else
+	        return opts.inverse(this);
+	});
+
+	Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+	    switch (operator) {
+	        case '==':
+	            return (v1 == v2) ? options.fn(this) : options.inverse(this);
+	        case '===':
+	            return (v1 === v2) ? options.fn(this) : options.inverse(this);
+	        case '<':
+	            return (v1 < v2) ? options.fn(this) : options.inverse(this);
+	        case '<=':
+	            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+	        case '>':
+	            return (v1 > v2) ? options.fn(this) : options.inverse(this);
+	        case '>=':
+	            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+	        case '&&':
+	            return (v1 && v2) ? options.fn(this) : options.inverse(this);
+	        case '||':
+	            return (v1 || v2) ? options.fn(this) : options.inverse(this);
+	        default:
+	            return options.inverse(this);
+	    }
+	});
+};
+
+/**
+ * [compileTpl description]
+ * @param  {[type]} html [description]
  * @param  {[type]} data [description]
  * @return {[type]}      [description]
  */
-var editModal = function(url, data){
+var compileTpl = function(html, data){
+	helpersHandlebars();
+	var tpl = Handlebars.compile(html);
+	var html = tpl(data);
+	return html;
+};
+
+/**
+ * [datepickerAdult description]
+ * @return {[type]} [description]
+ */
+var datepickerAdult = function(){
+	var current = new Date();
+	var adult   = String(current.getDate()) + "/" + String(current.getMonth()) + "/" + String(current.getFullYear() - 18);
+	$(".date").datepicker({
+		autoclose: true,
+		endDate: adult,
+		format: "dd/mm/yyyy",
+		language: "es",
+		orientation: "top auto"
+	});
+};
+
+/**
+ * [editModal description]
+ * @param  {[type]} url     [description]
+ * @param  {[type]} data    [description]
+ * @param  {[type]} title   [description]
+ * @param  {[type]} pathPut [description]
+ * @return {[type]}         [description]
+ */
+var editModal = function(url, data, title, pathPut){
 	switch(url){
 		case 'porcentajes': 
-			return modalPercentage(data);
+			var urlTpl = getTpl('recordPercentages', 'edit');
+			$.get(urlTpl)
+			.done( function(html){
+				var modal = compileTpl(html, data)
+				bootboxEdit(modal, title, pathPut);
+			});
 			break;
 		case 'afiliados': 
-			return modalAffiliate(data);
+			var urlTpl = getTpl('affiliates', 'edit');
+			$.get(urlTpl)
+			.done( function(html){
+				var modal = compileTpl(html, data)
+				bootboxEdit(modal, title, pathPut);
+				datepickerAdult();
+			});
 			break;
 	}
 };
 
 /**
- * [modalPercentage description]
- * @param  {[type]} data [description]
- * @return {[type]}      [description]
+ * [newModal description]
+ * @param  {[type]} url   [description]
+ * @param  {[type]} title [description]
+ * @return {[type]}       [description]
  */
-var modalPercentage = function(data){
-	var modal = "<form class='editModal'><section class='row'><div class='col-sm-6 col-md-6'><div class='form-mep'><label for='yearRecordPercentage'>Año</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-calendar'></i></span> <input name='yearRecordPercentage' class='form-control' type='number' value='"+data.year+"'/></div></div></div><div class='col-sm-6 col-md-6'><div class='form-mep'><label for='monthRecordPercentage'>Mes</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-calendar'></i></span> <input name='monthRecordPercentage' class='form-control' type='number' value='"+data.month+"'/></div></div></div><div class='col-sm-6 col-md-6'><div class='form-mep'><label for='percentage_affiliatesRecordPercentage'>Porcentaje del Afiliado</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-bars'></i></span> <input name='percentage_affiliatesRecordPercentage' class='form-control' type='number' step='any' value='"+data.percentage_affiliates+"'/></div></div></div><div class='col-sm-6 col-md-6'><div class='form-mep'><label for='percentageRecordPercentage'>Porcentaje de la Empresa</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-bars'></i></span> <input name='percentageRecordPercentage' class='form-control' type='number' step='any' value='"+data.percentage+"'/></div></div></div></section></form>"
-	return modal;
+var newModal = function(url, title){
+	switch(url){
+		case 'porcentajes': 
+			var urlTpl = getTpl('recordPercentages', 'create');
+			$.get(urlTpl)
+			.done( function(html){
+				var modal = compileTpl(html)
+				bootboxNew( modal, title, url);
+			});
+			break;
+		case 'afiliados': 
+			var urlTpl = getTpl('affiliates', 'create');
+			$.get(urlTpl)
+			.done( function(html){
+				var modal = compileTpl(html)
+				bootboxEdit(modal, title, url);
+				datepickerAdult();
+			});
+			break;
+	}
 };
 
-var modalAffiliate = function(data){
-	var modal = "<form class='editModal'><section class='row'><div class='col-sm-4 col-md-4'><div class='form-mep'><label for='codeAffiliates'>Código</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-barcode'></i></span> <input name='codeAffiliates' class='form-control' type='text' value='"+data.code+"' /></div></div></div><div class='col-sm-4 col-md-4'><div class='form-mep'><label for='charterAffiliates'>Cédula</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-barcode'></i></span> <input name='charterAffiliates' class='form-control' type='text' value='"+data.charter+"' /></div></div></div><div class='col-sm-4 col-md-4'><div class='form-mep'><label for='fnameAffiliates'>Primer Nombre</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-user'></i></span> <input name='fnameAffiliates' class='form-control' type='text' value='"+data.fname+"' /></div></div></div><div class='col-sm-4 col-md-4'><div class='form-mep'><label for='snameAffiliates'>Segundo Nombre</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-user'></i></span> <input name='snameAffiliates' class='form-control' type='text' value='"+data.sname+"' /></div></div></div><div class='col-sm-4 col-md-4'><div class='form-mep'><label for='flastAffiliates'>Primer Apellido</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-user'></i></span> <input name='flastAffiliates' class='form-control' type='text' value='"+data.flast+"' /></div></div></div><div class='col-sm-4 col-md-4'><div class='form-mep'><label for='slastAffiliates'>Segundo Apellido</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-user'></i></span> <input name='slastAffiliates' class='form-control' type='text' value='"+data.slast+"' /></div></div></div><div class='col-sm-4 col-md-4'><div class='form-mep'><label for='addressAffiliates'>Dirección</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-map-marker'></i></span> <input name='addressAffiliates' class='form-control' type='text' value='"+data.address+"' /></div></div></div><div class='col-sm-4 col-md-4'><div class='form-mep'><label for='homePhoneAffiliates'>Teléfono</label><div class='input-group'><span class='input-group-addon'><i class='fa fa-phone'></i></span> <input name='homePhone' class='form-control' type='text' value='"+data.homePhone+"' /></div></div></div><div class='col-sm-4 col-md-4'><div class='form-mep'><label for='birthdateAffiliates'>Fecha de Nacimiento</label><div class='input-group date'><span class='input-group-addon'><i class='fa fa-calendar'></i></span> <input name='birthdateAffiliates' class='form-control' type='text' value='"+data.birthdate+"' /></div></div></div><div class='col-sm-4 col-md-4'><div class='form-mep'><label for='maritalStatusAffiliates'>Estado Civil</label><select class='form-control' name='maritalStatusAffiliates'>";
-		if(data.maritalStatus == 'Casado'){
-			modal +="<option value='Casado' selected>Casado</option><option value='Soltero'>Soltero</option>";
-		}else{
-			modal +="<option value='Casado'>Casado</option><option value='Soltero' selected>Soltero</option>"
-		}
-		modal +="</select></div></div></section></form>";
-	return modal;
-}
 
 $(function(){
 	//setup Ajax
@@ -789,6 +944,7 @@ $(function(){
 	 */
 	
 	/**
+	 * Resources:
 	 * Porcentajes, Afiliados
 	 */
 	
@@ -796,43 +952,11 @@ $(function(){
 	$(document).on('click', '.new', function(e){
 		e.preventDefault();
 		var url = $(this).data('url');
-		$.getJSON('../json/modal.json', function(response){
-			$.each(response, function(index,value){
+		$.getJSON('../json/modal.json', function(views){
+			$.each(views, function(index,value){
 				if(value.view == url){
-					bootbox.dialog({
-					  	message: value.modal,
-					  	size: "large",
-					  	title: "Nuevo " + value.title,
-					  	animate: true,
-					  	className: "my-modal-new",
-					  	buttons: {
-						    success: {
-								label: "Grabar",
-								className: "btn-success",
-								callback: function() {
-									ajaxSubmit(url, 'post', $('.newModal').serialize())
-								    .done(function(response){
-								    	messageAjax(response);
-								    });
-								}
-						    },
-						    danger: {
-						    	label: "Cancelar",
-								className: "btn-default",
-						    }
-					  	}
-					});
-					if(url == 'afiliados'){
-						var current = new Date();
-						var adult   = String(current.getDate()) + "/" + String(current.getMonth()) + "/" + String(current.getFullYear() - 18);
-						$(".date").datepicker({
-							autoclose: true,
-							endDate: adult,
-							format: "dd/mm/yyyy",
-							language: "es",
-							orientation: "top auto"
-						});
-					}
+					//get view tpl and modal
+					newModal(url, value.title);
 					return false;
 				}
 			});
@@ -848,45 +972,12 @@ $(function(){
 		var pathPut = url+'/'+token;
 		$.get(path)
 		.done(function(response){
-			//get modal
-			var modal = editModal(url, response);
-			$.getJSON('../json/modal.json', function(response){
-				$.each(response, function(index,value){
+			//get pages json
+			$.getJSON('../json/modal.json', function(views){
+				$.each(views, function(index,value){
 					if(value.view == url){
-						bootbox.dialog({
-						  	message: modal,
-						  	size: "large",
-						  	title: "Editar " + value.title,
-						  	animate: true,
-						  	className: "my-modal-edit",
-						  	buttons: {
-							    success: {
-									label: "Actualizar",
-									className: "btn-success",
-									callback: function() {
-										ajaxSubmit(pathPut, 'put', $('.editModal').serialize())
-									    .done(function(response){
-									    	messageAjax(response);
-									    });
-									}
-							    },
-							    danger: {
-							    	label: "Cancelar",
-									className: "btn-default",
-							    }
-						  	}
-						});
-						if(url == 'afiliados'){
-							var current = new Date();
-							var adult   = String(current.getDate()) + "/" + String(current.getMonth()) + "/" + String(current.getFullYear() - 18);
-							$(".date").datepicker({
-								autoclose: true,
-								endDate: adult,
-								format: "dd/mm/yyyy",
-								language: "es",
-								orientation: "top auto"
-							});
-						}
+						//get view tpl and modal
+						editModal(url, response, value.title, pathPut);
 						return false;
 					}
 				});
