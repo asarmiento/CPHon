@@ -174,6 +174,32 @@ class MenuTaskTableSeeder extends Seeder {
             'menu_id' => 6,
             'status' => 0
         ]);
+        //CUOTAS
+        \DB::table('menu_task')->insert([
+            'task_id' => 1,
+            'menu_id' => 7,
+            'status' => 1
+        ]);
+        \DB::table('menu_task')->insert([
+            'task_id' => 2,
+            'menu_id' => 7,
+            'status' => 1
+        ]);
+        \DB::table('menu_task')->insert([
+            'task_id' => 3,
+            'menu_id' => 7,
+            'status' => 1
+        ]);
+        \DB::table('menu_task')->insert([
+            'task_id' => 4,
+            'menu_id' => 7,
+            'status' => 1
+        ]);
+        \DB::table('menu_task')->insert([
+            'task_id' => 5,
+            'menu_id' => 7,
+            'status' => 0
+        ]);
     }
 
 }

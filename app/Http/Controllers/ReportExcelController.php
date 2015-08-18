@@ -25,7 +25,13 @@ abstract class ReportExcelController extends Controller
 
     public function ReportAffiliate(){
 
-        $header = array();
+        $header = array(
+                array('INSTITUCION DE PREVISION SOCIAL DEL PERIODISTA'),
+                array(),
+                array(),
+                array(),
+                array(),
+            );
     }
   
 

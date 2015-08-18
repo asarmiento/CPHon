@@ -63,6 +63,14 @@ class MenuTableSeeder extends Seeder {
             'priority' => 1,
             'resource' => true,
          ]);
+        \DB::table('menus')->insert([
+            'id' => 7,
+            'name' => 'CUOTAS',
+            'url' => '/CUOTAS',
+            'icon_font' => null,
+            'priority' => 1,
+            'resource' => true,
+         ]);
           
     }
 }
