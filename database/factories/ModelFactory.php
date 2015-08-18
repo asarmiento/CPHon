@@ -11,11 +11,19 @@
 |
 */
 
-$factory->define(AccountHon\User::class, function ($faker) {
+$factory->define(AccountHon\Entities\Affiliate::class, function ($faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => str_random(10),
-        'remember_token' => str_random(10),
+        'code'=>$faker->randomNumber(5),
+        'charter'=>str_random(18), 
+        'fname'=>$faker->firstName,
+        'flast'=>$faker->lastName, 
+        'slast'=>$faker->lastName, 
+    'address'=>$faker->address, 
+    'homePhone'=>$faker->phoneNumber,
+    'affiliation'=>$faker->date,
+    'birthdate'=>$faker->date, 
+  	'maritalStatus'=>$faker->randomElement(['Casado','Soltero']),
+  	 'status'=>'activo',
+  	 'token'=>$faker->md5(str_random(2)),
     ];
 });
