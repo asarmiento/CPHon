@@ -33,7 +33,7 @@ class AffiliatesRecordPercentageController extends Controller
     {
         $affiliates = $this->affiliateRepository->all();
         $recordPercentages = $this->recordPercentageRepository->last();
-        return View('affiliates.data',compact('affiliates','recordPercentages'));
+        return View('dues.index',compact('affiliates','recordPercentages'));
     }
 
     /**
@@ -43,7 +43,9 @@ class AffiliatesRecordPercentageController extends Controller
      */
     public function create()
     {
-        //
+        $affiliates = $this->affiliateRepository->all();
+        $recordPercentages = $this->recordPercentageRepository->last();
+        return View('dues.create',compact('affiliates','recordPercentages'));
     }
 
     /**
@@ -54,18 +56,12 @@ class AffiliatesRecordPercentageController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+         $affiliate = $this->CreacionArray($request->all(),'Affiliate');
+          $affiliates = $this->affiliateRepository->token($affiliate->affiliate_token);
+          $recordPercentages = $this->recordPercentageRepository->token($affiliate->recordPercentage_token);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
+           $affiliateRecordPercentages = $this->affiliateRepository->find($affiliates->id);
+          $affiliateRecordPercentages->RecordPercentages->attach($recordPercentages->id);
     }
 
     /**
@@ -91,14 +87,4 @@ class AffiliatesRecordPercentageController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

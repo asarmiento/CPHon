@@ -48,9 +48,10 @@ class AffiliatesController extends Controller
      */
     public function store(Request $request)
     {
-            
+          $date = \Carbon\Carbon::now();
         $affiliate = $this->CreacionArray($request->all(),'Affiliate');
-        $affiliate['affiliation']= date('Y-m-d');
+        $affiliate['birthdate']= \Carbon\Carbon::createFromFormat('d/m/Y', $affiliate['birthdate'])->toDateString();
+        $affiliate['affiliation']= $date->now()->toDateString();
         $affiliate['status']= 'Activo';
         $affiliates = $this->affiliateRepository->getModel();
         if($affiliates->isValid($affiliate)):
@@ -62,16 +63,6 @@ class AffiliatesController extends Controller
          return $this->errores($affiliates->errors);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -107,14 +98,5 @@ class AffiliatesController extends Controller
          return $this->errores($affiliates->errors);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 }
