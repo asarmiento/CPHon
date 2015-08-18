@@ -74,7 +74,7 @@ class UsersController extends Controller {
      */
     public function store() {
         /* Capturamos los datos enviados por ajax */
-        $users = $this->convertionObjeto();
+        $users = $this->convertionObjeto('data');
         /* Creamos un array para cambiar nombres de parametros */
         $Validation = $this->CreacionArray($users, 'User');
         $Validation['type_user_id'] =  $users->typeUserIdUser;
@@ -131,7 +131,7 @@ class UsersController extends Controller {
     }
 
     public function updateRole() {
-        $roles = $this->convertionObjeto();
+        $roles = $this->convertionObjeto('data');
         $Menus = $roles->roles;
         $user  = $this->usersRepository->withTrashedFind($roles->idUser);
         $user->Tasks()->detach();
@@ -161,7 +161,7 @@ class UsersController extends Controller {
     public function update($id) {
 
         /* Capturamos los datos enviados por ajax */
-        $users = $this->convertionObjeto();
+        $users = $this->convertionObjeto('data');
         /* obtenemos dos datos del supplier mediante token recuperamos el id */
         /* Creamos un array para cambiar nombres de parametros */
         $Validation = $this->CreacionArray($users, 'User');
@@ -199,7 +199,7 @@ class UsersController extends Controller {
      */
     public function destroy() {
         /* Capturamos los datos enviados por ajax */
-        $users = $this->convertionObjeto();
+        $users = $this->convertionObjeto('data');
         /* les damos eliminacion pasavida */
         $data = $this->usersRepository->find($users->idUser)->delete();
         if ($data):
@@ -219,7 +219,7 @@ class UsersController extends Controller {
      */
     public function active() {
         /* Capturamos los datos enviados por ajax */
-        $users = $this->convertionObjeto();
+        $users = $this->convertionObjeto('data');
         /* les quitamos la eliminacion pasavida */
         $data = $this->usersRepository->withTrashedFind($users->idUser)->restore();
         if ($data):
