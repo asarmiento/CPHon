@@ -37,7 +37,8 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
  */
 Route::resource('porcentajes', 'RecordPercentageController');
 Route::resource('afiliados', 'AffiliatesController');
-
+Route::resource('cuotas', 'AffiliatesRecordPercentageController');
+Route::get('searchAffiliate', 'AffiliatesController@search');
 /*
  * Rutas de Tipos de Usuarios
  */

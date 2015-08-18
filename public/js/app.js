@@ -227,11 +227,23 @@ var bootboxEdit = function(html, title, pathPut){
 	});
 };
 
+/**
+ * [bootboxNew description]
+ * @param  {[type]} html  [description]
+ * @param  {[type]} title [description]
+ * @param  {[type]} url   [description]
+ * @return {[type]}       [description]
+ */
 var bootboxNew = function(html, title, url){
+	if(url == "cuotas"){
+		title = "Nueva " + title;
+	}else{
+		title = "Nuevo " + title;
+	}
 	bootbox.dialog({
 	  	message: html,
 	  	size: "large",
-	  	title: "Nuevo " + title,
+	  	title: title,
 	  	animate: true,
 	  	className: "my-modal-new",
 	  	buttons: {
@@ -329,6 +341,20 @@ var datepickerAdult = function(){
 };
 
 /**
+ * [datepickerMonth description]
+ * @return {[type]} [description]
+ */
+var datepickerMonth = function(){
+	$(".date").datepicker({
+		autoclose: true,
+		format: "mm/yyyy",
+		language: "es",
+		orientation: "top auto",
+		minViewMode: 1
+	});
+};
+
+/**
  * [editModal description]
  * @param  {[type]} url     [description]
  * @param  {[type]} data    [description]
@@ -365,22 +391,33 @@ var editModal = function(url, data, title, pathPut){
  * @return {[type]}       [description]
  */
 var newModal = function(url, title){
+	var urlTpl;
+	var modal;
 	switch(url){
 		case 'porcentajes': 
-			var urlTpl = getTpl('recordPercentages', 'create');
+			urlTpl = getTpl('recordPercentages', 'create');
 			$.get(urlTpl)
 			.done( function(html){
-				var modal = compileTpl(html)
+				modal = compileTpl(html)
 				bootboxNew( modal, title, url);
 			});
 			break;
 		case 'afiliados': 
-			var urlTpl = getTpl('affiliates', 'create');
+			urlTpl = getTpl('affiliates', 'create');
 			$.get(urlTpl)
 			.done( function(html){
-				var modal = compileTpl(html)
+				modal = compileTpl(html)
 				bootboxNew(modal, title, url);
 				datepickerAdult();
+			});
+			break;
+		case 'cuotas':
+			urlTpl = getTpl('dues', 'create');
+			$.get(urlTpl)
+			.done( function(html){
+				modal = compileTpl(html)
+				bootboxNew( modal, title, url);
+				datepickerMonth();
 			});
 			break;
 	}
@@ -537,6 +574,17 @@ $(function(){
 		}
 	});
 
+	//Search Affiliate
+	$(document).on('keyup', '#searchAffiliate', function(event) {
+		var self = $(this);
+		/* Act on the event */
+		if( self.val().length > 3 ){
+			$.getJSON('searchAffiliate', { code: self.val() } )
+			.done( function(response){
+				console.log(response);
+			});
+		}
+	});
 
 	/**
 	 * Type User
@@ -989,6 +1037,7 @@ $(function(){
 
 	dataTable('#table_percentage', 'porcentajes.');
 	dataTable('#table_affiliates', 'afiliados');
+	dataTable('#table_dues', 'cuotas');
 	/**
 	 * End Porcentajes
 	 */

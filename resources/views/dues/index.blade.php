@@ -21,7 +21,7 @@
 							<h5><strong>Lista de Afiliados</strong></h5>
 						</div>
 						<div class="col-sm-6">
-							<a data-url="afiliados" href="#" class="btn btn-info pull-right new">
+							<a data-url="cuotas" href="#" class="btn btn-info pull-right new">
 								<span class="glyphicon glyphicon-plus"></span>
 								<span>Nuevo</span>
 							</a>

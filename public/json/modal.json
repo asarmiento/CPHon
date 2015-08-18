@@ -6,5 +6,9 @@
 	{
 		"view": "afiliados",
 		"title": "Afiliado"
+	},
+	{
+		"view": "cuotas",
+		"title": "Cuota"
 	}
 ]
