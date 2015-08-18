@@ -231,15 +231,15 @@ var bootboxNew = function(html, title, url){
 	bootbox.dialog({
 	  	message: html,
 	  	size: "large",
-	  	title: "Editar " + title,
+	  	title: "Nuevo " + title,
 	  	animate: true,
-	  	className: "my-modal-edit",
+	  	className: "my-modal-new",
 	  	buttons: {
 		    success: {
-				label: "Actualizar",
+				label: "Grabar",
 				className: "btn-success",
 				callback: function() {
-					ajaxSubmit(url, 'put', $('.editModal').serialize())
+					ajaxSubmit(url, 'post', $('.newModal').serialize())
 				    .done(function(response){
 				    	messageAjax(response);
 				    });
@@ -379,7 +379,7 @@ var newModal = function(url, title){
 			$.get(urlTpl)
 			.done( function(html){
 				var modal = compileTpl(html)
-				bootboxEdit(modal, title, url);
+				bootboxNew(modal, title, url);
 				datepickerAdult();
 			});
 			break;
