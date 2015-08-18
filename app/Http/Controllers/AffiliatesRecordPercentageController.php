@@ -6,9 +6,24 @@ use Illuminate\Http\Request;
 
 use AccountHon\Http\Requests;
 use AccountHon\Http\Controllers\Controller;
+use AccountHon\Repositories\AffiliateRepository;
+use AccountHon\Repositories\RecordPercentageRepository;
 
 class AffiliatesRecordPercentageController extends Controller
 {
+    
+    private $affiliateRepository;
+    private $recordPercentageRepository;
+
+    public function __construct(
+        AffiliateRepository $affiliateRepository,
+        RecordPercentageRepository $recordPercentageRepository
+        )
+    {
+        $this->middleware('auth');
+        $this->affiliateRepository = $affiliateRepository;
+        $this->recordPercentageRepository=$recordPercentageRepository;
+    }    
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +31,9 @@ class AffiliatesRecordPercentageController extends Controller
      */
     public function index()
     {
-        //
+        $affiliates = $this->affiliateRepository->all();
+        $recordPercentages = $this->recordPercentageRepository->last();
+        return View('dues.index',compact('affiliates','recordPercentages'));
     }
 
     /**
@@ -26,7 +43,9 @@ class AffiliatesRecordPercentageController extends Controller
      */
     public function create()
     {
-        //
+        $affiliates = $this->affiliateRepository->all();
+        $recordPercentages = $this->recordPercentageRepository->last();
+        return View('dues.create',compact('affiliates','recordPercentages'));
     }
 
     /**
@@ -37,18 +56,12 @@ class AffiliatesRecordPercentageController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+         $affiliate = $this->CreacionArray($request->all(),'Affiliate');
+          $affiliates = $this->affiliateRepository->token($affiliate->affiliate_token);
+          $recordPercentages = $this->recordPercentageRepository->token($affiliate->recordPercentage_token);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
+           $affiliateRecordPercentages = $this->affiliateRepository->find($affiliates->id);
+          $affiliateRecordPercentages->RecordPercentages->attach($recordPercentages->id);
     }
 
     /**
@@ -74,14 +87,4 @@ class AffiliatesRecordPercentageController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -52,8 +52,29 @@
 					<label for="iconMenu">Ícono del Menú</label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-info"></i></span>
-				      	<input id="iconMenu" class="form-control" type="text" value="{{strtolower($menu->icon_font)}}">
+				      	<input id="icon_fontMenu" class="form-control" type="text" value="{{strtolower($menu->icon_font)}}">
 					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-6">
+				<div class="form-mep">
+					<label for="priorityMenu">Prioridad del Menú</label>
+					<div class="input-group">
+						<span class="input-group-addon">#</span>
+				      	<input id="priorityMenu" class="form-control" type="number" value="{{$menu->priority}}">
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-6">
+				<div class="form-mep">
+					<label for="resourceMenu">Menú Resource</label>
+					<div class="row">
+						@if($menu->resource)
+			      		<input id="resourceMenu" type="checkbox" name="status-checkbox" data-on-text="Activado" data-off-text="Desactivado" data-on-color="info" data-off-color="danger" data-label-text="Estado" checked>
+			      		@else
+			      		<input id="resourceMenu" type="checkbox" name="status-checkbox" data-on-text="Activado" data-off-text="Desactivado" data-on-color="info" data-off-color="danger" data-label-text="Estado">
+			      		@endif
+			      	</div>
 				</div>
 			</div>
 			<div class="col-sm-6 col-md-6">

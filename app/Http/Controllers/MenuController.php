@@ -54,7 +54,8 @@ class MenuController extends Controller {
         /* Capturamos los datos enviados por ajax */
         $menus = $this->convertionObjeto();
         /* Creamos un array para cambiar nombres de parametros */
-        $ValidationData = array('name' => $menus->nameMenu, 'url' => $menus->urlMenu, 'icon_font' => $menus->iconMenu);
+        $ValidationData = $this->CreacionArray($menus,'Menu');
+
         /* Declaramos las clases a utilizar */
         $menu = $this->menuRepository->getModel();
         /* Validamos los datos para guardar tabla menu */
@@ -100,7 +101,9 @@ class MenuController extends Controller {
         /* Capturamos los datos enviados por ajax */
         $menus = $this->convertionObjeto();
         /* Creamos un array para cambiar nombres de parametros */
-        $ValidationData = array('name' => $menus->nameMenu, 'url' => $menus->urlMenu, 'icon_font' => $menus->iconMenu);
+        $ValidationData =  $this->CreacionArray($menus,'Menu');
+        
+        
         /* Declaramos las clases a utilizar */
         $menu = $this->menuRepository->withTrashedFind($menus->idMenu);
         $menu->Tasks()->detach();

@@ -40,10 +40,10 @@
 			</div>
 			<div class="col-sm-6 col-md-6">
 				<div class="form-mep">
-					<label for="iconMenu">Ícono del Menú</label>
+					<label for="icon_fontMenu">Ícono del Menú</label>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-info"></i></span>
-				      	<input id="iconMenu" class="form-control" type="text">
+				      	<input id="icon_fontMenu" class="form-control" type="text">
 					</div>
 				</div>
 			</div>
