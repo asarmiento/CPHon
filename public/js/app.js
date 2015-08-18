@@ -575,13 +575,44 @@ $(function(){
 	});
 
 	//Search Affiliate
+	$(document).off('keup', '#searchAffiliate');
 	$(document).on('keyup', '#searchAffiliate', function(event) {
 		var self = $(this);
 		/* Act on the event */
-		if( self.val().length > 3 ){
+		if( self.val().length > 2 ){
 			$.getJSON('searchAffiliate', { code: self.val() } )
 			.done( function(response){
-				console.log(response);
+				var arrAffiliates = [];
+				$.each(response, function(index,value){
+					var affiliate = value.code + " - " + value.fname + " " + value.sname + " " + value.flast + " " + value.slast;
+					arrAffiliates.push(affiliate);
+				});
+				if(arrAffiliates.length > 0){
+					// constructs the suggestion engine
+					var affiliates = new Bloodhound({
+					  datumTokenizer: Bloodhound.tokenizers.whitespace,
+					  queryTokenizer: Bloodhound.tokenizers.whitespace,
+					  // `arrAffiliates` is an array of state names defined in "The Basics"
+					  local: arrAffiliates
+					});
+
+					self.typeahead({
+					  hint: true,
+					  highlight: true,
+					  minLength: 1
+					},
+					{
+					  name: 'affiliates',
+					  source: affiliates
+					});
+					self.bind('typeahead:select', function(ev, suggestion) {
+						$('#codeAffiliate').val(response.code);
+						$('#charterAffiliate').val(response.charter);
+						$('#nameAffiliate').val(response.fname + " " + response.sname);
+						$('#lastAffiliate').val(response.flast + " " + response.slast);
+						$('#birthdateAffiliate').val(response.birthdate);
+					});
+				}
 			});
 		}
 	});

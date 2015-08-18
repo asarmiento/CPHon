@@ -3,6 +3,23 @@
 @section('styles')
 	<link rel="stylesheet" href="{{ asset('bower_components/datatables-bootstrap3-plugin/media/css/datatables-bootstrap3.css') }}">
 	<link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+	<style>
+		span.twitter-typeahead {
+		  width: 100%;
+		}
+		.input-group span.twitter-typeahead {
+		  display: block !important;
+		}
+		.input-group span.twitter-typeahead .tt-dropdown-menu {
+		  top: 32px !important;
+		}
+		.input-group.input-group-lg span.twitter-typeahead .tt-dropdown-menu {
+		  top: 44px !important;
+		}
+		.input-group.input-group-sm span.twitter-typeahead .tt-dropdown-menu {
+		  top: 28px !important;
+		}
+	</style>
 @endsection
 
 @section('page')
@@ -66,4 +83,6 @@
 	<script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 	<script src="{{ asset('bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js') }}"></script>
 	<script src="{{ asset('bower_components/handlebars/handlebars.min.js') }}"></script>
+	<script src="{{ asset('bower_components/typeahead.js/dist/bloodhound.min.js') }}"></script>
+	<script src="{{ asset('bower_components/typeahead.js/dist/typeahead.jquery.min.js') }}"></script>
 @endsection
