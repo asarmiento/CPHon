@@ -98,5 +98,11 @@ class AffiliatesController extends Controller
          return $this->errores($affiliates->errors);
     }
 
+    public function search(){
+         $code = \Input::get('code');
+         $affiliate = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
+         ->orWhere('fname', 'LIKE', '%'.$code.'%')->orWhere('flast', 'LIKE', '%'.$code.'%')->get();
 
+         return $affiliate;
+    }
 }

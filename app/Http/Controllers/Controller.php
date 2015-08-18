@@ -42,12 +42,14 @@ abstract class Controller extends BaseController
     /**
      * @return type
      */
-    public function convertionObjeto()
+    public function convertionObjeto($data)
     {
-        $datos = Input::get('data');
+        $datos = Input::get($data);
         $DatosController = json_decode($datos);
         return $DatosController;
     }
+
+
 
     public function CreacionArray($data, $delimiter)
     {
