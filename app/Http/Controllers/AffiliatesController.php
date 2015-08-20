@@ -154,7 +154,7 @@ class AffiliatesController extends Controller
                         }
                     }
                 }
-                dd($row);
+              //  dd($row);
                 array_push($header, $row);
             }
         }

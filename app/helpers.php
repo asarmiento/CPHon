@@ -20,6 +20,12 @@ function convertTitle($string){
     return ucwords($string);
 }
 
+function dateVoluntary(){
+    return '60';
+}
+function dateMandatory(){
+    return '65';
+}
 function schoolSession($school){
     \Session::put('school', $school);
 }
