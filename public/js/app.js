@@ -418,6 +418,10 @@ var newModal = function(url, title){
 				modal = compileTpl(html)
 				bootboxNew( modal, title, url);
 				datepickerMonth();
+				var rec_affi = $('#rec_affi').val();
+				var rec_priv = $('#rec_priv').val();
+				$('#lbl_priv').append(" "+rec_priv+"%");
+				$('#lbl_aff').append(" "+rec_affi+"%");
 			});
 			break;
 	}
