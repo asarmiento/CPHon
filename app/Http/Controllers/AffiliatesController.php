@@ -110,13 +110,13 @@ class AffiliatesController extends Controller
          $affiliatesLists = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
          ->orWhere('fname', 'LIKE', '%'.$code.'%')->orWhere('flast', 'LIKE', '%'.$code.'%')->lists('id');
 
-        $payments= $this->duesRepository->getModel()->whereIn('affiliate_id',$affiliatesLists)->last();
-        foreach ($payments as $payments) {
-            
-                $affiliate->lastPayment = $payments->date_payment;
+        $payments= $this->duesRepository->getModel()->whereIn('affiliate_id',$affiliatesLists)->groupBy('affiliate_id')->orderBy('date_payment','DESC')->get();
+        foreach ($payments as $payment) {
+           
+                $affiliate->lastPayment = $payment->date_payment;
               
         }
-         
+       //  echo json_encode($affiliate); die;
          return $affiliate;
     }
 
