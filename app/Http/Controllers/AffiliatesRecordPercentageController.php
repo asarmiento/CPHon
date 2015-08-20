@@ -62,17 +62,31 @@ class AffiliatesRecordPercentageController extends Controller
     {
        try{
         DB::beginTransaction();
-         $affiliate = $this->CreacionArray($request->all(),'Affiliate');
+            #
+            
+              
+            $affiliate = $this->CreacionArray($request->all(),'Affiliate');
+            #
             $date= explode('/', $affiliate['date_payment']); 
             $affiliate['date_payment'] = $date[1]."-".$date[0]."-01";
-          $affiliates = $this->affiliateRepository->token($affiliate->affiliate_token);
-          $recordPercentages = $this->recordPercentageRepository->token($affiliate->recordPercentage_token);
-            $affiliate = $this->CreacionArray($request->all(),'Dues');
-           $affiliateRecordPercentages = $this->affiliateRepository->find($affiliates->id);
-          $affiliateRecordPercentages->RecordPercentages->attach($recordPercentages->id,$affiliate);
+            #
+            $affiliates = $this->affiliateRepository->getModel()->where('code',$affiliate['code'])->get();
+            #
+            $recordPercentages = $this->recordPercentageRepository->token($affiliate['token'] );
+            $affiliate['record_percentage_id']= $recordPercentages->id;
+            #
+            unset($affiliate['token']); 
+            $affiliate = $this->CreacionArray($affiliate,'Dues');
+            #
+            $affiliateRecordPercentages = $this->affiliateRepository->find($affiliates[0]->id);
+            #
 
-          return $this->exito('Se ha Guardado con exito');
-          DB::commit();
+            unset($affiliate['code']); 
+           $data =  $affiliateRecordPercentages->RecordPercentages()->attach( $recordPercentages->id,$affiliate );
+         
+             DB::commit();
+                return $this->exito('Se ha Guardado con exito');
+                
       } catch (Exception $e) {
             Log::error($e);
             DB::rollback();

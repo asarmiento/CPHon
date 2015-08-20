@@ -8,6 +8,7 @@ class Dues extends Entity
 {
     protected $table = "affiliate_record_percentage";
 
+public $timestamps = true;
     public function affiliates()
     {
         return $this->belongsTo(Affiliate::getClass(),'affiliate_id','id')->orderBy('id','DESC');
