@@ -10,7 +10,9 @@ function currentUser()
 {
     return auth()->user();
 }
-
+function recordPercentage(){
+  return  \AccountHon\Entities\RecordPercentage::orderBy('id','DESC')->get()->last();
+}
 function convertTitle($string){
 
     $string = strtolower($string);
