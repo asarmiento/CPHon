@@ -36,6 +36,7 @@ class AffiliatesRecordPercentageController extends Controller
     public function index()
     {
         $dues = $this->duesRepository->all();
+        echo json_encode($dues[21]->affiliates); die;
         return View('dues.index',compact('dues'));
     }
 
