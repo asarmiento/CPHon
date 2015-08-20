@@ -3,25 +3,7 @@
 namespace AccountHon\Http\Controllers;
 
 
-use AccountHon\Entities\Catalog;
-use AccountHon\Entities\Cost;
-use AccountHon\Entities\Seating;
-use AccountHon\Entities\Student;
-use AccountHon\Entities\TypeForm;
-use AccountHon\Entities\User;
-use AccountHon\Entities\BalanceBudget;
-use AccountHon\Entities\Transfer;
-use AccountHon\Entities\Spreadsheet;
 
-use AccountHon\Repositories\AccountingPeriodRepository;
-use AccountHon\Repositories\AuxiliaryReceiptRepository;
-use AccountHon\Repositories\AuxiliarySeatRepository;
-use AccountHon\Repositories\BalancePeriodRepository;
-use AccountHon\Repositories\CatalogRepository;
-
-use AccountHon\Repositories\FinancialRecordsRepository;
-use AccountHon\Repositories\SeatingRepository;
-use AccountHon\Repositories\TypeFormRepository;
 use Illuminate\Contracts\Auth\Guard;
 
 use Illuminate\Http\Request;
@@ -36,15 +18,14 @@ class TestController extends controller
     /**
      * @var FinancialRecordsRepository
      */
-    private $financialRecordsRepository;
+    
 
 
     /**
      * @param FinancialRecordsRepository $financialRecordsRepository
      */
-    public function __construct(FinancialRecordsRepository $financialRecordsRepository){
-        //$this->middleware('sessionOff');
-        $this->financialRecordsRepository = $financialRecordsRepository;
+    public function __construct(){
+      
     }
     /**
      * Display a listing of the resource.
@@ -54,12 +35,7 @@ class TestController extends controller
      */
     public function index()
     {
-        if(userSchool()){
-            echo "School User";
-        }else{
-            echo "No user school";
-        }die;
-        Log::error($this->financialRecordsRepository->updateData('106','status','aplicado'));
+       echo json_encode(recordPercentage()); 
     }
 
 

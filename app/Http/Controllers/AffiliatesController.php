@@ -107,7 +107,7 @@ class AffiliatesController extends Controller
          $code = \Input::get('code');
          $affiliates = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
          ->orWhere('fname', 'LIKE', '%'.$code.'%')->orWhere('flast', 'LIKE', '%'.$code.'%')->get();
-         
+         $data = array();
          foreach ($affiliates as $affiliate) {
            
             $payments= $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->groupBy('affiliate_id')->orderBy('date_payment','DESC')->get();
@@ -119,10 +119,10 @@ class AffiliatesController extends Controller
                    endif;
 
             } 
-            
+            $data[] = $affiliate;
         }
      //    echo json_encode($affiliate );    die;
-         return $affiliate;
+         return $data;
     }
 
     public function report($token){
