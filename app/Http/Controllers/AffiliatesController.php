@@ -143,11 +143,14 @@ class AffiliatesController extends Controller
                 for ($j=1; $j <= 12 ; $j++) { 
                     # code...
                     foreach ($dues as $key => $value) {
-                        echo $value->date_payment;die;
-                        if($value->date_payment == $i.str_pad($j, 2, "0", STR_PAD_LEFT)."/"."01"){
-                            array_push($row, $value->amount);
-                        }else{
-                            array_push($row, "");
+                        if(Carbon::parse($value->date_payment)->year == $i){
+                            $date = $i."/".str_pad($j, 2, "0", STR_PAD_LEFT)."/01";
+                            //echo $date;die;
+                            if($value->date_payment == $date){
+                                array_push($row, $value->amount);
+                            }else{
+                                array_push($row, "");
+                            }
                         }
                     }
                 }
