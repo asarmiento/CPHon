@@ -8,8 +8,8 @@ class Dues extends Entity
 {
     protected $table = "affiliate_record_percentage";
 
-    public function Affiliates()
+    public function affiliates()
     {
-        return $this->belongsTo(Dues::getClass(),'id','Affiliate_id');
+        return $this->belongsTo(Affiliate::getClass(),'Affiliate_id','id');
     }
 }
