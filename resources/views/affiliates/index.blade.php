@@ -48,18 +48,18 @@
 	                        	@if(count($affiliates) > 0)
 		                        	@foreach($affiliates as $affiliate)
 			                            <tr>
-			                            	<td class="text-center">{{ strtolower($affiliate->Affiliates->code) }}</td>
-			                            	<td class="text-center">{{ strtolower($affiliate->Affiliates->charter) }}</td>
-			                            	<td class="text-center">{{ convertTitle($affiliate->Affiliates->fname.' '.$affiliate->Affiliates->sname) }}</td>
-			                                <td class="text-center">{{ convertTitle($affiliate->Affiliates->flast.' '.$affiliate->Affiliates->slast) }}</td>
-			                                <td class="text-center">{{ strtolower($affiliate->Affiliates->homePhone) }}</td>
-			                                <td class="text-center">{{ strtolower($affiliate->Affiliates->birthdate) }}</td>
-			                                <td class="text-center">{{ convertTitle($affiliate->Affiliates->maritalStatus) }}</td>
+			                            	<td class="text-center">{{ strtolower($affiliate->code) }}</td>
+			                            	<td class="text-center">{{ strtolower($affiliate->charter) }}</td>
+			                            	<td class="text-center">{{ convertTitle($affiliate->fname.' '.$affiliate->sname) }}</td>
+			                                <td class="text-center">{{ convertTitle($affiliate->flast.' '.$affiliate->slast) }}</td>
+			                                <td class="text-center">{{ strtolower($affiliate->homePhone) }}</td>
+			                                <td class="text-center">{{ strtolower($affiliate->birthdate) }}</td>
+			                                <td class="text-center">{{ convertTitle($affiliate->maritalStatus) }}</td>
 			                                <td class="text-center edit-row">
-		                                		<a href="{{ route('report-affiliate', $affiliate->Affiliates->token) }}" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+		                                		<a href="{{ route('report-affiliate', $affiliate->token) }}" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
 			                                </td>
 			                                <td class="text-center edit-row">
-												<a class="edit" href="#" data-url="afiliados" data-token="{{$affiliate->Affiliates->token}}"><i class="fa fa-pencil-square-o"></i></a>
+												<a class="edit" href="#" data-url="afiliados" data-token="{{$affiliate->token}}"><i class="fa fa-pencil-square-o"></i></a>
 			                                </td>
 			                            </tr>
 		                            @endforeach

@@ -41,14 +41,14 @@
 	                            </tr>
 	                        </thead>
 	                        <tbody>
-	                        	@if(count($affiliates) > 0)
-		                        	@foreach($affiliates as $affiliate)
+	                        	@if(count($dues) > 0)
+		                        	@foreach($dues as $due)
 			                            <tr>
-			                            	<td class="text-center">{{ strtolower($affiliate->code) }}</td>
-			                            	<td class="text-center">{{ strtolower($affiliate->charter) }}</td>
-			                            	<td class="text-center">{{ convertTitle($affiliate->fname.' '.$affiliate->sname) }}</td>
-			                                <td class="text-center">{{ convertTitle($affiliate->flast.' '.$affiliate->slast) }}</td>
-			                                <td class="text-center">{{ strtolower($affiliate->birthdate) }}</td>
+			                            	<td class="text-center">{{ strtolower($due->affiliates->code) }}</td>
+			                            	<td class="text-center">{{ strtolower($due->affiliates->charter) }}</td>
+			                            	<td class="text-center">{{ convertTitle($due->affiliates->fname.' '.$due->affiliates->sname) }}</td>
+			                                <td class="text-center">{{ convertTitle($due->affiliates->flast.' '.$due->affiliates->slast) }}</td>
+			                                <td class="text-center">{{ strtolower($due->affiliates->birthdate) }}</td>
 			                            </tr>
 		                            @endforeach
 	                            @endif
