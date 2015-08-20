@@ -85,4 +85,5 @@
 	<script src="{{ asset('bower_components/handlebars/handlebars.min.js') }}"></script>
 	<script src="{{ asset('bower_components/typeahead.js/dist/bloodhound.min.js') }}"></script>
 	<script src="{{ asset('bower_components/typeahead.js/dist/typeahead.jquery.min.js') }}"></script>
+	<!--<script src="{{ asset('bower_components/jqueryui/jquery-ui.min.js') }}"></script>-->
 @endsection
