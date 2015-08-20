@@ -27,3 +27,14 @@ $factory->define(AccountHon\Entities\Affiliate::class, function ($faker) {
   	 'token'=>$faker->md5(str_random(2)),
     ];
 });
+
+$factory->define(AccountHon\Entities\Dues::class, function ($faker) {
+    return [
+        'affiliate_id'=>round(1,30),
+        'record_percentage_id'=>1, 
+        'amount_affiliate'=>$faker->randomNumber(4),
+        'amount'=>$faker->randomNumber(3), 
+        'consecutive'=>$faker->randomDigit, 
+    'date_payment'=>$faker->dateTimeBetween('1986-01-01 00:00:00'), 
+    ];
+});

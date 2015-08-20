@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('SchoolUserTableSeeder');
         $this->call('TaskUserTableSeeder');
         $this->call('AffiliateTableSeeder');
+        $this->call('DuesTableSeeder');
 
         Model::reguard();
     }
