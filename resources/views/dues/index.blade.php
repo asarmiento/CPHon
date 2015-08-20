@@ -32,6 +32,7 @@
 					<div class="table-responsive">
                         <input type="hidden" id="rec_priv" value="{{ recordPercentage()->percentage }}">
                         <input type="hidden" id="rec_affi" value="{{ recordPercentage()->percentage_affiliates }}">
+                        <input type="hidden" id="token_rec" value="{{ recordPercentage()->token }}">
 						<table id="table_dues" class="table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" width="100%" style="table-layout:fixed;">
 	                        <thead>
 	                            <tr>

@@ -140,17 +140,18 @@ class AffiliatesController extends Controller
             $header = array();
             for ($i = $old_year; $i <= $last_year ; $i++) { 
                 $row[] = $i;
-                dd($row);
                 for ($j=1; $j <= 12 ; $j++) { 
                     # code...
                     foreach ($dues as $key => $value) {
-                        if($value->date_payment == "01/".str_pad($j, 2, "0", STR_PAD_LEFT)."/".$i){
+                        echo $value->date_payment;die;
+                        if($value->date_payment == $i.str_pad($j, 2, "0", STR_PAD_LEFT)."/"."01"){
                             array_push($row, $value->amount);
                         }else{
                             array_push($row, "");
                         }
                     }
                 }
+                dd($row);
                 array_push($header, $row);
             }
         }

@@ -420,8 +420,10 @@ var newModal = function(url, title){
 				datepickerMonth();
 				var rec_affi = $('#rec_affi').val();
 				var rec_priv = $('#rec_priv').val();
+				var token_rec = $('#token_rec').val();
 				$('#lbl_priv').append(" "+rec_priv+"%");
 				$('#lbl_aff').append(" "+rec_affi+"%");
+				$('#token').val(token_rec);
 			});
 			break;
 	}
