@@ -104,19 +104,23 @@ class AffiliatesController extends Controller
 
     public function search(){
          $code = \Input::get('code');
-         $affiliate = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
+         $affiliates = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
          ->orWhere('fname', 'LIKE', '%'.$code.'%')->orWhere('flast', 'LIKE', '%'.$code.'%')->get();
-         /**/
-         $affiliatesLists = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
-         ->orWhere('fname', 'LIKE', '%'.$code.'%')->orWhere('flast', 'LIKE', '%'.$code.'%')->lists('id');
-
-        $payments= $this->duesRepository->getModel()->whereIn('affiliate_id',$affiliatesLists)->groupBy('affiliate_id')->orderBy('date_payment','DESC')->get();
-        foreach ($payments as $payment) {
+         
+         foreach ($affiliates as $affiliate) {
            
-                $affiliate->lastPayment = $payment->date_payment;
-              
+            $payments= $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->groupBy('affiliate_id')->orderBy('date_payment','DESC')->get();
+
+            foreach ($payments as $payment) {
+              if($affiliate->id == $payment->affiliate_id):
+                    $affiliate->lastPayment = $payment->date_payment;
+                 
+                   endif;
+
+            } 
+            
         }
-         echo json_encode($affiliate); die;
+     //    echo json_encode($affiliate );    die;
          return $affiliate;
     }
 

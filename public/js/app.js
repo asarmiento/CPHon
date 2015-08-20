@@ -594,7 +594,7 @@ $(function(){
 		e.preventDefault();
 		var self = $('#searchAffiliate');
 		// Act on the event
-		if( self.val().length > 2 ){
+		if( self.val().length > 0 ){
 			$.getJSON('searchAffiliate', { code: self.val() } )
 			.done( function(response){
 				if(response.length > 0){
