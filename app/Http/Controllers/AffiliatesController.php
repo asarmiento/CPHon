@@ -131,32 +131,34 @@ class AffiliatesController extends Controller
         $dues =  $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->orderBy('date_payment','ASC')->get();
 
         if(!$dues->isEmpty()){
-            //"01/01/1995"
-            //dd($dues[0]->date_payment);
-            $old_year = Carbon::parse($dues[0]->date_payment); //1995
-            $old_year = $old_year->year;
-            $last_year = Carbon::parse($dues[count($dues)-1]->date_payment); //2014
-            $last_year = $last_year->year;
+            $old_year = Carbon::parse($dues[0]->date_payment)->year;
+            $last_year = Carbon::parse($dues[count($dues)-1]->date_payment)->year;
             $header = array();
             for ($i = $old_year; $i <= $last_year ; $i++) { 
+                $row = array();
                 $row[] = $i;
                 for ($j=1; $j <= 12 ; $j++) { 
-                    # code...
                     foreach ($dues as $key => $value) {
-                        if(Carbon::parse($value->date_payment)->year == $i){
-                            $date = $i."/".str_pad($j, 2, "0", STR_PAD_LEFT)."/01";
-                            //echo $date;die;
-                            if($value->date_payment == $date){
-                                array_push($row, $value->amount);
-                            }else{
-                                array_push($row, "");
-                            }
+                        if(Carbon::parse($value->date_payment)->year == $i && Carbon::parse($value->date_payment)->month == $j){
+                            array_push($row, $value->amount);
                         }
                     }
+                    if(count($row) == $j){
+                        array_push($row, "");
+                    }
                 }
-              //  dd($row);
+
                 array_push($header, $row);
             }
         }
+        $dateNow = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now()->toDateTimeString())->format('d-m-Y H:i:s');
+        $arrDateNow = explode(" ", $dateNow);
+
+        $birthdate = new Carbon($affiliate->birthdate);
+        $now = Carbon::now();
+        
+        $age = $birthdate->diffInYears($now);
+
+        return view('affiliates.report.main', compact('affiliate', 'dues', 'arrDateNow', 'age'));
     }
 }
