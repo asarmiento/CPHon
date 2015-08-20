@@ -7,17 +7,21 @@ use Illuminate\Http\Request;
 use AccountHon\Http\Requests;
 use AccountHon\Http\Controllers\Controller;
 use AccountHon\Repositories\AffiliateRepository;
+use AccountHon\Repositories\DuesRepository;
 
 class AffiliatesController extends Controller
 {
     private $affiliateRepository;
+    private $duesRepository;
 
     public function __construct(
-        AffiliateRepository $affiliateRepository
+        AffiliateRepository $affiliateRepository,
+        DuesRepository $duesRepository
         )
     {
         $this->middleware('auth');
         $this->affiliateRepository = $affiliateRepository;
+        $this->duesRepository = $duesRepository;
     }
     /**
      * Display a listing of the resource.
@@ -102,9 +106,17 @@ class AffiliatesController extends Controller
          $code = \Input::get('code');
          $affiliate = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
          ->orWhere('fname', 'LIKE', '%'.$code.'%')->orWhere('flast', 'LIKE', '%'.$code.'%')->get();
-         $affiliates = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
-         ->orWhere('fname', 'LIKE', '%'.$code.'%')->orWhere('flast', 'LIKE', '%'.$code.'%')->lists('');
-         $affiliate->lastPayment= 
+         /**/
+         $affiliatesLists = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
+         ->orWhere('fname', 'LIKE', '%'.$code.'%')->orWhere('flast', 'LIKE', '%'.$code.'%')->lists('id');
+
+        $payments= $this->duesRepository->getModel()->whereIn('affiliate_id',$affiliatesLists)->last();
+        foreach ($payments as $payments) {
+            
+                $affiliate->lastPayment = $payments->date_payment;
+              
+        }
+         
          return $affiliate;
     }
 
