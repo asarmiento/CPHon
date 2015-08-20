@@ -105,4 +105,8 @@ class AffiliatesController extends Controller
 
          return $affiliate;
     }
+
+    public function report($token){
+        dd($token);
+    }
 }

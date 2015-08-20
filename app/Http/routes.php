@@ -39,6 +39,7 @@ Route::resource('porcentajes', 'RecordPercentageController');
 Route::resource('afiliados', 'AffiliatesController');
 Route::resource('cuotas', 'AffiliatesRecordPercentageController');
 Route::get('searchAffiliate', 'AffiliatesController@search');
+Route::get('reporte-afiliado/{token}', ['as' => 'report-affiliate' ,'uses'=>'AffiliatesController@report']);
 /*
  * Rutas de Tipos de Usuarios
  */

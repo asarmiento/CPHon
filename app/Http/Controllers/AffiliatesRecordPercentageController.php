@@ -36,6 +36,7 @@ class AffiliatesRecordPercentageController extends Controller
     public function index()
     {
         $affiliates = $this->duesRepository->all();
+        dd($affiliates[0]->Affiliates);
         return View('dues.index',compact('affiliates'));
     }
 
