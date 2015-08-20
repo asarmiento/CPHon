@@ -35,7 +35,7 @@ class TestController extends controller
      */
     public function index()
     {
-       echo json_encode(recordPercentage()); 
+       echo json_encode(recordPercentage()->percentage_affiliates); 
     }
 
 

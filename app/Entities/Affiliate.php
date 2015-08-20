@@ -24,7 +24,7 @@ class Affiliate extends Entity
 
 	public function RecordPercentages()
     {
-        return $this->belongsTo(RecordPercentage::getClass())->withPivot('amount_affiliate','amount','consecutive');
+        return $this->belongsToMany(RecordPercentage::getClass())->withPivot('amount_affiliate','amount','consecutive');
     }
 
      public function isValid($data) {
