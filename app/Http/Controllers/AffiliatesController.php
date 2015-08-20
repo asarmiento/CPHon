@@ -8,6 +8,7 @@ use AccountHon\Http\Requests;
 use AccountHon\Http\Controllers\Controller;
 use AccountHon\Repositories\AffiliateRepository;
 use AccountHon\Repositories\DuesRepository;
+use \Carbon\Carbon;
 
 class AffiliatesController extends Controller
 {
@@ -125,6 +126,33 @@ class AffiliatesController extends Controller
     }
 
     public function report($token){
-        dd($token);
+        $affiliate = $this->affiliateRepository->token($token);
+
+        $dues =  $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->orderBy('date_payment','ASC')->get();
+
+        if(!$dues->isEmpty()){
+            //"01/01/1995"
+            //dd($dues[0]->date_payment);
+            $old_year = Carbon::parse($dues[0]->date_payment); //1995
+            $old_year = $old_year->year;
+            $last_year = Carbon::parse($dues[count($dues)-1]->date_payment); //2014
+            $last_year = $last_year->year;
+            $header = array();
+            for ($i = $old_year; $i <= $last_year ; $i++) { 
+                $row[] = $i;
+                dd($row);
+                for ($j=1; $j <= 12 ; $j++) { 
+                    # code...
+                    foreach ($dues as $key => $value) {
+                        if($value->date_payment == "01/".str_pad($j, 2, "0", STR_PAD_LEFT)."/".$i){
+                            array_push($row, $value->amount);
+                        }else{
+                            array_push($row, "");
+                        }
+                    }
+                }
+                array_push($header, $row);
+            }
+        }
     }
 }

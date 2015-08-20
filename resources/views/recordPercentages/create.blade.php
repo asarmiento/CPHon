@@ -36,5 +36,7 @@
 				</div>
 			</div>
 		</div>
+		<input type="hidden" id="percentage_affiliates" value="{{ $recordPercentages->percentage_affiliates }}">
+		<input type="hidden" id="amount" value="{{ $recordPercentages->percentage  }}">
 	</section>
 </form>
