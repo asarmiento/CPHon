@@ -45,4 +45,8 @@ class Affiliate extends Entity
 
         return false;
     }
+
+    public function fullname(){
+        return $this->fname.' '.$this->sname.' '.$this->flast.' '.$this->slast;
+    }
 }
