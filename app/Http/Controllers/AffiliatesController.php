@@ -102,7 +102,9 @@ class AffiliatesController extends Controller
          $code = \Input::get('code');
          $affiliate = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
          ->orWhere('fname', 'LIKE', '%'.$code.'%')->orWhere('flast', 'LIKE', '%'.$code.'%')->get();
-
+         $affiliates = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
+         ->orWhere('fname', 'LIKE', '%'.$code.'%')->orWhere('flast', 'LIKE', '%'.$code.'%')->lists('');
+         $affiliate->lastPayment= 
          return $affiliate;
     }
 
