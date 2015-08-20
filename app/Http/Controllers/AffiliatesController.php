@@ -116,7 +116,7 @@ class AffiliatesController extends Controller
                 $affiliate->lastPayment = $payment->date_payment;
               
         }
-       //  echo json_encode($affiliate); die;
+         echo json_encode($affiliate); die;
          return $affiliate;
     }
 

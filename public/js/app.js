@@ -580,6 +580,7 @@ $(function(){
     	var self = $(this);
     	$('#codeAffiliate').val(self.parent().parent().find('.code').text());
     	$('#hdnCode').val(self.parent().parent().find('.code').text());
+    	$('#datePaymentLastAffiliate').val(self.parent().parent().find('.lastPayment').val());
     	$('#charterAffiliate').val(self.parent().parent().find('.charter').text());
     	$('#nameAffiliate').val(self.parent().parent().find('.name').text());
     	$('#lastAffiliate').val(self.parent().parent().find('.last').text());
