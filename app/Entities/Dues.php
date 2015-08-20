@@ -10,6 +10,6 @@ class Dues extends Entity
 
     public function Affiliates()
     {
-        return $this->belongsTo(Dues::getClass(),'Affiliate_id','id');
+        return $this->belongsTo(Dues::getClass(),'id','Affiliate_id');
     }
 }
