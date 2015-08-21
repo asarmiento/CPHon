@@ -11,6 +11,6 @@ class DuesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(AccountHon\Entities\Dues::class,30)->create();
+        factory(AccountHon\Entities\Dues::class,3600)->create();
     }
 }
