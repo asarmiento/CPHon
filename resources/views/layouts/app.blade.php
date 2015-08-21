@@ -22,7 +22,7 @@
 	<nav class="Menu">
 		<div class="Menu-logo">
 			<figure>
-				<a href="{{ url('/') }}"><img class="center-block" src="{{ asset('images/se-logo.png') }}"></a>
+				<a href="{{ url('/') }}"><img class="center-block" src="{{ asset('images/logo-ipp.jpg') }}"></a>
 			</figure>
 		</div>
 		@include('layouts.partials.menu')

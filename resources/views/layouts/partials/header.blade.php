@@ -11,7 +11,7 @@
 			<div class="pull-right">
 				<div class="list-inline-block">
 					<ul>
-						<li><a>Bienvenido Anwar Sarmiento - Super Administrador</a></li>
+						<li><a>Bienvenido {{ currentUser()->nameComplete() }} - {{ currentUser()->typeUsers->name }}</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
 						<li><a href="{{ url('/auth/logout') }}"><strong>| Cerrar Sesión</strong></a></li>
 					</ul>
