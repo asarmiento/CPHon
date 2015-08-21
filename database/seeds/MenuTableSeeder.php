@@ -51,7 +51,7 @@ class MenuTableSeeder extends Seeder {
             'id' => 5,
             'name' => 'AFILIADOS',
             'url' => '/AFILIADOS',
-            'icon_font' => null,
+            'icon_font' => 'fa fa-users',
             'priority' => 1,
             'resource' => true,
          ]);
@@ -59,7 +59,7 @@ class MenuTableSeeder extends Seeder {
             'id' => 6,
             'name' => 'PORCENTAJES',
             'url' => '/PORCENTAJES',
-            'icon_font' => null,
+            'icon_font' => 'fa fa-calendar',
             'priority' => 1,
             'resource' => true,
          ]);
@@ -67,7 +67,7 @@ class MenuTableSeeder extends Seeder {
             'id' => 7,
             'name' => 'CUOTAS',
             'url' => '/CUOTAS',
-            'icon_font' => null,
+            'icon_font' => 'fa fa-money',
             'priority' => 1,
             'resource' => true,
          ]);

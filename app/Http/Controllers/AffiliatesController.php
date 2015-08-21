@@ -125,40 +125,167 @@ class AffiliatesController extends Controller
          return $data;
     }
 
-    public function report($token){
+    /**
+     * [report description]
+     * @param  [type] $token [description]
+     * @return [type]        [description]
+     */
+    public function reportPrivate($token){
+        
         $affiliate = $this->affiliateRepository->token($token);
+        
+        //Total dues for affiliate
+        $dues      =  $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->orderBy('date_payment','ASC')->get();
+        
+        //Data for report
+        $data      = $this->prepareData($dues, 'private');
+        
+        //Total amount private 
+        $total     = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->sum('amount');
+        
+        //Salary by affiliate    
+        $salary    = $total/0.1;
+        $salary_prom = number_format($salary / count($dues));
 
-        $dues =  $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->orderBy('date_payment','ASC')->get();
+        //Date Now separed Date of Hours
+        $arrDateNow = $this->arrDateNow();
+        
+        //Birthdate
+        $birthdate = new Carbon($affiliate->birthdate);
+        //Age
+        $age       = $birthdate->diffInYears(Carbon::now());
+        //Format Birthdate        
+        $birthdate = $birthdate->format('d/m/Y');
+        
+        //First Due - Reference date_payment
+        $first_due    = new Carbon($dues[0]->date_payment);
+        
+        //Dues total (compare Now - First Due)
+        $dues_total   = Carbon::now()->diffInMonths($first_due);
+        
+        //Dues total payment
+        $dues_payment = count($dues);
+        
+        //Date Affiliate
+        $date_affiliate = Carbon::createFromFormat("Y-m-d H:i:s", $affiliate->created_at)->format('d/m/Y');
 
-        if(!$dues->isEmpty()){
-            $old_year = Carbon::parse($dues[0]->date_payment)->year;
-            $last_year = Carbon::parse($dues[count($dues)-1]->date_payment)->year;
-            $header = array();
-            for ($i = $old_year; $i <= $last_year ; $i++) { 
-                $row = array();
-                $row[] = $i;
-                for ($j=1; $j <= 12 ; $j++) { 
-                    foreach ($dues as $key => $value) {
-                        if(Carbon::parse($value->date_payment)->year == $i && Carbon::parse($value->date_payment)->month == $j){
-                            array_push($row, $value->amount);
+        //return view('affiliates.report.private.main', compact('arrDateNow', 'affiliate', 'birthdate', 'age', 'date_affiliate', 'data', 'dues_total', 'dues_payment', 'salary_prom'));
+
+        $pdf = \PDF::loadView('affiliates.report.private.main', compact('arrDateNow', 'affiliate', 'birthdate', 'age', 'date_affiliate', 'data', 'dues_total', 'dues_payment', 'salary_prom'))->setOrientation('portrait');
+        return $pdf->stream("Reporte Sector Privado -".$affiliate->fullname().".pdf");
+    }
+
+    /**
+     * [report description]
+     * @param  [type] $token [description]
+     * @return [type]        [description]
+     */
+    public function reportAffiliate($token){
+        
+        $affiliate = $this->affiliateRepository->token($token);
+        
+        //Total dues for affiliate
+        $dues      =  $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->orderBy('date_payment','ASC')->get();
+        
+        //Data for report
+        $data      = $this->prepareData($dues, 'affiliate');
+        
+        //Date Now separed Date of Hours
+        $arrDateNow = $this->arrDateNow();
+        
+        //First Due - Reference date_payment
+        $first_due    = new Carbon($dues[0]->date_payment);
+        
+        //Dues total (compare Now - First Due)
+        $dues_total   = Carbon::now()->diffInMonths($first_due);
+        
+        //Dues total payment
+        $dues_payment = count($dues);
+        
+        //return view('affiliates.report.affiliate.main', compact('arrDateNow', 'affiliate', 'data', 'dues_total', 'dues_payment'));
+
+        $pdf = \PDF::loadView('affiliates.report.affiliate.main', compact('arrDateNow', 'affiliate', 'data', 'dues_total', 'dues_payment'))->setOrientation('portrait');
+        return $pdf->stream("Reporte Contribución Afiliado -".$affiliate->fullname().".pdf");
+    }
+
+    /**
+     * [report description]
+     * @param  [type] $token [description]
+     * @return [type]        [description]
+     */
+    public function reportSalary($token){
+        
+        $affiliate = $this->affiliateRepository->token($token);
+        
+        //Total dues for affiliate
+        $dues      =  $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->orderBy('date_payment','ASC')->get();
+        
+        //Data for report
+        $data      = $this->prepareData($dues, 'private');
+        
+        //Date Now separed Date of Hours
+        $arrDateNow = $this->arrDateNow();
+        
+        //First Due - Reference date_payment
+        $first_due    = new Carbon($dues[0]->date_payment);
+        
+        //Dues total (compare Now - First Due)
+        $dues_total   = Carbon::now()->diffInMonths($first_due);
+        
+        //Dues total payment
+        $dues_payment = count($dues);
+        
+        //return view('affiliates.report.salary.main', compact('arrDateNow', 'affiliate', 'data', 'dues_total', 'dues_payment'));
+
+        $pdf = \PDF::loadView('affiliates.report.salary.main', compact('arrDateNow', 'affiliate', 'data', 'dues_total', 'dues_payment'))->setOrientation('portrait');
+        return $pdf->stream("Reporte Contribución Afiliado -".$affiliate->fullname().".pdf");
+    }
+
+    /**
+     * [prepareData description]
+     * @param  [type] $dues [description]
+     * @return [type]       [description]
+     */
+    private function prepareData($dues, $type){
+        $old_year  = Carbon::parse($dues[0]->date_payment)->year;
+        $last_year = Carbon::parse($dues[count($dues)-1]->date_payment)->year;
+        
+        $data = array();
+        for ($i = $old_year; $i <= $last_year ; $i++) {
+            $row   = array();
+            $row[] = $i;
+            for ($j=1; $j <= 12 ; $j++) {
+                foreach ($dues as $key => $value) {
+                    if(Carbon::parse($value->date_payment)->year == $i && Carbon::parse($value->date_payment)->month == $j){
+                        if( array_key_exists($j, $row) ){
+                            if($type == 'private'){
+                                $row[$j] = $value->amount + $row[$j];
+                            }else{
+                                $row[$j] = $value->amount_affiliate + $row[$j];
+                            }
+                        }else{
+                            if($type == 'private'){
+                                array_push($row, $value->amount);
+                            }else{
+                                array_push($row, $value->amount_affiliate);;
+                            }
                         }
                     }
-                    if(count($row) == $j){
-                        array_push($row, "");
-                    }
                 }
-
-                array_push($header, $row);
+                if(count($row) == $j){
+                    array_push($row, "");
+                }
             }
+            array_push($data, $row);
         }
-        $dateNow = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now()->toDateTimeString())->format('d-m-Y H:i:s');
-        $arrDateNow = explode(" ", $dateNow);
-
-        $birthdate = new Carbon($affiliate->birthdate);
-        $now = Carbon::now();
-        
-        $age = $birthdate->diffInYears($now);
-
-        return view('affiliates.report.main', compact('affiliate', 'dues', 'arrDateNow', 'age'));
+        return $data;
     }
+
+    private function arrDateNow(){
+        $now = Carbon::now();
+        $dateNow    = $now->format('d/m/Y H:i:s');
+        $arrDateNow = explode(" ", $dateNow);
+        return $arrDateNow;
+    }
+
 }

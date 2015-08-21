@@ -34,12 +34,12 @@ class UsersTableSeeder  extends Seeder{
          ]);
         \DB::table('users')->insert([
             'id' => 3,
-            'name' => 'Karen',
-            'last' => 'Ucles',
-            'email' => 'kucles@ilcorso.com',
-            'password' => Hash::make('kucles'),
-            'type_user_id' => 1,
-            'token' => 'dds42rwsfw32ddsc<caf2r3qcd13213r2rawrara312312rrwr<xb56'
+            'name' => 'Andrea',
+            'last' => 'Varela',
+            'email' => 'andrea.varela20@hotmail.es',
+            'password' => Hash::make('avarela#2015'),
+            'type_user_id' => 3,
+            'token' => 'dds42rwsfweqw5529913213r2rawrara312312rrwr<xb56'
          ]);
     }
 }

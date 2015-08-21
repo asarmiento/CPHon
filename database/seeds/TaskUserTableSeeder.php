@@ -156,6 +156,31 @@ class TaskUserTableSeeder extends Seeder {
             'status' => 1, 
             'user_id' =>1 
         ]);
+        //cuotas
+        \DB::table('task_user')->insert([
+            'task_id' => 1,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 1 
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 2,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 1 
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 3,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 1 
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 4,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 1 
+        ]);
 
         /**
          * User 2: Anwar
@@ -297,6 +322,107 @@ class TaskUserTableSeeder extends Seeder {
             'menu_id' => 6,
             'status' => 1, 
             'user_id' =>2 
+        ]);
+        //cuotas
+        \DB::table('task_user')->insert([
+            'task_id' => 1,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 2
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 2,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 2
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 3,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 2
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 4,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 2
+        ]);
+        /* User : Andrea Varela */
+        //afiliados
+        \DB::table('task_user')->insert([
+            'task_id' => 1,
+            'menu_id' => 5,
+            'status' => 1, 
+            'user_id' => 3
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 2,
+            'menu_id' => 5,
+            'status' => 1, 
+            'user_id' => 3
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 3,
+            'menu_id' => 5,
+            'status' => 1, 
+            'user_id' => 3
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 4,
+            'menu_id' => 5,
+            'status' => 1, 
+            'user_id' => 3
+        ]);
+        //porcentajes
+        \DB::table('task_user')->insert([
+            'task_id' => 1,
+            'menu_id' => 6,
+            'status' => 1, 
+            'user_id' => 3
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 2,
+            'menu_id' => 6,
+            'status' => 1, 
+            'user_id' => 3
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 3,
+            'menu_id' => 6,
+            'status' => 1, 
+            'user_id' => 3
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 4,
+            'menu_id' => 6,
+            'status' => 1, 
+            'user_id' => 3
+        ]);
+        //cuotas
+        \DB::table('task_user')->insert([
+            'task_id' => 1,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 3
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 2,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 3
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 3,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 3
+        ]);
+        \DB::table('task_user')->insert([
+            'task_id' => 4,
+            'menu_id' => 7,
+            'status' => 1, 
+            'user_id' => 3
         ]);
          
     }
