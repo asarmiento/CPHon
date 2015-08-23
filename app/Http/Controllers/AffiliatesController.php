@@ -234,10 +234,16 @@ class AffiliatesController extends Controller
         
         //Dues total payment
         $dues_payment = count($dues);
-        
-        //return view('affiliates.report.salary.main', compact('arrDateNow', 'affiliate', 'data', 'dues_total', 'dues_payment'));
 
-        $pdf = \PDF::loadView('affiliates.report.salary.main', compact('arrDateNow', 'affiliate', 'data', 'dues_total', 'dues_payment'))->setOrientation('portrait');
+        //Total Amount affiliate
+        $total_affiliate = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->sum('amount_affiliate');
+
+        //Total Amount private
+        $total_private = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->sum('amount');
+        
+        //return view('affiliates.report.salary.main', compact('arrDateNow', 'affiliate', 'data', 'dues_total', 'dues_payment', 'total_private', 'total_affiliate'));
+
+        $pdf = \PDF::loadView('affiliates.report.salary.main', compact('arrDateNow', 'affiliate', 'data', 'dues_total', 'dues_payment', 'total_private', 'total_affiliate'))->setOrientation('portrait');
         return $pdf->stream("Reporte Contribución Afiliado -".$affiliate->fullname().".pdf");
     }
 
