@@ -35,9 +35,13 @@ class TestController extends controller
      */
     public function index()
     {
-       echo json_encode(recordPercentage()->percentage_affiliates); 
+        return view('test.index');
     }
 
+    public function post(){
+        $file = \Input::file();
+        dd($file);
+    }
 
 
   /*  public function catalogSaldo($catalog,$period,$type){
