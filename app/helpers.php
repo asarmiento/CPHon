@@ -10,7 +10,9 @@ function currentUser()
 {
     return auth()->user();
 }
-
+function recordPercentage(){
+  return  \AccountHon\Entities\RecordPercentage::orderBy('id','DESC')->get()->last();
+}
 function convertTitle($string){
 
     $string = strtolower($string);
@@ -18,6 +20,12 @@ function convertTitle($string){
     return ucwords($string);
 }
 
+function dateVoluntary(){
+    return '60';
+}
+function dateMandatory(){
+    return '65';
+}
 function schoolSession($school){
     \Session::put('school', $school);
 }

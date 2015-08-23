@@ -30,7 +30,7 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 // Password reset routes...
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
-
+Route::get('test', 'TestController@index');
 
 /**
  * After Authentication
@@ -39,6 +39,7 @@ Route::resource('porcentajes', 'RecordPercentageController');
 Route::resource('afiliados', 'AffiliatesController');
 Route::resource('cuotas', 'AffiliatesRecordPercentageController');
 Route::get('searchAffiliate', 'AffiliatesController@search');
+Route::get('reporte-afiliado/{token}', ['as' => 'report-affiliate' ,'uses'=>'AffiliatesController@report']);
 /*
  * Rutas de Tipos de Usuarios
  */

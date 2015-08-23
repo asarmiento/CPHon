@@ -418,6 +418,12 @@ var newModal = function(url, title){
 				modal = compileTpl(html)
 				bootboxNew( modal, title, url);
 				datepickerMonth();
+				var rec_affi = $('#rec_affi').val();
+				var rec_priv = $('#rec_priv').val();
+				var token_rec = $('#token_rec').val();
+				$('#lbl_priv').append(" "+rec_priv+"%");
+				$('#lbl_aff').append(" "+rec_affi+"%");
+				$('#token').val(token_rec);
 			});
 			break;
 	}
@@ -574,48 +580,59 @@ $(function(){
 		}
 	});
 
-	//Search Affiliate
-	$(document).off('keup', '#searchAffiliate');
-	$(document).on('keyup', '#searchAffiliate', function(event) {
-		var self = $(this);
-		/* Act on the event */
-		if( self.val().length > 2 ){
+    //Select row affilliate
+    $(document).off('click', '.radioAffiliate');
+    $(document).on('click', '.radioAffiliate', function(e){
+    	var self = $(this);
+    	$('#codeAffiliate').val(self.parent().parent().find('.code').text());
+    	$('#hdnCode').val(self.parent().parent().find('.code').text());
+    	$('#datePaymentLastAffiliate').val(self.parent().parent().find('.lastPayment').val());
+    	$('#charterAffiliate').val(self.parent().parent().find('.charter').text());
+    	$('#nameAffiliate').val(self.parent().parent().find('.name').text());
+    	$('#lastAffiliate').val(self.parent().parent().find('.last').text());
+    	$('#birthdateAffiliate').val(self.parent().parent().find('.birthdate').val());
+    	$('.my-modal-search').modal('hide');
+    });
+
+    //Search Affiliate - typeahead
+	$(document).off('click', '.search');
+	$(document).on('click', '.search', function(e) {
+		e.preventDefault();
+		var self = $('#searchAffiliate');
+		// Act on the event
+		if( self.val().length > 0 ){
 			$.getJSON('searchAffiliate', { code: self.val() } )
 			.done( function(response){
-				var arrAffiliates = [];
-				$.each(response, function(index,value){
-					var affiliate = value.code + " - " + value.fname + " " + value.sname + " " + value.flast + " " + value.slast;
-					arrAffiliates.push(affiliate);
-				});
-				if(arrAffiliates.length > 0){
-					// constructs the suggestion engine
-					var affiliates = new Bloodhound({
-					  datumTokenizer: Bloodhound.tokenizers.whitespace,
-					  queryTokenizer: Bloodhound.tokenizers.whitespace,
-					  // `arrAffiliates` is an array of state names defined in "The Basics"
-					  local: arrAffiliates
+				if(response.length > 0){
+					var urlTpl = getTpl('dues', 'listAffiliates');
+					$.get(urlTpl)
+					.done( function(html){
+						helpersHandlebars();
+						var tpl = Handlebars.compile(html);
+						var html = tpl({ListData: response});
+						bootbox.dialog({
+						  	message: html,
+						  	size: "large",
+						  	title: "Escoger Afiliado",
+						  	animate: true,
+						  	className: "my-modal-search",
+						  	buttons: {
+							    danger: {
+							    	label: "Cancelar",
+									className: "btn-default",
+							    }
+						  	}
+						});
 					});
-
-					self.typeahead({
-					  hint: true,
-					  highlight: true,
-					  minLength: 1
-					},
-					{
-					  name: 'affiliates',
-					  source: affiliates
-					});
-					self.bind('typeahead:select', function(ev, suggestion) {
-						$('#codeAffiliate').val(response.code);
-						$('#charterAffiliate').val(response.charter);
-						$('#nameAffiliate').val(response.fname + " " + response.sname);
-						$('#lastAffiliate').val(response.flast + " " + response.slast);
-						$('#birthdateAffiliate').val(response.birthdate);
-					});
+				}else{
+					console.log("Sin respuesta");
 				}
 			});
+		}else{
+			console.log("sin respuesta");
 		}
 	});
+	
 
 	/**
 	 * Type User

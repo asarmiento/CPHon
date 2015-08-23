@@ -30,12 +30,13 @@ $factory->define(AccountHon\Entities\Affiliate::class, function ($faker) {
 
 $factory->define(AccountHon\Entities\Dues::class, function ($faker) {
     return [
-        'affiliate_id'=>rand(1, 30),
-        'record_percentage_id'=>1, 
-        'amount_affiliate'=>$faker->firstName,
-        'amount'=>$faker->lastName, 
-        'consecutive'=>$faker->randomNumber(5), 
-    'date_payment'=>$faker->dateTimeBetween('1986-15 02:00:49'), 
-    
+
+        'affiliate_id'=>$faker->numberBetween(1,30),
+        'record_percentage_id'=>'1', 
+        'amount_affiliate'=>$faker->randomNumber(4),
+        'amount'=>$faker->randomNumber(3), 
+        'consecutive'=>$faker->randomDigit, 
+    'date_payment'=>$faker->dateTimeBetween('1986-01-01 00:00:00'), 
     ];
 });
+

@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('AffiliateTableSeeder');
         $this->call('RecordPercentageTableSeeder');
         $this->call('DuesTableSeeder');
+
         Model::reguard();
     }
 

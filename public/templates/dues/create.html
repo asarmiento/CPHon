@@ -3,9 +3,9 @@
 		<div class='col-sm-6 col-md-6'>
 			<div class='form-mep'>
 				<label for='searchAffiliate'>Afiliado</label>
-				<div class='input-group'>
-					<span class='input-group-addon'><i class='fa fa-user'></i></span>
-			      	<input id='searchAffiliate' class='form-control' type='text' />
+				<div class="input-group">
+					<input id="searchAffiliate" type="text" class="form-control">
+					<div class="input-group-addon search" style="cursor: pointer;"><span style="font-size: 1.2em;" class="glyphicon glyphicon-search"></span></div>
 				</div>
 			</div>
 		</div>
@@ -15,6 +15,7 @@
 				<div class='input-group'>
 					<span class='input-group-addon'><i class='fa fa-barcode'></i></span>
 			      	<input id="codeAffiliate" class='form-control' type='text' disabled />
+			      	<input type="hidden" name="codeAffiliate" id="hdnCode">
 				</div>
 			</div>
 		</div>
@@ -65,7 +66,7 @@
 		</div>
 		<div class='col-sm-6 col-md-6'>
 			<div class='form-mep'>
-				<label for='date_paymentAffiliate'>Mes a pagar</label>
+				<label for='date_paymentAffiliate'>Mes a pagar </label>
 				<div class='input-group date'>
 					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
 			      	<input name="date_paymentAffiliate" class='form-control' type='text' />
@@ -74,16 +75,17 @@
 		</div>
 		<div class='col-sm-6 col-md-6'>
 			<div class='form-mep'>
-				<label for='amountDues'>Monto S. Privado</label>
+				<label for='amountDues' id="lbl_priv">Monto S. Privado</label>
 				<div class='input-group'>
 					<span class='input-group-addon'><i class='fa fa-usd'></i></span>
 			      	<input name='amountDues' class='form-control' type='number' step="any" />
 				</div>
 			</div>
 		</div>
+		<input type="hidden" name="token" id="token">
 		<div class='col-sm-6 col-md-6'>
 			<div class='form-mep'>
-				<label for='amount_affiliateDues'>Monto de Afiliado</label>
+				<label for='amount_affiliateDues' id="lbl_aff">Monto de Afiliado</label>
 				<div class='input-group'>
 					<span class='input-group-addon'><i class='fa fa-usd'></i></span>
 			      	<input name='amount_affiliateDues' class='form-control' type='number' step="any" />

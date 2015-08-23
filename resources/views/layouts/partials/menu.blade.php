@@ -4,7 +4,7 @@
         @foreach ($menus as $key => $menu)
             @if($key != 0)
             @if($menu['resource'])
-            <li class="{{ ($menu['resource']) ? '' : 'submenu' }} {{ ($menus[0] != "inicio") ? ( $menus[0] == strtolower(substr($menu['url'],1)) ? "active" : "" ): "" }}">
+                <li class="{{ ($menu['resource']) ? '' : 'submenu' }} {{ ($menus[0] != "inicio") ? ( $menus[0] == strtolower(substr($menu['url'],1)) ? "active" : "" ): "" }}">
             @else
                 <li class="{{ ($menu['resource']) ? '' : 'submenu' }} {{ ($menus[0] != "inicio") ? ( $menus[0] == strtolower(substr($menu['url'],1)) ? "active" : "" ): "" }}">
             @endif

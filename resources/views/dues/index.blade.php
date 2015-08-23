@@ -3,23 +3,6 @@
 @section('styles')
 	<link rel="stylesheet" href="{{ asset('bower_components/datatables-bootstrap3-plugin/media/css/datatables-bootstrap3.css') }}">
 	<link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
-	<style>
-		span.twitter-typeahead {
-		  width: 100%;
-		}
-		.input-group span.twitter-typeahead {
-		  display: block !important;
-		}
-		.input-group span.twitter-typeahead .tt-dropdown-menu {
-		  top: 32px !important;
-		}
-		.input-group.input-group-lg span.twitter-typeahead .tt-dropdown-menu {
-		  top: 44px !important;
-		}
-		.input-group.input-group-sm span.twitter-typeahead .tt-dropdown-menu {
-		  top: 28px !important;
-		}
-	</style>
 @endsection
 
 @section('page')
@@ -47,6 +30,9 @@
 				</div>
 				<div class="table-content">
 					<div class="table-responsive">
+                        <input type="hidden" id="rec_priv" value="{{ recordPercentage()->percentage }}">
+                        <input type="hidden" id="rec_affi" value="{{ recordPercentage()->percentage_affiliates }}">
+                        <input type="hidden" id="token_rec" value="{{ recordPercentage()->token }}">
 						<table id="table_dues" class="table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" width="100%" style="table-layout:fixed;">
 	                        <thead>
 	                            <tr>
@@ -58,14 +44,14 @@
 	                            </tr>
 	                        </thead>
 	                        <tbody>
-	                        	@if(count($affiliates) > 0)
-		                        	@foreach($affiliates as $affiliate)
+	                        	@if(count($dues) > 0)
+		                        	@foreach($dues as $due)
 			                            <tr>
-			                            	<td class="text-center">{{ strtolower($affiliate->code) }}</td>
-			                            	<td class="text-center">{{ strtolower($affiliate->charter) }}</td>
-			                            	<td class="text-center">{{ convertTitle($affiliate->fname.' '.$affiliate->sname) }}</td>
-			                                <td class="text-center">{{ convertTitle($affiliate->flast.' '.$affiliate->slast) }}</td>
-			                                <td class="text-center">{{ strtolower($affiliate->birthdate) }}</td>
+			                            	<td class="text-center">{{ strtolower($due->affiliates->code) }}</td>
+			                            	<td class="text-center">{{ strtolower($due->affiliates->charter) }}</td>
+			                            	<td class="text-center">{{ convertTitle($due->affiliates->fname.' '.$due->affiliates->sname) }}</td>
+			                                <td class="text-center">{{ convertTitle($due->affiliates->flast.' '.$due->affiliates->slast) }}</td>
+			                                <td class="text-center">{{ strtolower($due->affiliates->birthdate) }}</td>
 			                            </tr>
 		                            @endforeach
 	                            @endif
@@ -83,6 +69,7 @@
 	<script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 	<script src="{{ asset('bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js') }}"></script>
 	<script src="{{ asset('bower_components/handlebars/handlebars.min.js') }}"></script>
-	<script src="{{ asset('bower_components/typeahead.js/dist/bloodhound.min.js') }}"></script>
+	<!--<script src="{{ asset('bower_components/typeahead.js/dist/bloodhound.min.js') }}"></script>
 	<script src="{{ asset('bower_components/typeahead.js/dist/typeahead.jquery.min.js') }}"></script>
+	<script src="{{ asset('bower_components/jqueryui/jquery-ui.min.js') }}"></script>-->
 @endsection

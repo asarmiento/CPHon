@@ -18,6 +18,7 @@ class RecordPercentageTableSeeder extends Seeder
             'percentage_affiliates' => 10,
             'percentage' => 8,
             'token' => Hash::make('prueba'),
+
          ]);
     }
 }

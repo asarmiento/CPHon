@@ -37,10 +37,10 @@
 	                            	<th>Cédula</th>
 	                                <th>Nombres</th>
 	                                <th>Apellidos</th>
-	                                <th>Dirección</th>
 	                                <th>Teléfono</th>
 	                                <th>Fecha de Nacimiento</th>
 	                                <th>Estado Civil</th>
+	                                <th>Reportes</th>
 	                                <th>Edición</th>
 	                            </tr>
 	                        </thead>
@@ -52,10 +52,12 @@
 			                            	<td class="text-center">{{ strtolower($affiliate->charter) }}</td>
 			                            	<td class="text-center">{{ convertTitle($affiliate->fname.' '.$affiliate->sname) }}</td>
 			                                <td class="text-center">{{ convertTitle($affiliate->flast.' '.$affiliate->slast) }}</td>
-			                                <td class="text-center">{{ convertTitle($affiliate->address) }}</td>
 			                                <td class="text-center">{{ strtolower($affiliate->homePhone) }}</td>
 			                                <td class="text-center">{{ strtolower($affiliate->birthdate) }}</td>
 			                                <td class="text-center">{{ convertTitle($affiliate->maritalStatus) }}</td>
+			                                <td class="text-center edit-row">
+		                                		<a href="{{ route('report-affiliate', $affiliate->token) }}" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+			                                </td>
 			                                <td class="text-center edit-row">
 												<a class="edit" href="#" data-url="afiliados" data-token="{{$affiliate->token}}"><i class="fa fa-pencil-square-o"></i></a>
 			                                </td>
