@@ -20,6 +20,10 @@ function convertTitle($string){
     return ucwords($string);
 }
 
+function months(){
+    return array('ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SETIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE');
+}
+
 function dateVoluntary(){
     return '60';
 }

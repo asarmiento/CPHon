@@ -56,7 +56,9 @@
 			                                <td class="text-center">{{ strtolower($affiliate->birthdate) }}</td>
 			                                <td class="text-center">{{ convertTitle($affiliate->maritalStatus) }}</td>
 			                                <td class="text-center edit-row">
-		                                		<a href="{{ route('report-affiliate', $affiliate->token) }}" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+		                                		<a href="{{ route('report-private', $affiliate->token) }}" target="_blank" data-toggle="tooltip" data-placement="left" title="privado"><i class="fa fa-file-pdf-o"></i></a>
+		                                		<a href="{{ route('report-affiliate', $affiliate->token) }}" target="_blank" data-toggle="tooltip" data-placement="left" title="afiliado"><i class="fa fa-file-pdf-o"></i></a>
+		                                		<a href="{{ route('report-salary', $affiliate->token) }}" target="_blank" data-toggle="tooltip" data-placement="left" title="sueldo"><i class="fa fa-file-pdf-o"></i></a>
 			                                </td>
 			                                <td class="text-center edit-row">
 												<a class="edit" href="#" data-url="afiliados" data-token="{{$affiliate->token}}"><i class="fa fa-pencil-square-o"></i></a>
