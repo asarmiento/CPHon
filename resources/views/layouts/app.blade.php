@@ -9,6 +9,7 @@
 	<title>Account Hon</title>
 	<link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/lib/nprogress.css') }}">
 	@yield('styles')
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -38,6 +39,7 @@
 	<script src="{{ asset('bower_components/blockUI/jquery.blockUI.js') }}"></script>
 	<script src="{{ asset('bower_components/bootbox/bootbox.js') }}"></script>
 	<script src="{{ asset('bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('js/lib/nprogress.js') }}"></script>
 	@yield('scripts')
 	<script src="{{ asset('js/app.js') }}"></script>
 </body>

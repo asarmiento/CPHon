@@ -13,12 +13,11 @@ class RecordPercentageTableSeeder extends Seeder
     {
          \DB::table('record_percentages')->insert([
             'id' => 1,
-            'year' => '2015',
-            'month' => '02',
-            'percentage_affiliates' => 10,
-            'percentage' => 8,
+            'year' => '1986',
+            'month' => '01',
+            'percentage_affiliates' => 3,
+            'percentage' => 10,
             'token' => Hash::make('prueba'),
-
          ]);
     }
 }

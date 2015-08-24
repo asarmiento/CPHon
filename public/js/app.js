@@ -1210,7 +1210,14 @@ $(function(){
 		  	}
 		});
 	});
+});
 
-	
+window.onbeforeunload = function() {
+	NProgress.start();
+	loadingUI('Cargando página...');
+};
 
+$(window).load(function(){
+	NProgress.done();
+	//responseUI('Listo');
 });

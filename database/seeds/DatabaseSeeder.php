@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder {
         $this->call('MenuTaskTableSeeder');
         $this->call('SchoolUserTableSeeder');
         $this->call('TaskUserTableSeeder');
-        $this->call('AffiliateTableSeeder');
+        //$this->call('AffiliateTableSeeder');
         $this->call('RecordPercentageTableSeeder');
-        $this->call('DuesTableSeeder');
+        //$this->call('DuesTableSeeder');
 
         Model::reguard();
     }
