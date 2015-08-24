@@ -26,7 +26,7 @@
         "psr-4": {
             "AccountHon\\": "app/"
         },
-      "files": ["app/helpers.php","app/verificationUserAccess.php"]
+      "files": ["app/helpers.php"]
     },
     "autoload-dev": {
         "classmap": [
