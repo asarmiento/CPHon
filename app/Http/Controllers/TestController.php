@@ -3,11 +3,11 @@
 namespace AccountHon\Http\Controllers;
 
 
-
+use AccountHon\Entities\Affiliate;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
-
+use Crypt;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
@@ -25,6 +25,11 @@ class TestController extends Controller {
      */
     public function index()
     {
+        $affilliates = Affiliate::all();
+        foreach ($affilliates as $key => $value) {
+            $value->token = Crypt::encrypt($value->id);
+            $value->save();
+        }
         return view('test.index');
     }
 

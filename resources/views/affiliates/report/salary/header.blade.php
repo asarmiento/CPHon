@@ -1,4 +1,4 @@
-<img src="{{ asset('images/logo-ipp.jpg') }}" style="float: right; height: 100px; position: absolute; right: 4em; top: -2em;">
+<img src="{{ asset('images/logo.jpg') }}" style="float: right; height: 85px; position: absolute; right: 5em; top: -1em;">
 <p style="margin:0; font-size: 14px;">Impreso el: {{ $arrDateNow[0] }} Hora: {{ $arrDateNow[1] }}</p>
 <p style="margin:0; font-size: 14px;">INSTITUTO DE PREVISION SOCIAL DEL PERIODISTA</p>
 {{-- <p style="margin-bottom:0;">Carnet IPP: {{ $affiliate->charter }} - Fecha de Nacimiento: {{ $birthdate }} - Edad: {{ $age }} - Fecha de Ingreso: {{ $date_affiliate }}</p> --}}

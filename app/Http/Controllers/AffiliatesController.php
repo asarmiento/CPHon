@@ -137,9 +137,16 @@ class AffiliatesController extends Controller
         //Total dues for affiliate
         $dues      =  $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->orderBy('date_payment','ASC')->get();
         
+        if($dues->isEmpty())
+        {
+            $page = 'Afiliados';
+            $error = "El afiliado $affiliate->fname $affiliate->flast no cuenta con cuotas canceladas";
+            return view('errors.validate', compact('page', 'error'));
+        }
+
         //Data for report
         $data      = $this->prepareData($dues, 'private');
-        
+         
         //Total amount private 
         $total     = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->sum('amount');
         
@@ -167,7 +174,7 @@ class AffiliatesController extends Controller
         $dues_payment = count($dues);
         
         //Date Affiliate
-        $date_affiliate = Carbon::createFromFormat("Y-m-d H:i:s", $affiliate->created_at)->format('d/m/Y');
+        $date_affiliate = Carbon::createFromFormat("Y-m-d", $affiliate->affiliation)->format('d/m/Y');
 
         //return view('affiliates.report.private.main', compact('arrDateNow', 'affiliate', 'birthdate', 'age', 'date_affiliate', 'data', 'dues_total', 'dues_payment', 'salary_prom'));
 
@@ -187,6 +194,13 @@ class AffiliatesController extends Controller
         //Total dues for affiliate
         $dues      =  $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->orderBy('date_payment','ASC')->get();
         
+        if($dues->isEmpty())
+        {
+            $page = 'Afiliados';
+            $error = "El afiliado $affiliate->fname $affiliate->flast no cuenta con cuotas canceladas";
+            return view('errors.validate', compact('page', 'error'));
+        }
+
         //Data for report
         $data      = $this->prepareData($dues, 'affiliate');
         
@@ -219,6 +233,13 @@ class AffiliatesController extends Controller
         
         //Total dues for affiliate
         $dues      =  $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->orderBy('date_payment','ASC')->get();
+        
+        if($dues->isEmpty())
+        {
+            $page = 'Afiliados';
+            $error = "El afiliado $affiliate->fname $affiliate->flast no cuenta con cuotas canceladas";
+            return view('errors.validate', compact('page', 'error'));
+        }
         
         //Data for report
         $data      = $this->prepareData($dues, 'private');
