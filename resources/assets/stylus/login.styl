@@ -1,0 +1,35 @@
+.Login
+	display flex
+	flex-direction column
+	justify-content space-between
+	min-height 100vh
+	&-header
+		height 90px
+		border-bottom 1px solid black
+		img
+			max-width 100%
+		&-container
+			max-width 80%
+			margin 1em auto
+	&-content
+		background url('../images/bg2.png')
+		background-size cover
+		flex 1
+		display flex
+		align-items center
+		&-title
+			margin 0.25em 0
+		&-wrapper
+			min-width 600px
+			@media (max-width: 620px)
+				min-width 100%
+				max-width 100%
+			@media (max-width: 420px)
+				min-width 100%
+	&-footer
+		padding 0.5em 0
+		border-top 1px solid black
+		background #eee
+		text-align: center
+		p
+			margin 0

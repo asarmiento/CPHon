@@ -16,6 +16,7 @@
 	<!-- Styles -->
 	<link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{ asset('css/login.css') }}">
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -24,7 +25,20 @@
 	<![endif]-->
 </head>
 <body>
-	@yield('content')
+	<div class="Login">
+		<div class="Login-header">
+			<div class="Login-header-container">
+				<img src="{{ asset('images/logo-cph-new.jpg') }}" alt="" height="62">
+			</div>
+		</div>
+		<div class="Login-content">
+			@yield('content')
+		</div>
+		<div class="Login-footer">
+			<p><a href="http://colegiodeperiodistasdehonduras.hn/" target="_blank">Ir a la Página Principal.</a></p>
+			<p>© 2015 Friendly Account. Todos los derechos reservados.</p>
+		</div>
+	</div>
 	<!-- Scripts -->
 	<script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 	<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
