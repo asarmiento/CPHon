@@ -55,6 +55,7 @@ class AffiliatesRecordPercentageController extends Controller
      */
     public function create()
     {
+        set_time_limit(0);
         $affiliates = $this->affiliateRepository->all();
         
         return View('dues.create',compact('affiliates','recordPercentages'));
@@ -68,6 +69,7 @@ class AffiliatesRecordPercentageController extends Controller
      */
     public function store(Request $request)
     {
+        set_time_limit(0);
        try{
         DB::beginTransaction();
             #
