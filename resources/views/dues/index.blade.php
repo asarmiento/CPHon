@@ -40,6 +40,8 @@
 	                            	<th>Cédula</th>
 	                                <th>Nombres</th>
 	                                <th>Apellidos</th>
+	                                <th>Monto Afiliado</th>
+	                                <th>Monto Empresa</th>
 	                                <th>Fecha Último Aporte</th>
 	                            </tr>
 	                        </thead>
@@ -51,7 +53,9 @@
 			                            	<td class="text-center">{{ strtolower($due->affiliates->charter) }}</td>
 			                            	<td class="text-center">{{ convertTitle($due->affiliates->fname.' '.$due->affiliates->sname) }}</td>
 			                                <td class="text-center">{{ convertTitle($due->affiliates->flast.' '.$due->affiliates->slast) }}</td>
-			                                <td class="text-center">{{ strtolower($due->affiliates->birthdate) }}</td>
+			                                <td class="text-center">{{ $due->amount_affiliate }}</td>
+			                                <td class="text-center">{{ $due->amount  }}</td>
+			                                <td class="text-center">{{ strtolower($due->date_payment) }}</td>
 			                            </tr>
 		                            @endforeach
 	                            @endif

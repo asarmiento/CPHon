@@ -39,12 +39,18 @@ class AffiliatesRecordPercentageController extends Controller
      */
     public function index()
     {
+        $affiliates = $this->affiliateRepository->all();
 
-        //$dues = $this->duesRepository->getModel()->limit(100)->offset(100)->get();
-        $dues = $this->duesRepository->getModel()->orderBy('id','desc')->limit(100)->offset(100)->get();
-        //dd($dues);
+        $dues = array();
+        foreach ($affiliates as $affiliate) {
+            $due = $this->duesRepository->whereId('affiliate_id', $affiliate->id, 'date_payment');
+            if( ! $due->isEmpty() )
+            {
+                array_push($dues, $due[0]);
+            }
+        }
+        
         return View('dues.index',compact('dues'));
-
     }
 
     /**
