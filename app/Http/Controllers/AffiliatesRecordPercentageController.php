@@ -40,7 +40,9 @@ class AffiliatesRecordPercentageController extends Controller
     public function index()
     {
 
-        $dues = $this->duesRepository->all();
+        //$dues = $this->duesRepository->getModel()->limit(100)->offset(100)->get();
+        $dues = $this->duesRepository->getModel()->orderBy('id','desc')->limit(100)->offset(100)->get();
+        //dd($dues);
         return View('dues.index',compact('dues'));
 
     }
