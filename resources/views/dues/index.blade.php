@@ -7,7 +7,7 @@
 
 @section('page')
 	<aside class="page">
-		<h2>Afiliados</h2>
+		<h2>Cuotas de Afiliados</h2>
 	</aside>
 @endsection
 
@@ -18,7 +18,7 @@
 				<div class="table-header">
 					<div class="row">
 						<div class="col-sm-6">
-							<h5><strong>Lista de Afiliados</strong></h5>
+							<h5><strong>Lista de Cuotas de Afiliados</strong></h5>
 						</div>
 						<div class="col-sm-6">
 							<a data-url="cuotas" href="#" class="btn btn-info pull-right new">
