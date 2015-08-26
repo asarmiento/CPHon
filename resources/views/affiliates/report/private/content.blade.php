@@ -11,7 +11,11 @@
 			@if($key == 0)
 				<td style="font-size:11px;">{{ $month }}</td>
 			@else
-				<td style="text-align: right; font-size:11px;">{{ $month[0] }}</td>
+				<td style="text-align: right; font-size:11px;">
+				@if( is_array($month) )
+					{{ $month[0] }}
+				@endif
+				</td>
 			@endif
 		@endforeach
 		</tr>
@@ -20,7 +24,11 @@
 				@if($key == 0)
 					<td style="font-size:11px;"></td>
 				@else
-					<td style="text-align: right; font-size:11px;">{{ $month[1] }}</td>
+					<td style="text-align: right; font-size:11px;">
+					@if( is_array($month) )
+						{{ $month[1] }}
+					@endif
+					</td>
 				@endif
 			@endforeach
 		</tr>

@@ -5,7 +5,7 @@
 			<td style=" font-size:11px;margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">{{$month}}</td>
 		@endforeach
 	</tr>
-	@foreach($dataPrivate as $year)
+	@foreach($dataAffiliate as $year)
 		<tr>
 		@foreach($year as $key => $month)
 			@if($key == 0)

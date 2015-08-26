@@ -201,20 +201,20 @@ class AffiliatesController extends Controller
         $salary_affiliate = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'affiliate')->sum('salary');
 
         //Salary prom by affiliate    
-        $salary_prom_affiliate = number_format( ($salary_affiliate / $dues_payment_affiliate), 2);
-
+        $salary_prom_affiliate = number_format( ($salary_affiliate / $dues_payment_affiliate), 2, '.', ',');
+        
         //Total Salary private
         $salary_private = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'privado')->sum('salary');
 
         //Salary prom by private    
-        $salary_prom_private = number_format( ($salary_private / $dues_payment_private), 2);
+        $salary_prom_private = number_format( ($salary_private / $dues_payment_private), 2, '.', ',');
 
         //Total Amount affiliate
         $amount_affiliate = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'affiliate')->sum('amount');
 
         //Total Amount private
-        $amount_private = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'private')->sum('amount');
-
+        $amount_private = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'privado')->sum('amount');
+        // dd($dataPrivate);
         //return view('affiliates.report.salary.main', compact('arrDateNow', 'affiliate', 'data', 'dues_total', 'dues_payment', 'total_private', 'total_affiliate'));
         $pdf = \PDF::loadView('affiliates.report.main',
                     compact('affiliate', 'birthdate', 'age', 'date_affiliate', 'dataAffiliate',

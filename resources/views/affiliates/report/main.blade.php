@@ -13,3 +13,7 @@
 <div class="page-break"></div>
 
 @include('affiliates.report.salary-private.main')
+
+<div class="page-break"></div>
+
+@include('affiliates.report.salary-affiliate.main')
