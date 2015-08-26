@@ -42,9 +42,8 @@ Route::resource('porcentajes', 'RecordPercentageController');
 Route::resource('afiliados', 'AffiliatesController');
 Route::resource('cuotas', 'AffiliatesRecordPercentageController');
 Route::get('searchAffiliate', 'AffiliatesController@search');
-Route::get('reporte-sector-privado/{token}', ['as' => 'report-private' ,'uses'=>'AffiliatesController@reportPrivate']);
-Route::get('reporte-afiliado/{token}', ['as' => 'report-affiliate' ,'uses'=>'AffiliatesController@reportAffiliate']);
-Route::get('reporte-sueldo/{token}', ['as' => 'report-salary' ,'uses'=>'AffiliatesController@reportSalary']);
+Route::get('reporte-afiliado/{token}', ['as' => 'report' ,'uses'=>'AffiliatesController@report']);
+
 /*
  * Rutas de Tipos de Usuarios
  */
