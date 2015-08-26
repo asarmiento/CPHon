@@ -11,6 +11,8 @@ class Dues extends Entity
 
 	public $timestamps = true;
 
+    public $fillable=['affiliate_id','record_percentage_id','amount_affiliate','amount','token','salary','consecutive','date_payment'];
+    
     public function affiliates()
     {
         return $this->belongsTo(Affiliate::getClass(),'affiliate_id','id')->orderBy('id','DESC');

@@ -95,10 +95,45 @@ class AffiliatesRecordPercentageController extends Controller
             #
             $affiliateRecordPercentages = $this->affiliateRepository->find($affiliates[0]->id);
             #
+            $comprobacion = $this->duesRepository->getModel()->where('affiliate_id',$affiliateRecordPercentages->id)
+            ->where('date_payment',$affiliate['date_payment'])
+            ->where('type','affiliate')->orderBy('date_payment','DESC')->get();
 
-            unset($affiliate['code']); 
-           $data =  $affiliateRecordPercentages->RecordPercentages()->attach( $recordPercentages->id,$affiliate );
-         
+           
+           
+            if(count($comprobacion) > 0):
+
+            else:
+                if(count($affiliate['amount_affiliate']) > 0):
+                    $typeAffiliate = $affiliate;
+                    unset($typeAffiliate['amount']);
+                    $typeAffiliate['salary']= $typeAffiliate['amount_affiliate'] / ($recordPercentages->percentage_affiliates/100);
+                    $typeAffiliate['type']= 'affiliate';
+                    $typeAffiliate['amount']= $typeAffiliate['amount_affiliate'];
+                     unset($typeAffiliate['amount_affiliate']);
+                    unset($typeAffiliate['code']); 
+                    $data =  $affiliateRecordPercentages->RecordPercentages()->attach( $recordPercentages->id,$typeAffiliate );
+                endif;
+            endif;
+
+            $comprobacionPrivet = $this->duesRepository->getModel()->where('affiliate_id',$affiliateRecordPercentages->id)
+            ->where('date_payment',$affiliate['date_payment'])
+            ->where('type','privado')->orderBy('date_payment','DESC')->get();
+           
+            if(count($comprobacionPrivet) > 0):
+
+            else:
+                 $typeAffiliate = $affiliate;
+                unset($typeAffiliate['amount_affiliate']);
+                if(count($affiliate['amount']) > 0):
+                    $typeAffiliate['salary']= $typeAffiliate['amount'] / ($recordPercentages->percentage/100);
+                    $typeAffiliate['type']= 'privado';
+                    unset($typeAffiliate['code']); 
+                    $data =  $affiliateRecordPercentages->RecordPercentages()->attach( $recordPercentages->id,$typeAffiliate );
+                endif;
+            endif;
+
+
              DB::commit();
                 return $this->exito('Se ha Guardado con exito');
                 
