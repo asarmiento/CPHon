@@ -47,6 +47,7 @@ class AffiliatesRecordPercentageController extends Controller
             if( ! $due->isEmpty() )
             {
                 array_push($dues, $due[0]);
+                array_push($dues, $due[1]);
             }
         }
         
