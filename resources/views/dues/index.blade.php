@@ -35,7 +35,7 @@
                         <input type="hidden" id="token_rec" value="{{ recordPercentage()->token }}">
 						<table id="table_dues" class="table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" width="100%" style="table-layout:fixed;">
 	                        <thead>
-	                            <tr>
+		                            <tr>
 	                            	<th>Código</th>
 	                            	<th>Cédula</th>
 	                                <th>Nombres</th>
@@ -53,8 +53,16 @@
 			                            	<td class="text-center">{{ strtolower($due->affiliates->charter) }}</td>
 			                            	<td class="text-center">{{ convertTitle($due->affiliates->fname.' '.$due->affiliates->sname) }}</td>
 			                                <td class="text-center">{{ convertTitle($due->affiliates->flast.' '.$due->affiliates->slast) }}</td>
-			                                <td class="text-center">{{ $due->amount_affiliate }}</td>
-			                                <td class="text-center">{{ $due->amount  }}</td>
+			                                @if($due->type == 'affiliate')
+											<td class="text-center">{{ $due->amount  }}</td>
+			                                @else
+											<td class="text-center"></td>
+			                                @endif
+			                                @if($due->type == 'privado')
+											<td class="text-center">{{ $due->amount  }}</td>
+			                                @else
+											<td class="text-center"></td>
+			                                @endif
 			                                <td class="text-center">{{ strtolower($due->date_payment) }}</td>
 			                            </tr>
 		                            @endforeach
