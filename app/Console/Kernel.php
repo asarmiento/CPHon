@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \AccountHon\Console\Commands\Inspire::class,
+        \AccountHon\Console\Commands\SendAlert::class,
     ];
 
     /**
@@ -26,5 +27,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('inspire')
                  ->hourly();
+
+        $schedule->command('send:alert')
+                 ->everyFiveMinutes();
     }
 }

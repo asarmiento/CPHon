@@ -104,25 +104,24 @@ class AffiliatesController extends Controller
     }
 
     public function search(){
-         $code = \Input::get('code');
-         $affiliates = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
+        $code = \Input::get('code');
+        $affiliates = $this->affiliateRepository->getModel()->orWhere('code', 'LIKE', '%'.$code.'%' )
          ->orWhere('fname', 'LIKE', '%'.$code.'%')->orWhere('flast', 'LIKE', '%'.$code.'%')->get();
-         $data = array();
-         foreach ($affiliates as $affiliate) {
-           
-            $payments= $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->groupBy('affiliate_id')->orderBy('date_payment','DESC')->get();
+        
+        $data = array();
+        foreach ($affiliates as $affiliate) {
+            $payment = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->orderBy('date_payment','DESC')->first();
+            
+            $affiliate->lastPayment = '';
 
-            foreach ($payments as $payment) {
-              if($affiliate->id == $payment->affiliate_id):
-                    $affiliate->lastPayment = $payment->date_payment;
-                 
-                   endif;
-
-            } 
+            if( $payment )
+            {
+                $affiliate->lastPayment = Carbon::parse($payment->date_payment)->format('m/d/Y');
+            }
+            
             $data[] = $affiliate;
         }
-     //    echo json_encode($affiliate );    die;
-         return $data;
+        return $data;
     }
 
     /**

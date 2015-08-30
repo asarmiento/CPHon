@@ -66,19 +66,28 @@
 		</div>
 		<div class='col-sm-6 col-md-6'>
 			<div class='form-mep'>
-				<label for='date_paymentAffiliate'>Mes a pagar </label>
-				<div class='input-group date'>
-					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
-			      	<input name="date_paymentAffiliate" class='form-control' type='text' />
+				<label for='consecutiveAffiliate'>N° de Recibo</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-barcode'></i></span>
+			      	<input name="consecutiveAffiliate" id="consecutiveAffiliate" class='form-control' type='text' />
 				</div>
 			</div>
 		</div>
 		<div class='col-sm-6 col-md-6'>
 			<div class='form-mep'>
-				<label for='consecutiveAffiliate'>N° de Recibo</label>
+				<label for='date_consecutiveAffiliate'>Fecha del Recibo</label>
+				<div class='input-group date'>
+					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+			      	<input name="date_consecutiveAffiliate" class='form-control' type='text' />
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label for='date_paymentAffiliate'>Mes a pagar</label>
 				<div class='input-group'>
-					<span class='input-group-addon'><i class='fa fa-barcode'></i></span>
-			      	<input name="consecutiveAffiliate" id="consecutiveAffiliate" class='form-control' type='text' />
+					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+			      	<input name="date_paymentAffiliate" id='datepicker' class='form-control' type='text' />
 				</div>
 			</div>
 		</div>
@@ -99,12 +108,6 @@
 					<span class='input-group-addon'><i class='fa fa-usd'></i></span>
 			      	<input name='amount_affiliateDues' class='form-control' type='number' step="any" />
 				</div>
-			</div>
-		</div>
-		<div class='col-sm-6 col-md-46'>
-			<div class='form-mep'>
-				<label></label>
-				<p style="color: rgba(97, 9, 25, 0.77); font-size: 14px; margin-top: .75em;">Advertencia: Una vez grabada esta cuota, no se puede editar.</p>
 			</div>
 		</div>
 	</section>

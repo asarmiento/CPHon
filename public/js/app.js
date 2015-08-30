@@ -37,6 +37,13 @@ var dataTable = function(selector, list){
 };
 
 /**
+ * [date description]
+ * @type {Date}
+ */
+var date  = new Date();
+var adult = String(date.getDate()) + "/" + String(date.getMonth()) + "/" + String(date.getFullYear() - 18);
+
+/**
  * [messageAjax - Response message after request ]
  * @param  {[json]} data [description messages error after request]
  * @return {[alert]}     [errors in alert]
@@ -325,32 +332,28 @@ var compileTpl = function(html, data){
 };
 
 /**
- * [datepickerAdult description]
- * @return {[type]} [description]
+ * [datepicker description]
+ * @param  {[type]} format  [description]
+ * @param  {[type]} minview [description]
+ * @param  {[type]} start   [description]
+ * @param  {[type]} end     [description]
+ * @return {[type]}         [description]
  */
-var datepickerAdult = function(){
-	var current = new Date();
-	var adult   = String(current.getDate()) + "/" + String(current.getMonth()) + "/" + String(current.getFullYear() - 18);
-	$(".date").datepicker({
+var datepicker = function(selector, format, minview, start, end){
+	var selector, format, minview, start, end;
+	(selector) ? selector = selector : selector = "date";
+	(format) ? format = format :  format = "dd/mm/yyyy";
+	(minview) ? minview = minview : minvew = 0;
+	(start) ? start = start: start = false;
+	(end) ? end = end: end = false;
+	$(selector).datepicker({
 		autoclose: true,
-		endDate: adult,
-		format: "dd/mm/yyyy",
-		language: "es",
-		orientation: "top auto"
-	});
-};
-
-/**
- * [datepickerMonth description]
- * @return {[type]} [description]
- */
-var datepickerMonth = function(){
-	$(".date").datepicker({
-		autoclose: true,
-		format: "mm/yyyy",
+		format: format,
+		startDate: start,
+		endDate: end,
 		language: "es",
 		orientation: "top auto",
-		minViewMode: 1
+		minViewMode: minview
 	});
 };
 
@@ -378,7 +381,7 @@ var editModal = function(url, data, title, pathPut){
 			.done( function(html){
 				var modal = compileTpl(html, data)
 				bootboxEdit(modal, title, pathPut);
-				datepickerAdult();
+				datepicker('.date','dd/mm/yyyy', 0, null, adult);
 			});
 			break;
 	}
@@ -408,7 +411,7 @@ var newModal = function(url, title){
 			.done( function(html){
 				modal = compileTpl(html)
 				bootboxNew(modal, title, url);
-				datepickerAdult();
+				datepicker('.date','dd/mm/yyyy', 0, null, adult);
 			});
 			break;
 		case 'cuotas':
@@ -416,8 +419,9 @@ var newModal = function(url, title){
 			$.get(urlTpl)
 			.done( function(html){
 				modal = compileTpl(html)
-				bootboxNew( modal, title, url);
-				datepickerMonth();
+				bootboxNew(modal, title, url);
+				datepicker('.date', 'dd/mm/yyyy', 0, null, null);
+				datepicker('#datepicker', 'mm/yyyy', 1, null, null);
 				var rec_affi = $('#rec_affi').val();
 				var rec_priv = $('#rec_priv').val();
 				var token_rec = $('#token_rec').val();

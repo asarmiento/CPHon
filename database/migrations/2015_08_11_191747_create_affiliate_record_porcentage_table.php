@@ -23,7 +23,7 @@ class CreateAffiliateRecordPorcentageTable extends Migration
             $table->string('consecutive',14);
             $table->string('token');
             $table->decimal('salary',20,2);
-            $table->date('date_payment');
+            $table->date('date_payment')->nullable();
             $table->date('date_dues');
             $table->engine = 'InnoDB';
             $table->timestamps();
