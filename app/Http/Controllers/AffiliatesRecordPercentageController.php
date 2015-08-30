@@ -44,6 +44,7 @@ class AffiliatesRecordPercentageController extends Controller
         $dues = array();
         foreach ($affiliates as $affiliate) {
             $due = $this->duesRepository->whereId('affiliate_id', $affiliate->id, 'date_payment');
+            
             if( ! $due->isEmpty() )
             {
                 array_push($dues, $due[0]);
