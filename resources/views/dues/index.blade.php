@@ -46,6 +46,7 @@
 	                                <th>Sueldo</th>
 	                                <th>Recibo</th>
 	                                <th>Fecha del Recibo</th>
+	                                <th>Edición</th>
 	                                {{-- <th>Fecha del Último Aporte</th> --}}
 	                            </tr>
 	                        </thead>
@@ -71,6 +72,9 @@
 											<td class="text-center">{{ $due->salary }}</td>
 											<td class="text-center">{{ $due->consecutive }}</td>
 			                                <td class="text-center">{{ $due->datePayment() }}</td>
+			                                <td class="text-center edit-row">
+												<a class="edit" href="#" data-url="cuotas" data-token="{{$due->token}}"><i class="fa fa-pencil-square-o"></i></a>
+			                                </td>
 			                                {{-- <td class="text-center">{{ $due->datePayment() }}</td> --}}
 			                            </tr>
 		                            @endforeach
