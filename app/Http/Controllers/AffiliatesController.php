@@ -145,17 +145,16 @@ class AffiliatesController extends Controller
         if( $duesAffiliate->isEmpty() )
         {
             $error_affiliate = true;
-            $error = "El afiliado $affiliate->fname $affiliate->flast no cuenta con cuotas canceladas.";
         }
 
         if( $duesPrivate->isEmpty() )
         {
             $error_private = true;
-            $error = "El afiliado $affiliate->fname $affiliate->flast no cuenta con cuotas canceladas.";
         }
         
         if( isset($error_private) && isset($error_affiliate) )
         {
+            $error = "El afiliado $affiliate->fname $affiliate->flast no cuenta con cuotas canceladas.";
             return view('errors.validate', compact('page', 'error'));
         }
 
@@ -245,12 +244,12 @@ class AffiliatesController extends Controller
                     if(Carbon::parse($due->date_payment)->year == $i && Carbon::parse($due->date_payment)->month == $j){
                         if( array_key_exists($j, $row) )
                         {
-                            $amount = $row[$j][0] + $due->amount;
+                            $amount = number_format($row[$j][0] + $due->amount, 2, '.', ',');
                             $consecutive = $row[$j][1].'-'.$due->consecutive;
-                            $salary = $row[$j][2] + $due->salary;
+                            $salary = number_format($row[$j][2] + $due->salary, 2, '.', ',');
                             $row[$j] = array($amount, $consecutive, $salary);
                         }else{
-                            array_push($row, array($due->amount, $due->consecutive, $due->salary));
+                            array_push($row, array(number_format($due->amount, 2, '.', ',')), $due->consecutive, number_format($due->salary, 2, '.', ','));
                         }
                     }
                 }
