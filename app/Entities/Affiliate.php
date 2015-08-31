@@ -49,4 +49,14 @@ class Affiliate extends Entity
     public function fullname(){
         return $this->fname.' '.$this->sname.' '.$this->flast.' '.$this->slast;
     }
+
+    public function name()
+    {
+        return $this->fname.' '.$this->sname;
+    }
+
+    public function last()
+    {
+        return $this->flast.' '.$this->flast;
+    }
 }

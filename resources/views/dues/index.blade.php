@@ -35,14 +35,18 @@
                         <input type="hidden" id="token_rec" value="{{ recordPercentage()->token }}">
 						<table id="table_dues" class="table table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" width="100%" style="table-layout:fixed;">
 	                        <thead>
-		                            <tr>
+	                            <tr>
 	                            	<th>Código</th>
-	                            	<th>Cédula</th>
 	                                <th>Nombres</th>
 	                                <th>Apellidos</th>
-	                                <th>Monto Afiliado</th>
+	                                <th>Mes</th>
+	                                <th>Año</th>
 	                                <th>Monto Empresa</th>
-	                                <th>Fecha Último Aporte</th>
+	                                <th>Monto Afiliado</th>
+	                                <th>Sueldo</th>
+	                                <th>Recibo</th>
+	                                <th>Fecha del Recibo</th>
+	                                {{-- <th>Fecha del Último Aporte</th> --}}
 	                            </tr>
 	                        </thead>
 	                        <tbody>
@@ -50,20 +54,24 @@
 		                        	@foreach($dues as $due)
 			                            <tr>
 			                            	<td class="text-center">{{ strtolower($due->affiliates->code) }}</td>
-			                            	<td class="text-center">{{ strtolower($due->affiliates->charter) }}</td>
-			                            	<td class="text-center">{{ convertTitle($due->affiliates->fname.' '.$due->affiliates->sname) }}</td>
-			                                <td class="text-center">{{ convertTitle($due->affiliates->flast.' '.$due->affiliates->slast) }}</td>
-			                                @if($due->type == 'affiliate')
-											<td class="text-center">{{ $due->amount  }}</td>
-			                                @else
-											<td class="text-center"></td>
-			                                @endif
+			                            	<td>{{ convertTitle($due->affiliates->name()) }}</td>
+			                                <td>{{ convertTitle($due->affiliates->last()) }}</td>
+			                                <td>{{ convertTitle(months()[$due->monthDue()]) }}</td>
+			                                <td>{{ $due->yearDue() }}</td>
 			                                @if($due->type == 'privado')
-											<td class="text-center">{{ $due->amount  }}</td>
+												<td class="text-center">{{ $due->amount  }}</td>
 			                                @else
-											<td class="text-center"></td>
+												<td class="text-center"></td>
 			                                @endif
-			                                <td class="text-center">{{ strtolower($due->date_payment) }}</td>
+			                                @if($due->type == 'affiliate')
+												<td class="text-center">{{ $due->amount  }}</td>
+			                                @else
+												<td class="text-center"></td>
+			                                @endif
+											<td class="text-center">{{ $due->salary }}</td>
+											<td class="text-center">{{ $due->consecutive }}</td>
+			                                <td class="text-center">{{ $due->datePayment() }}</td>
+			                                {{-- <td class="text-center">{{ $due->datePayment() }}</td> --}}
 			                            </tr>
 		                            @endforeach
 	                            @endif
@@ -81,7 +89,4 @@
 	<script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 	<script src="{{ asset('bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js') }}"></script>
 	<script src="{{ asset('bower_components/handlebars/handlebars.min.js') }}"></script>
-	<!--<script src="{{ asset('bower_components/typeahead.js/dist/bloodhound.min.js') }}"></script>
-	<script src="{{ asset('bower_components/typeahead.js/dist/typeahead.jquery.min.js') }}"></script>
-	<script src="{{ asset('bower_components/jqueryui/jquery-ui.min.js') }}"></script>-->
 @endsection
