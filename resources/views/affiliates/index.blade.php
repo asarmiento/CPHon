@@ -53,7 +53,7 @@
 			                            	<td class="text-center">{{ convertTitle($affiliate->fname.' '.$affiliate->sname) }}</td>
 			                                <td class="text-center">{{ convertTitle($affiliate->flast.' '.$affiliate->slast) }}</td>
 			                                <td class="text-center">{{ strtolower($affiliate->homePhone) }}</td>
-			                                <td class="text-center">{{ strtolower($affiliate->birthdate) }}</td>
+			                                <td class="text-center">{{ strtolower($affiliate->dateBirth()) }}</td>
 			                                <td class="text-center">{{ convertTitle($affiliate->maritalStatus) }}</td>
 			                                <td class="text-center edit-row">
 		                                		<a href="{{ route('report', $affiliate->token) }}" target="_blank" data-toggle="tooltip" data-placement="left" title="privado"><i class="fa fa-file-pdf-o"></i></a>

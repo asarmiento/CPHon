@@ -1,7 +1,7 @@
 <?php
 
 namespace AccountHon\Entities;
-
+use Carbon\Carbon;
 
 
 class Affiliate extends Entity
@@ -58,5 +58,10 @@ class Affiliate extends Entity
     public function last()
     {
         return $this->flast.' '.$this->flast;
+    }
+
+    public function dateBirth()
+    {
+        return Carbon::parse($this->birthdate)->format('d/m/Y');
     }
 }

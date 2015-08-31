@@ -196,23 +196,23 @@ class AffiliatesController extends Controller
         $dues_payment_private = count($duesPrivate);
 
         //Total Salary affiliate
-        $salary_affiliate = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'affiliate')->sum('salary');
+        $salary_affiliate = number_format($this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'affiliate')->sum('salary'),2 , '.', ',');
 
         //Salary prom by affiliate    
         $salary_prom_affiliate = number_format( ($salary_affiliate / $dues_payment_affiliate), 2, '.', ',');
         
         //Total Salary private
-        $salary_private = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'privado')->sum('salary');
+        $salary_private = number_format($this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'privado')->sum('salary'), 2, '.', ',');
 
         //Salary prom by private    
         $salary_prom_private = number_format( ($salary_private / $dues_payment_private), 2, '.', ',');
 
         //Total Amount affiliate
-        $amount_affiliate = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'affiliate')->sum('amount');
+        $amount_affiliate = number_format($this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'affiliate')->sum('amount'), 2, '.', ',');
 
         //Total Amount private
-        $amount_private = $this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'privado')->sum('amount');
-        // dd($dataPrivate);
+        $amount_private = number_format($this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'privado')->sum('amount'), 2, '.', ',');
+        //dd($dataPrivate);
         //return view('affiliates.report.salary.main', compact('arrDateNow', 'affiliate', 'data', 'dues_total', 'dues_payment', 'total_private', 'total_affiliate'));
         $pdf = \PDF::loadView('affiliates.report.main',
                     compact('affiliate', 'birthdate', 'age', 'date_affiliate', 'dataAffiliate',
@@ -228,6 +228,7 @@ class AffiliatesController extends Controller
     /**
      * [prepareData description]
      * @param  [type] $dues [description]
+     * @param  [type] $type [description]
      * @return [type]       [description]
      */
     private function prepareData($dues, $type){
@@ -244,12 +245,14 @@ class AffiliatesController extends Controller
                     if(Carbon::parse($due->date_payment)->year == $i && Carbon::parse($due->date_payment)->month == $j){
                         if( array_key_exists($j, $row) )
                         {
-                            $amount = number_format($row[$j][0] + $due->amount, 2, '.', ',');
+                            $amount = number_format( ($row[$j][0] + (float) $due->amount), 2, '.', ',');
                             $consecutive = $row[$j][1].'-'.$due->consecutive;
-                            $salary = number_format($row[$j][2] + $due->salary, 2, '.', ',');
+                            $salary = number_format( ($row[$j][2] + (float) $due->salary), 2, '.', ',');
                             $row[$j] = array($amount, $consecutive, $salary);
                         }else{
-                            array_push($row, array(number_format($due->amount, 2, '.', ',')), $due->consecutive, number_format($due->salary, 2, '.', ','));
+                            array_push($row, 
+                                array( number_format((float) $due->amount, 2, '.', ','), $due->consecutive, number_format( (float) $due->salary, 2, '.', ',') )
+                            );
                         }
                     }
                 }
@@ -259,7 +262,6 @@ class AffiliatesController extends Controller
             }
             array_push($data, $row);
         }
-
         return $data;
     }
 
