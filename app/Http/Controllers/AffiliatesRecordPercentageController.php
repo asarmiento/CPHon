@@ -13,6 +13,8 @@ use AccountHon\Repositories\DuesRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
+use Carbon\Carbon;
+
 class AffiliatesRecordPercentageController extends Controller
 {
     
@@ -153,12 +155,16 @@ class AffiliatesRecordPercentageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $token
      * @return Response
      */
-    public function edit($id)
+    public function edit($token)
     {
-        //
+        $due = $this->duesRepository->getModel()->where('token',$token)->with('affiliates')->first();
+        $due->date_payment = Carbon::parse($due->date_payment)->format('d/m/Y');
+        $due->date_dues    = Carbon::parse($due->date_dues)->format('d/m/Y');
+
+        return $due;
     }
 
     /**
