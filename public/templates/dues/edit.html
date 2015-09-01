@@ -1,0 +1,103 @@
+<form class='editModal'>
+	<section class='row'>
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label>Código</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-barcode'></i></span>
+			      	<input id="codeAffiliate" class='form-control' type='text' value="{{ affiliates.code }}" disabled/>
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label>Cédula</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-barcode'></i></span>
+			      	<input class='form-control' type='text' value="{{ affiliates.charter }}" disabled />
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label>Nombres</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-user'></i></span>
+			      	<input class='form-control' type='text' value="{{ affiliates.fname }} {{ affiliates.sname }}" disabled />
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label>Apellidos</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-user'></i></span>
+			      	<input class='form-control' type='text' value="{{ affiliates.flast }} {{ affiliates.slast }}" disabled />
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label>Fecha de Nacimiento</label>
+				<div class='input-group date'>
+					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+			      	<input class='form-control' type='text' value="{{ affiliates.birthdate }}" disabled />
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label for='consecutiveAffiliate'>N° de Recibo</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-barcode'></i></span>
+			      	<input name="consecutiveAffiliate" id="consecutiveAffiliate" class='form-control' type='text' value="{{ consecutive }}" />
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label for='date_consecutiveAffiliate'>Fecha del Recibo</label>
+				<div class='input-group date'>
+					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+			      	<input name="date_consecutiveAffiliate" class='form-control' type='text' value="{{ date_payment }}" />
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label for='date_paymentAffiliate'>Mes a pagar</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
+			      	<input name="date_paymentAffiliate" id='datepicker' class='form-control' type='text' value=" {{ date_dues }} "/>
+				</div>
+			</div>
+		</div>
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label for='amountDues' id="lbl_priv">Monto S. Privado</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-usd'></i></span>
+					{{#if_eq type "privado"}}
+			      	<input name='amountDues' id="amountDues" class='form-control' type='number' step="any" value="{{ amount }}"/>
+			      	{{else}}
+					<input name='amountDues' id="amountDues" class='form-control' type='number' step="any" />
+			      	{{/if_eq}}
+				</div>
+			</div>
+		</div>
+		<input type="hidden" name="token" id="token" value="{{ token }}">
+		<div class='col-sm-6 col-md-6'>
+			<div class='form-mep'>
+				<label for='amount_affiliateDues' id="lbl_aff">Monto de Afiliado</label>
+				<div class='input-group'>
+					<span class='input-group-addon'><i class='fa fa-usd'></i></span>
+			      	{{#if_eq type "affiliate"}}
+			      	<input name='amount_affiliateDues' id="amount_affiliateDues" class='form-control' type='number' step="any" value="{{ amount }}"/>
+			      	{{else}}
+					<input name='amount_affiliateDues' id="amount_affiliateDues" class='form-control' type='number' step="any" />
+			      	{{/if_eq}}
+				</div>
+			</div>
+		</div>
+	</section>
+</form>

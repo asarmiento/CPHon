@@ -71,7 +71,7 @@
 			                                @endif
 											<td class="text-center">{{ $due->salary }}</td>
 											<td class="text-center">{{ $due->consecutive }}</td>
-			                                <td class="text-center">{{ $due->datePayment() }}</td>
+			                                <td class="text-center">{{ $due->dateDues() }}</td>
 			                                <td class="text-center edit-row">
 												<a class="edit" href="#" data-url="cuotas" data-token="{{$due->token}}"><i class="fa fa-pencil-square-o"></i></a>
 			                                </td>

@@ -366,24 +366,34 @@ var datepicker = function(selector, format, minview, start, end){
  * @return {[type]}         [description]
  */
 var editModal = function(url, data, title, pathPut){
+	var urlTpl, modal;
 	switch(url){
 		case 'porcentajes': 
-			var urlTpl = getTpl('recordPercentages', 'edit');
+			urlTpl = getTpl('recordPercentages', 'edit');
 			$.get(urlTpl)
 			.done( function(html){
-				var modal = compileTpl(html, data)
+				modal = compileTpl(html, data);
 				bootboxEdit(modal, title, pathPut);
 			});
 			break;
 		case 'afiliados': 
-			var urlTpl = getTpl('affiliates', 'edit');
+			urlTpl = getTpl('affiliates', 'edit');
 			$.get(urlTpl)
 			.done( function(html){
-				var modal = compileTpl(html, data)
+				modal = compileTpl(html, data);
 				bootboxEdit(modal, title, pathPut);
 				datepicker('.date','dd/mm/yyyy', 0, null, adult);
 			});
 			break;
+		case 'cuotas':
+			urlTpl = getTpl('dues', 'edit');
+			$.get(urlTpl)
+			.done( function(html){
+				modal = compileTpl(html, data);
+				bootboxEdit(modal, title, pathPut);
+				datepicker('.date', 'dd/mm/yyyy', 0, null, null);
+				datepicker('#datepicker', 'mm/yyyy', 1, null, null);
+			});
 	}
 };
 
@@ -1074,6 +1084,7 @@ $(function(){
 		var pathPut = url+'/'+token;
 		$.get(path)
 		.done(function(response){
+			//console.log(response);return false; aquí done
 			//get pages json
 			$.getJSON('../json/modal.json', function(views){
 				$.each(views, function(index,value){

@@ -32,9 +32,9 @@ class Dues extends Entity
     	return $arr_date_payment[2];
     }
 
-    public function datePayment()
+    public function dateDues()
     {
-    	return Carbon::parse($this->date_payment)->format('d/m/Y');
+    	return Carbon::parse($this->date_dues)->format('d/m/Y');
     }
 
 }
