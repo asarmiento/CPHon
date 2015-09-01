@@ -176,7 +176,22 @@ class AffiliatesRecordPercentageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $affiliate = $this->CreacionArray($request->all(),'Affiliate');
+        $affiliate = $this->CreacionArray($affiliate,'Dues');
+        $duesPrivateId = $this->duesRepository->getModel()->Where('token',$request->get('token'))->where('type','privado')->get();
+        $duesPrivate= $this->duesRepository->find($duesPrivateId[0]->id);
+        $affiliateDues = $affiliate['amount_affiliate'];
+        $duesPrivate->fill($affiliate);
+        $duesPrivate->update();
+        unset($affiliate['amount']);
+        $affiliate['amount']= $affiliate['amount_affiliate'];
+        unset($affiliate['amount_affiliate']);
+        $duesAffiliateId = $this->duesRepository->getModel()->Where('token',$request->get('token'))->where('type','affiliate')->get();
+        $duesAffiliate= $this->duesRepository->find($duesAffiliateId[0]->id);
+        $duesAffiliate->fill($affiliate);
+        $duesAffiliate->update();
+
     }
 
 }
