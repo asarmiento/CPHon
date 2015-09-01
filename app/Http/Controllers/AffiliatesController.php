@@ -196,13 +196,13 @@ class AffiliatesController extends Controller
         $dues_payment_private = count($duesPrivate);
 
         //Total Salary affiliate
-        $salary_affiliate = number_format($this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'affiliate')->sum('salary'),2 , '.', ',');
+        $salary_affiliate = ($this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'affiliate')->sum('salary'));
 
         //Salary prom by affiliate    
         $salary_prom_affiliate = number_format( ($salary_affiliate / $dues_payment_affiliate), 2, '.', ',');
         
         //Total Salary private
-        $salary_private = number_format($this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'privado')->sum('salary'), 2, '.', ',');
+        $salary_private = ($this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'privado')->sum('salary'));
 
         //Salary prom by private    
         $salary_prom_private = number_format( ($salary_private / $dues_payment_private), 2, '.', ',');
