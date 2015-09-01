@@ -163,7 +163,8 @@ class AffiliatesRecordPercentageController extends Controller
         $due = $this->duesRepository->getModel()->where('token',$token)->with('affiliates')->first();
         $due->date_payment = Carbon::parse($due->date_payment)->format('d/m/Y');
         $due->date_dues    = Carbon::parse($due->date_dues)->format('d/m/Y');
-
+        $arrDatePayment = explode('/',$due->date_payment);
+        $due->date_payment = $arrDatePayment[1].'/'.$arrDatePayment[2];
         return $due;
     }
 
