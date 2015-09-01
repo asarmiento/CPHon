@@ -45,7 +45,7 @@ class AffiliatesRecordPercentageController extends Controller
 
         $dues = array();
         foreach ($affiliates as $affiliate) {
-            $dues_affiliate = $this->duesRepository->getModel()->where('affiliate_id', $affiliate->id)->limit(2)->offset(2)->orderBy('date_payment', 'desc')->get();
+            $dues_affiliate = $this->duesRepository->getModel()->where('affiliate_id', $affiliate->id)->limit(10)->offset(10)->orderBy('date_payment', 'desc')->get();
             //dd($dues_affiliate);
             if( ! $dues_affiliate->isEmpty() )
             {
