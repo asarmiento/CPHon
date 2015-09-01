@@ -170,6 +170,7 @@ class AffiliatesController extends Controller
 
         //Data for report affiliate
         $dataAffiliate = $this->prepareData($duesAffiliate, 'affiliate');
+        //dd($dataAffiliate);
 
         //Data for report private
         $dataPrivate = $this->prepareData($duesPrivate, 'privado');
