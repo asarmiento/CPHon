@@ -78,6 +78,7 @@ class AffiliatesController extends Controller
     public function edit($token)
     {
         $affiliate = $this->affiliateRepository->token($token);
+        $affiliate->birthdate = Carbon::parse($affiliate->birthdate)->format('d/m/Y');
         return $affiliate;
     }
 
@@ -170,6 +171,7 @@ class AffiliatesController extends Controller
 
         //Data for report affiliate
         $dataAffiliate = $this->prepareData($duesAffiliate, 'affiliate');
+        //dd($dataAffiliate);
 
         //Data for report private
         $dataPrivate = $this->prepareData($duesPrivate, 'privado');

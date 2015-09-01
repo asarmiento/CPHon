@@ -163,7 +163,8 @@ class AffiliatesRecordPercentageController extends Controller
         $due = $this->duesRepository->getModel()->where('token',$token)->with('affiliates')->first();
         $due->date_payment = Carbon::parse($due->date_payment)->format('d/m/Y');
         $due->date_dues    = Carbon::parse($due->date_dues)->format('d/m/Y');
-
+        $arrDatePayment = explode('/',$due->date_payment);
+        $due->date_payment = $arrDatePayment[1].'/'.$arrDatePayment[2];
         return $due;
     }
 
@@ -181,8 +182,9 @@ class AffiliatesRecordPercentageController extends Controller
         $affiliate = $this->CreacionArray($affiliate,'Dues');
         $duesPrivateId = $this->duesRepository->getModel()->Where('token',$request->get('token'))->where('type','privado')->get();
         $duesPrivate= $this->duesRepository->find($duesPrivateId[0]->id);
-        $affiliateDues = $affiliate['amount_affiliate'];
-        $duesPrivate->fill($affiliate);
+        $affiliateDues = $affiliate;
+        unset($affiliateDues['amount_affiliate']);
+        $duesPrivate->fill($affiliateDues);
         $duesPrivate->update();
         unset($affiliate['amount']);
         $affiliate['amount']= $affiliate['amount_affiliate'];
