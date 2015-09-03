@@ -37,84 +37,93 @@
 	@endforeach
 </table>
 @if(count($dataAffiliate) >= 17 && count($dataAffiliate) < 33)
-<div class="page-break"></div>
-<table>
-	<tr style="">
-		<td style="font-size:11px;margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">Año</td>
-		@foreach(months() as $month)
-			<td style="font-size:11px;margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">{{$month}}</td>
-		@endforeach
-	</tr>
-	@foreach($dataAffiliate as $key => $year)
-		@if($key >= 17 && $key <33)
-		<tr>
-		@foreach($year as $key => $month)
-			@if($key == 0)
-				<td style="font-size:11px;">{{ $month }}</td>
-			@else
-				<td style="text-align: right; font-size:11px;">
-				@if( is_array($month) )
-					{{ $month[0] }}
-				@endif
-				</td>
-			@endif
-		@endforeach
+	{{ addPage(1) }}
+	<div class="page-break"></div>
+	<p style="margin:0; font-size: 14px;">Página: {{ Session::get('page') }} impreso el: {{ $arrDateNow[0] }} Hora: {{ $arrDateNow[1] }}</p>
+	<p style="margin:0; font-size: 14px;">INSTITUTO DE PREVISION SOCIAL DEL PERIODISTA</p>
+	<p style="margin:0; font-size: 14px;">{{ strtoupper($affiliate->fullname()) }}</p>
+	<table>
+		<tr style="">
+			<td style="font-size:11px;margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">Año</td>
+			@foreach(months() as $month)
+				<td style="font-size:11px;margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">{{$month}}</td>
+			@endforeach
 		</tr>
-		<tr>
+		@foreach($dataAffiliate as $key => $year)
+			@if($key >= 17 && $key <33)
+			<tr>
 			@foreach($year as $key => $month)
 				@if($key == 0)
-					<td style="font-size:11px;"></td>
+					<td style="font-size:11px;">{{ $month }}</td>
 				@else
 					<td style="text-align: right; font-size:11px;">
 					@if( is_array($month) )
-						{{ $month[1] }}
+						{{ $month[0] }}
 					@endif
 					</td>
 				@endif
 			@endforeach
-		</tr>
-		@endif
-	@endforeach
-</table>
+			</tr>
+			<tr>
+				@foreach($year as $key => $month)
+					@if($key == 0)
+						<td style="font-size:11px;"></td>
+					@else
+						<td style="text-align: right; font-size:11px;">
+						@if( is_array($month) )
+							{{ $month[1] }}
+						@endif
+						</td>
+					@endif
+				@endforeach
+			</tr>
+			@endif
+		@endforeach
+	</table>
 @endif
 @if(count($dataAffiliate) >= 33)
-<div class="page-break"></div>
-<table>
-	<tr style="">
-		<td style="font-size:11px;margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">Año</td>
-		@foreach(months() as $month)
-			<td style="font-size:11px;margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">{{$month}}</td>
-		@endforeach
-	</tr>
-	@foreach($dataAffiliate as $key => $year)
-		@if($key >= 33)
-		<tr>
-		@foreach($year as $key => $month)
-			@if($key == 0)
-				<td style="font-size:11px;">{{ $month }}</td>
-			@else
-				<td style="text-align: right; font-size:11px;">
-				@if( is_array($month) )
-					{{ $month[0] }}
-				@endif
-				</td>
-			@endif
-		@endforeach
+	{{ addPage() }}
+	<div class="page-break"></div>
+	<p style="margin:0; font-size: 14px;">Página: {{ Session::get('page') }} impreso el: {{ $arrDateNow[0] }} Hora: {{ $arrDateNow[1] }}</p>
+	<p style="margin:0; font-size: 14px;">INSTITUTO DE PREVISION SOCIAL DEL PERIODISTA</p>
+	<p style="margin:0; font-size: 14px;">{{ strtoupper($affiliate->fullname()) }}</p>
+	{{ addPage(1) }}
+	<table>
+		<tr style="">
+			<td style="font-size:11px;margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">Año</td>
+			@foreach(months() as $month)
+				<td style="font-size:11px;margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">{{$month}}</td>
+			@endforeach
 		</tr>
-		<tr>
+		@foreach($dataAffiliate as $key => $year)
+			@if($key >= 33)
+			<tr>
 			@foreach($year as $key => $month)
 				@if($key == 0)
-					<td style="font-size:11px;"></td>
+					<td style="font-size:11px;">{{ $month }}</td>
 				@else
 					<td style="text-align: right; font-size:11px;">
 					@if( is_array($month) )
-						{{ $month[1] }}
+						{{ $month[0] }}
 					@endif
 					</td>
 				@endif
 			@endforeach
-		</tr>
-		@endif
-	@endforeach
-</table>
+			</tr>
+			<tr>
+				@foreach($year as $key => $month)
+					@if($key == 0)
+						<td style="font-size:11px;"></td>
+					@else
+						<td style="text-align: right; font-size:11px;">
+						@if( is_array($month) )
+							{{ $month[1] }}
+						@endif
+						</td>
+					@endif
+				@endforeach
+			</tr>
+			@endif
+		@endforeach
+	</table>
 @endif

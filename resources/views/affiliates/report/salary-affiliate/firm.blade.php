@@ -7,3 +7,4 @@
 <p style="font-size: 14px;margin: 0;">Total Sueldos D. 10%.: {{ number_format( $salary_private,2 ,'.',',') }}</p>
 <p style="font-size: 14px;margin: 0;">Sueldo Promedio Cont.: {{  number_format($salary_private / $dues_total_private, 2, '.', ',') }}</p>
 <p style="font-size: 14px;margin: 0;">Total Pagado Cont.: {{ ( $amount_private) }}</p>
+{{ destroyPage() }}

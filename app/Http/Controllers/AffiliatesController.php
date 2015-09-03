@@ -171,7 +171,6 @@ class AffiliatesController extends Controller
 
         //Data for report affiliate
         $dataAffiliate = $this->prepareData($duesAffiliate, 'affiliate');
-        //dd($dataAffiliate);
 
         //Data for report private
         $dataPrivate = $this->prepareData($duesPrivate, 'privado');
@@ -214,8 +213,7 @@ class AffiliatesController extends Controller
 
         //Total Amount private
         $amount_private = number_format($this->duesRepository->getModel()->where('affiliate_id',$affiliate->id)->where('type', 'privado')->sum('amount'), 2, '.', ',');
-        //dd($dataPrivate);
-        //return view('affiliates.report.salary.main', compact('arrDateNow', 'affiliate', 'data', 'dues_total', 'dues_payment', 'total_private', 'total_affiliate'));
+        
         $pdf = \PDF::loadView('affiliates.report.main',
                     compact('affiliate', 'birthdate', 'age', 'date_affiliate', 'dataAffiliate',
                             'salary_affiliate', 'salary_prom_affiliate', 'salary_private', 
@@ -239,30 +237,47 @@ class AffiliatesController extends Controller
         $last_year = Carbon::parse($dues[count($dues)-1]->date_payment)->year;
         
         $data = array();
+        //Recorre todos los años de las cuotas
         for ($i = $old_year; $i <= $last_year ; $i++) {
+            //array que contiene información por cada año (año, [cuota, recibo, salario])
             $row   = array();
             $row[] = $i;
+            $validate = false;
+            //Recorre todos los meses del año
             for ($j=1; $j <= 12 ; $j++) {
+                //Recorre todas las cuotas
                 foreach ($dues as $key => $due) {
+                    //Evalua si el año y el mes son los mismos que las fecha de cuota
                     if(Carbon::parse($due->date_payment)->year == $i && Carbon::parse($due->date_payment)->month == $j){
+                        //Si existe el mes y año en el array -> se suma la cuota, se concatena el recibo y se suma el salario
                         if( array_key_exists($j, $row) )
                         {
-                            $amount = number_format( ($row[$j][0] + (float) $due->amount), 2, '.', ',');
-                            $consecutive = $row[$j][1].'-'.$due->consecutive;
-                            $salary = number_format( ($row[$j][2] + (float) $due->salary), 2, '.', ',');
-                            $row[$j] = array($amount, $consecutive, $salary);
+                            //Si el valor es mayor que 0 se adiciona a la misma fila
+                            if($due->amount > 0)
+                            {
+                                $amount = number_format( ($row[$j][0] + (float) $due->amount), 2, '.', ',');
+                                $consecutive = $row[$j][1].'-'.$due->consecutive;
+                                $salary = number_format( ($row[$j][2] + (float) $due->salary), 2, '.', ',');
+                                $row[$j] = array($amount, $consecutive, $salary);
+                            }
                         }else{
-                            array_push($row, 
-                                array( number_format((float) $due->amount, 2, '.', ','), $due->consecutive, number_format( (float) $due->salary, 2, '.', ',') )
-                            );
+                            //Si el valor es mayor que 0 se ingresa un nuevo dato a la fila
+                            if($due->amount > 0)
+                            {
+                                array_push($row, 
+                                    array( number_format( (float) $due->amount, 2, '.', ','), $due->consecutive, number_format( (float) $due->salary, 2, '.', ',') )
+                                );
+                                $validate = true;
+                            }else{
+                                array_push( $row, null );
+                            }
                         }
                     }
                 }
-                if(count($row) == $j){
-                    array_push($row, "");
-                }
             }
-            array_push($data, $row);
+            if($validate){
+                array_push($data, $row);
+            }
         }
         return $data;
     }

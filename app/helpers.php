@@ -81,3 +81,17 @@ function dateShort()
     endif;
     return date("Y/m/d");
 }
+function addPage($add = null)
+{
+    if($add)
+    {
+        $pageCurrent = Session::get('page');
+        Session::put('page', $pageCurrent +1);
+    }else{
+        Session::put('page', 1);
+    }
+}
+function destroyPage()
+{
+    Session::forget('page');
+}
