@@ -177,22 +177,60 @@ class AffiliatesRecordPercentageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try {
+            DB::beginTransaction();
+            $affiliate = $this->CreacionArray($request->all(), 'Affiliate');
+            $affiliate = $this->CreacionArray($affiliate, 'Dues');
+            $date= explode('/', $affiliate['date_payment']);
+            $affiliate['date_payment'] = $date[1]."-".$date[0]."-01";
 
-        $affiliate = $this->CreacionArray($request->all(),'Affiliate');
-        $affiliate = $this->CreacionArray($affiliate,'Dues');
-        $duesPrivateId = $this->duesRepository->getModel()->Where('token',$request->get('token'))->where('type','privado')->get();
-        $duesPrivate= $this->duesRepository->find($duesPrivateId[0]->id);
-        $affiliateDues = $affiliate;
-        unset($affiliateDues['amount_affiliate']);
-        $duesPrivate->fill($affiliateDues);
-        $duesPrivate->update();
-        unset($affiliate['amount']);
-        $affiliate['amount']= $affiliate['amount_affiliate'];
-        unset($affiliate['amount_affiliate']);
-        $duesAffiliateId = $this->duesRepository->getModel()->Where('token',$request->get('token'))->where('type','affiliate')->get();
-        $duesAffiliate= $this->duesRepository->find($duesAffiliateId[0]->id);
-        $duesAffiliate->fill($affiliate);
-        $duesAffiliate->update();
+            $affiliateDues = $affiliate;
+            unset($affiliateDues['amount_affiliate']);
+
+            unset($affiliate['amount']);
+            $affiliate['amount'] = $affiliate['amount_affiliate'];
+            unset($affiliate['amount_affiliate']);
+
+            $comprobacion = $this->duesRepository->token($request->get('token'));
+            if (count($comprobacion) > 1):
+                $duesPrivateId = $this->duesRepository->getModel()->Where('token', $request->get('token'))->where('type', 'privado')->get();
+                $duesPrivate = $this->duesRepository->find($duesPrivateId[0]->id);
+                $duesPrivate->fill($affiliateDues);
+                $duesPrivate->update();
+
+
+                $duesAffiliateId = $this->duesRepository->getModel()->Where('token', $request->get('token'))->where('type', 'affiliate')->get();
+                $duesAffiliate = $this->duesRepository->find($duesAffiliateId[0]->id);
+                $duesAffiliate->fill($affiliate);
+                $duesAffiliate->update();
+            else:
+
+                $comprobacion->fill($affiliateDues);
+                $comprobacion->update();
+
+                if ($comprobacion['type'] == 'privado'):
+                    $type = 'affiliate';
+                elseif ($comprobacion['type'] == 'affiliate'):
+                    $type = 'privado';
+                endif;
+                $duesAffiliateId = $this->duesRepository->getModel()
+                    ->Where('affiliate_id', $comprobacion['affiliate_id'])
+                    ->Where('date_payment', $comprobacion['date_payment'])
+                    ->where('type', $type)->get();
+                if(count($duesAffiliateId)>0):
+                $duesAffiliate = $this->duesRepository->find($duesAffiliateId[0]->id);
+                $duesAffiliate->fill($affiliate);
+                $duesAffiliate->update();
+                endif;
+            endif;
+
+            DB::commit();
+            return $this->exito('Se actualizaron con exito los datos!!!');
+        } catch (Exception $e) {
+            Log::error($e);
+            DB::rollback();
+            return $this->errores(['error'=>' se ha generado un error verificar los datos']);
+        }
 
     }
 
