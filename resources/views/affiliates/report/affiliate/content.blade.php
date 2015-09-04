@@ -6,7 +6,7 @@
 		@endforeach
 	</tr>
 	@foreach($dataAffiliate as $keyYear => $year)
-		@if($keyYear < 20)
+		@if($keyYear < 23)
 			<tr>
 			@foreach($year as $key => $month)
 				@if( $key == 0 && $keyYear != (count($dataAffiliate)-1) )
@@ -36,7 +36,7 @@
 		@endif
 	@endforeach
 </table>
-@if(count($dataAffiliate) >= 20 && count($dataAffiliate) < 40)
+@if(count($dataAffiliate) >= 23 && count($dataAffiliate) < 43)
 	{{ addPage(1) }}
 	<div class="page-break"></div>
 	<img src="{{ asset('images/logo.jpg') }}" style="float: right; height: 85px; position: absolute; right: 5em; top: -1em;">
@@ -51,7 +51,7 @@
 			@endforeach
 		</tr>
 		@foreach($dataAffiliate as $keyYear => $year)
-			@if($keyYear >= 20 && $keyYear <40)
+			@if($keyYear >= 23 && $keyYear < 43)
 				<tr>
 				@foreach($year as $key => $month)
 					@if( $key == 0 && $keyYear != (count($dataAffiliate)-1) )
@@ -82,7 +82,7 @@
 		@endforeach
 	</table>
 @endif
-@if(count($dataAffiliate) >= 40)
+@if(count($dataAffiliate) >= 43)
 	{{ addPage(1) }}
 	<div class="page-break"></div>
 	<img src="{{ asset('images/logo.jpg') }}" style="float: right; height: 85px; position: absolute; right: 5em; top: -1em;">
@@ -97,7 +97,7 @@
 			@endforeach
 		</tr>
 		@foreach($dataAffiliate as $keyYear => $year)
-			@if($keyYear >= 40)
+			@if($keyYear >= 43)
 				<tr>
 				@foreach($year as $key => $month)
 					@if( $key == 0 && $keyYear != (count($dataAffiliate)-1) )
