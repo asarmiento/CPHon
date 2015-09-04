@@ -13,7 +13,7 @@
 			@else
 				<td style="text-align: right; font-size:11px;">
 				@if( is_array($month) )
-					{{ number_format($month[2],2,'.',',') }}
+					{{ number_format((float)$month[2],2,'.',',') }}
 				@endif
 				</td>
 			@endif

@@ -140,7 +140,7 @@ class AffiliatesController extends Controller
         
         //Total dues for Affiliate
         $duesAffiliate =  $this->duesRepository->getModel()->where('type','affiliate')->where('affiliate_id',$affiliate->id)->orderBy('date_payment','ASC')->get();
-
+        
         //Total dues for Private
         $duesPrivate = $this->duesRepository->getModel()->where('type','privado')->where('affiliate_id',$affiliate->id)->orderBy('date_payment','ASC')->get();
         
@@ -204,7 +204,6 @@ class AffiliatesController extends Controller
      * @return [type]       [description]
      */
     private function prepareData($dues, $type){
-
         $old_year  = Carbon::parse($dues[0]->date_payment)->year;
         $last_year = Carbon::parse($dues[count($dues)-1]->date_payment)->year;
         
@@ -244,7 +243,6 @@ class AffiliatesController extends Controller
                             $percentage_current = $percentage_affiliate[2];
                         }
                     }
-
                     //Evalua si el año y el mes son los mismos que las fecha de cuota
                     if($yearDue == $i && $monthDue == $j){
                         //Si existe el mes y año en el array -> se suma la cuota, se concatena el recibo y se suma el salario
@@ -255,21 +253,37 @@ class AffiliatesController extends Controller
                             {
                                 if($type == 'affiliate')
                                 {
-                                    $amount = number_format( ($row[$j][0] + (float) $due->amount), 2, '.', ',');
-                                    $consecutive = $row[$j][1].'-'.$due->consecutive;
-                                    $salary = number_format( ($row[$j][2] + (float) ($due->amount * 100/$percentage_current)), 2, '.', ',');
+                                    if( ! $row[$j] );
+                                    {
+                                        if($dues_count == 0)
+                                        {
+                                            $first_date = '01/'.str_pad((string)$j, 2, "0", STR_PAD_LEFT).'/'.$i;
+                                        }
+                                        $dues_count++;
+                                    }
+                                    $amount = $row[$j][0] + (float) $due->amount;
+                                    $consecutive = ($row[$j][1]) ? $row[$j][1].'-'.$due->consecutive : $due->consecutive;
+                                    $salary = $row[$j][2] + (float) ($due->amount) * 100 / $percentage_current;
                                     $row[$j] = array($amount, $consecutive, $salary);
                                     $dues_total += $amount;
-                                    $salary_accumulated += $salary; 
+                                    $salary_accumulated += $salary;
                                 }else{
-                                    $amount = number_format( ($row[$j][0] + (float) $due->amount), 2, '.', ',');
-                                    $consecutive = $row[$j][1].'-'.$due->consecutive;
-                                    $salary = number_format( ($row[$j][2] + (float) $due->amount * 100 / 10), 2, '.', ',');
+                                    if( ! $row[$j] );
+                                    {
+                                        if($dues_count == 0)
+                                        {
+                                            $first_date = '01/'.str_pad((string)$j, 2, "0", STR_PAD_LEFT).'/'.$i;
+                                        }
+                                        $dues_count++;
+                                    }
+                                    $amount = $row[$j][0] + (float) $due->amount;
+                                    $consecutive = ($row[$j][1]) ? $row[$j][1].'-'.$due->consecutive : $due->consecutive;
+                                    $salary = $row[$j][2] + (float) $due->amount * 100 / 10;
                                     $row[$j] = array($amount, $consecutive, $salary);
                                     $dues_total += $amount;
                                     $salary_accumulated += $salary;
                                 }
-
+                                $validate = true;
                             }
                         }else{
                             //Si el valor es mayor que 0 se ingresa un nuevo dato a la fila
@@ -312,6 +326,7 @@ class AffiliatesController extends Controller
                 array_push($data, $row);
             }
         }
+        //dd($data[0]);
         //fecha de ingreso, salario total, contador de cuotas pagadas, total de cuotas pagadas
         array_push($data, array($first_date, $salary_accumulated,$dues_count, $dues_total));
         return $data;

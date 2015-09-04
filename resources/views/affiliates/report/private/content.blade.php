@@ -6,7 +6,7 @@
 		@endforeach
 	</tr>
 	@foreach($dataPrivate as $keyYear => $year)
-		@if($keyYear < 17)
+		@if($keyYear < 20)
 			<tr>
 			@foreach($year as $key => $month)
 				@if( $key == 0 && $keyYear != (count($dataPrivate)-1) )
@@ -36,9 +36,10 @@
 		@endif
 	@endforeach
 </table>
-@if(count($dataAffiliate) >= 17 && count($dataAffiliate) < 33)
+@if(count($dataAffiliate) >= 20 && count($dataAffiliate) < 40)
 	{{ addPage(1) }}
 	<div class="page-break"></div>
+	<img src="{{ asset('images/logo.jpg') }}" style="float: right; height: 85px; position: absolute; right: 5em; top: -1em;">
 	<p style="margin:0; font-size: 14px;">Página: {{ Session::get('page') }} impreso el: {{ $arrDateNow[0] }} Hora: {{ $arrDateNow[1] }}</p>
 	<p style="margin:0; font-size: 14px;">INSTITUTO DE PREVISION SOCIAL DEL PERIODISTA</p>
 	<p style="margin:0; font-size: 14px;">{{ strtoupper($affiliate->fullname()) }}</p>
@@ -50,7 +51,7 @@
 			@endforeach
 		</tr>
 		@foreach($dataPrivate as $keyYear => $year)
-			@if($keyYear >= 17 && $keyYear < 33)
+			@if($keyYear >= 20 && $keyYear < 40)
 				<tr>
 				@foreach($year as $key => $month)
 					@if( $key == 0 && $keyYear != (count($dataPrivate)-1) )
@@ -58,7 +59,7 @@
 					@else
 						<td style="text-align: right; font-size:11px;">
 						@if( is_array($month) )
-							{{ number_format((float)$month[0],2,'.',',') }}
+							{{ number_format($month[0],2,'.',',') }}
 						@endif
 						</td>
 					@endif
@@ -81,9 +82,10 @@
 		@endforeach
 	</table>
 @endif
-@if(count($dataAffiliate) >= 33)
+@if(count($dataAffiliate) >= 40)
 	{{ addPage(1) }}
 	<div class="page-break"></div>
+	<img src="{{ asset('images/logo.jpg') }}" style="float: right; height: 85px; position: absolute; right: 5em; top: -1em;">
 	<p style="margin:0; font-size: 14px;">Página: {{ Session::get('page') }} impreso el: {{ $arrDateNow[0] }} Hora: {{ $arrDateNow[1] }}</p>
 	<p style="margin:0; font-size: 14px;">INSTITUTO DE PREVISION SOCIAL DEL PERIODISTA</p>
 	<p style="margin:0; font-size: 14px;">{{ strtoupper($affiliate->fullname()) }}</p>
@@ -95,7 +97,7 @@
 			@endforeach
 		</tr>
 		@foreach($dataPrivate as $keyYear => $year)
-			@if($keyYear >= 33)
+			@if($keyYear >= 40)
 				<tr>
 				@foreach($year as $key => $month)
 					@if( $key == 0 && $keyYear != (count($dataPrivate)-1) )
