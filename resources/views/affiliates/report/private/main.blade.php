@@ -1,9 +1,5 @@
-<div>
-	@include('affiliates.report.private.header')
-	<div>
-		@include('affiliates.report.private.content')
-		<div>
-			@include('affiliates.report.private.firm')
-		</div>
-	</div>
-</div>
+@include('affiliates.report.private.header')
+
+@include('affiliates.report.private.content')
+
+@include('affiliates.report.private.firm')

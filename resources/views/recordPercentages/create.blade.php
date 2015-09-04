@@ -5,7 +5,7 @@
 				<label for='yearRecordPercentage'>Año</label>
 				<div class='input-group'>
 					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
-			      	<input name='yearRecordPercentage' class='form-control' type='number' />
+			      	<input name='yearRecordPercentage' class='form-control' type="number" min="1" max="5" />
 				</div>
 			</div>
 		</div>
@@ -14,7 +14,7 @@
 				<label for='monthRecordPercentage'>Mes</label>
 				<div class='input-group'>
 					<span class='input-group-addon'><i class='fa fa-calendar'></i></span>
-			      	<input name='monthRecordPercentage' class='form-control' type='number' />
+			      	<input name='monthRecordPercentage' class='form-control' type='number' min="1" max="12"/>
 				</div>
 			</div>
 		</div>

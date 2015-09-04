@@ -1,38 +1,38 @@
 <table style="margin: 1em 0">
-	<tr style="">
+	<tr>
 		<td style="font-size:11px; margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">Año</td>
 		@foreach(months() as $month)
 			<td style="font-size:11px; margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">{{$month}}</td>
 		@endforeach
 	</tr>
-	@foreach($dataPrivate as $key => $year)
-		@if($key < 17)
-		<tr>
-		@foreach($year as $key => $month)
-			@if($key == 0)
-				<td style="font-size:11px;">{{ $month }}</td>
-			@else
-				<td style="text-align: right; font-size:11px;">
-				@if( is_array($month) )
-					{{ $month[0] }}
-				@endif
-				</td>
-			@endif
-		@endforeach
-		</tr>
-		<tr>
+	@foreach($dataPrivate as $keyYear => $year)
+		@if($keyYear < 17)
+			<tr>
 			@foreach($year as $key => $month)
-				@if($key == 0)
-					<td style="font-size:11px;"></td>
+				@if( $key == 0 && $keyYear != (count($dataPrivate)-1) )
+					<td style="font-size:11px;">{{ $month }}</td>
 				@else
 					<td style="text-align: right; font-size:11px;">
-					@if( is_array($month) )
-						{{ $month[1] }}
-					@endif
+						@if( is_array($month) )
+							{{ number_format((float)$month[0],2,'.',',') }}
+						@endif
 					</td>
 				@endif
 			@endforeach
-		</tr>
+			</tr>
+			<tr>
+			@foreach($year as $key => $month)
+				@if( $key == 0 && $keyYear != (count($dataPrivate)-1) )
+					<td style="font-size:11px;"></td>
+				@else
+					<td style="text-align: right; font-size:11px;">
+						@if( is_array($month) )
+							{{ $month[1] }}
+						@endif
+					</td>
+				@endif
+			@endforeach
+			</tr>
 		@endif
 	@endforeach
 </table>
@@ -43,30 +43,30 @@
 	<p style="margin:0; font-size: 14px;">INSTITUTO DE PREVISION SOCIAL DEL PERIODISTA</p>
 	<p style="margin:0; font-size: 14px;">{{ strtoupper($affiliate->fullname()) }}</p>
 	<table style="margin: 1em 0">
-		<tr style="">
+		<tr>
 			<td style="font-size:11px; margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">Año</td>
 			@foreach(months() as $month)
 				<td style="font-size:11px; margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">{{$month}}</td>
 			@endforeach
 		</tr>
-		@foreach($dataPrivate as $key => $year)
-			@if($key >= 17 && $key < 33)
-			<tr>
-			@foreach($year as $key => $month)
-				@if($key == 0)
-					<td style="font-size:11px;">{{ $month }}</td>
-				@else
-					<td style="text-align: right; font-size:11px;">
-					@if( is_array($month) )
-						{{ $month[0] }}
-					@endif
-					</td>
-				@endif
-			@endforeach
-			</tr>
-			<tr>
+		@foreach($dataPrivate as $keyYear => $year)
+			@if($keyYear >= 17 && $keyYear < 33)
+				<tr>
 				@foreach($year as $key => $month)
-					@if($key == 0)
+					@if( $key == 0 && $keyYear != (count($dataPrivate)-1) )
+						<td style="font-size:11px;">{{ $month }}</td>
+					@else
+						<td style="text-align: right; font-size:11px;">
+						@if( is_array($month) )
+							{{ number_format((float)$month[0],2,'.',',') }}
+						@endif
+						</td>
+					@endif
+				@endforeach
+				</tr>
+				<tr>
+				@foreach($year as $key => $month)
+					@if( $key == 0 && $keyYear != (count($dataPrivate)-1) )
 						<td style="font-size:11px;"></td>
 					@else
 						<td style="text-align: right; font-size:11px;">
@@ -76,7 +76,7 @@
 						</td>
 					@endif
 				@endforeach
-			</tr>
+				</tr>
 			@endif
 		@endforeach
 	</table>
@@ -88,30 +88,30 @@
 	<p style="margin:0; font-size: 14px;">INSTITUTO DE PREVISION SOCIAL DEL PERIODISTA</p>
 	<p style="margin:0; font-size: 14px;">{{ strtoupper($affiliate->fullname()) }}</p>
 	<table style="margin: 1em 0">
-		<tr style="">
+		<tr>
 			<td style="font-size:11px; margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">Año</td>
 			@foreach(months() as $month)
 				<td style="font-size:11px; margin-bottom: 1em;border-bottom: 1px solid black; padding: .5em;">{{$month}}</td>
 			@endforeach
 		</tr>
-		@foreach($dataPrivate as $key => $year)
-			@if($key >= 33)
-			<tr>
-			@foreach($year as $key => $month)
-				@if($key == 0)
-					<td style="font-size:11px;">{{ $month }}</td>
-				@else
-					<td style="text-align: right; font-size:11px;">
-					@if( is_array($month) )
-						{{ $month[0] }}
-					@endif
-					</td>
-				@endif
-			@endforeach
-			</tr>
-			<tr>
+		@foreach($dataPrivate as $keyYear => $year)
+			@if($keyYear >= 33)
+				<tr>
 				@foreach($year as $key => $month)
-					@if($key == 0)
+					@if( $key == 0 && $keyYear != (count($dataPrivate)-1) )
+						<td style="font-size:11px;">{{ $month }}</td>
+					@else
+						<td style="text-align: right; font-size:11px;">
+						@if( is_array($month) )
+							{{ number_format((float)$month[0],2,'.',',') }}
+						@endif
+						</td>
+					@endif
+				@endforeach
+				</tr>
+				<tr>
+				@foreach($year as $key => $month)
+					@if( $key == 0 && $keyYear != (count($dataPrivate)-1) )
 						<td style="font-size:11px;"></td>
 					@else
 						<td style="text-align: right; font-size:11px;">
@@ -121,7 +121,7 @@
 						</td>
 					@endif
 				@endforeach
-			</tr>
+				</tr>
 			@endif
 		@endforeach
 	</table>
